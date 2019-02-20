@@ -1,0 +1,1 @@
+Directorio usado para guardar los datasets adquiridos.

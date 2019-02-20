@@ -1,0 +1,4 @@
+Directorio usado para guardar la documentación del proyecto. 
+Contiene:
+- Memoria Latex - Plantilla
+- Directorio mas recursos para añadir documentacion adicional: tablas excel resumen, csv...
