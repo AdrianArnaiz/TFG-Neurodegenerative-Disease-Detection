@@ -1,0 +1,228 @@
+Nombre DB,Publica,Autor,Fuente,Enfermedad,Tipo,Características,Correo Contacto,Año,Revista,Anotaciones
+Parkinsons Telemonitoring Data Set,Disponible,"Athanasios Tsanas, Max Little ","UCI, http://archive.ics.uci.edu/ml/datasets/Parkinsons+Telemonitoring",Parkinson,Ccas Extraidas,"DS Characteristics:  Multivariate || Attribute Characteristics:  Integer, Real || Number of Instances:  5875|| Number of Attributes:  26 || Mode:Regression",NO HACEN FALTA,2009,IEEE Transactions on Biomedical Engineering,"A PARTE DE ESTE ARTÍCULO, ESTOS DOS AUTORES 
+APARECEN EN INFINIDAD DE OTROS ARTÍCULOS SOBRE EL 
+PARKINSON Y LA VOZ, EN EL QUE CADA UNO SE DESCRIBE 
+UNA DB DIFERENTE (entiendo que la misma que la van 
+mejorando con los años y haciendo más grande). TAMBIÉN 
+PARTICIPAN EN LA INICIATIVA PARKINSONS VOICE INITIATIVE.
+Esta en concreto es una databse encontrada en la UCI. Es usada en varios artículos: 
+-Little MA, McSharry PE, Hunter EJ, Ramig LO (2009),
+'Suitability of dysphonia measurements for telemonitoring of Parkinson's 
+disease',
+IEEE Transactions on Biomedical Engineering, 56(4):1015-1022
+
+Little MA, McSharry PE, Roberts SJ, Costello DAE, Moroz IM.
+'Exploiting Nonlinear Recurrence and Fractal Scaling Properties for Voice 
+Disorder Detection',
+BioMedical Engineering OnLine 2007, 6:23 (26 June 2007)
+"
+Parkinsons Data Set,Disponible,Max Little,"UCI
+https://archive.ics.uci.edu/ml/datasets/parkinsons",Parkinson,"Ccas 
+Extraidas","Data Set Characteristics: Multivariate
+Number of Instances: 197
+Number of Attributes: 23
+Attribute Characteristics: Real",NO HACEN FALTA,2007,--,"Igual o parecido al anterior pero más pequeño. Parece su predecesor. 
+Diferencia: anterior indicado para regresión y este para clasificación."
+"Early biomarkers of 
+Parkinson’s disease based 
+on natural connected speech 
+Data Set",Disponible,"Charles University in Prague, First Faculty of Medicine, 
+Department of Neurology and Centre of Clinical Neuroscience, Prague, Czech Republic","UCI
+https://archive.ics.uci.edu/ml/datasets/Early+biomarkers+of+Parkinson%E2%80%99s+disease+based+on+natural+connected+speech",Parkinson,"Ccas 
+Extraidas","Data Set Characteristics:  Multivariate
+Number of Instances:130
+Attribute Characteristics:Integer, Real
+Number of Attributes:65
+Associated Tasks:Classification, Regression
+-30 pacientes con PD, 
+-50 pacientes con RBD y Sinucleinopatías 
+-50 controles cardiacos.",NO HACEN FALTA,2017,--,"Los atributos parecen interesantes ya que 
+SACA MUCHOS MÁS ATRIBUTOS QUE EN OTROS DATASETS:
+- atributos relaccionados con caracteristicas del analisis del discurso
+- atributos de identificacion del paciente, sexo.
+- atributos de la enfermedad, grado, PD o HC o RBD..."
+"Parkinson Speech Dataset
+ with Multiple Types of Sound 
+Recordings Data Set",Disponible,"Olcay KURSUN, PhD.,  Erdogdu Sakar, B.
+Istanbul University, 
+Department of Computer Engineering","UCI
+http://archive.ics.uci.edu/ml//datasets/Parkinson+Speech+Dataset+with++Multiple+Types+of+Sound+Recordings",Parkinson,"Ccas 
+Extraidas","Data Set Characteristics: Multivariate
+Number of Instances:1040
+Attribute Characteristics:Integer, Real
+Number of Attributes: 26",NO HACEN FALTA,2014,--,Sigue la tónica de los primeros dataset vistos
+"Detecting Parkinson’s disease 
+from sustained phonation and 
+speech signals",Disponible,"Evaldas Vaiciukynas
+Antanas Verikas
+Adas Gelzinis1
+Marija Bacauskiene
+Kaunas University of Technology
+Center for Applied Intelligent Systems Research (CAISR), Halmstad University, Halmstad, Sweden","ARTICULO
+http://sci-hub.tw/10.1371/journal.pone.0185613",Parkinson,"Ccas 
+Extraidas","3 archivos
+Archivo S1. Se presenta un análisis de importancia variable en la tarea de detección de parkinson para los modelos de RF y meta-RF de mejor rendimiento.
+Archivo S2. Datos experimentales, en forma de características de audio extraídas de grabaciones de voz y voz obtenidas a través del canal de micrófono acústico cardioide.
+Archivo S3. Datos experimentales, en forma de funciones de audio extraídas de la voz y la grabación de voz",NO HACEN FALTA,2017,Plos | one,"Varios archivos con datos extraidos de la voz.
+ En este articulo también se pueden pedir los datos
+ crudos, audio en bruto, por lo que se repetirá más abajo."
+"Sensorimotor adaptation of 
+voice fundamental frequency 
+in Parkinson’s disease",Disponible,"Defne Abur, Rosemary A. Lester-Smith
+Universidad de BOSTON","ARTICULO
+sci-hub.se/10.1371/journal.pone.0191839",Parkinson,"Ccas 
+Extraidas","Datos de pacientes con y sin enfermedad:
+16 con enfermedad
+19 sin ella",NO HACE FALTA,2018,PLOS | one,"Artículo de neurología pero que quizás contendrá datasets interesantes. Los datos que aparecen son más confusos ya que están dirigidos a neurología.
+Los datos se encuentran en el apartado Supporting information dentro del articulo.
+Es un XLSX con diversos datos derivados de las voces"
+"A PARTIR DE AQUÍ SE RECOPILARÁN LAS BASES DE DATOS QUE ESTARÁN DISPONIBLES A PETICIÓN DE LOS AUTORES, O QUE REQUIEREN PETICIÓN O PROCEDIMIENTO PARA ACCEDER A ELLAS",,,,,,,,,,
+"Speech-based Parkinson's
+ Disease Classifier
+Assessment of Speech Intelligibility in Parkinson’s Disease Using a Speech-To-Text System",OBTENIDO,"Github: acheketa
+Dueño datos: Prof. Giovanni Dimauro, Universita' degli Studi di Bari 'Aldo Moro'","GITHUB y articulo
+https://github.com/acheketa/parkinsons
+Articulo: https://ieeexplore.ieee.org/document/8070308",Parkinson,Audio Bruto,28 pacientes y 16 audios cada uno. Aprox 6:30 de cada paciente.Contiene excels con info de audios y pacientes.Audios clasificados con red Gan y Wgan. ,giovanni.dimauro@uniba.it ,2017,IEEE Access,"Contactado con Giovanni Dimauro profesor de la Universidad de Bari. OBTENIDOS.
+A parte de estar utilizados en ese github, también se utilizan en un paper llamado:
+Assessment of Speech Intelligibility in Parkinson’s Disease Using a Speech-To-Text System de Giovanni Dimauro"
+"Detecting Parkinson’s disease 
+from sustained phonation and 
+speech signals",Bajo Demanda,"Evaldas Vaiciukynas
+Antanas Verikas
+Adas Gelzinis1
+Marija Bacauskiene
+Kaunas University of Technology
+Center for Applied Intelligent Systems Research (CAISR), Halmstad University, Halmstad, Sweden","ARTICULO
+http://sci-hub.tw/10.1371/journal.pone.0185613",Parkinson,Audio Bruto,99 Pacientes:  63 de parkinson y 34 de enfermedad cardiaca. De cada paciente varios audios UTILIZA RANDOM FOREST,ANG.klinika@kaunoklinikos.lt,2017,Plos | one,"Como bien se dice en el artículo:
+Data access queries regarding raw recordings should be
+addressed to the Department of Otorhinolaryngology at Lithuanian University of Health Sciences (ANG.klinika@kaunoklinikos.lt)"
+"New Spanish speech corpus database 
+for the analysis of people suffering 
+from Parkinson’s disease",Bajo Demanda,"J. R. Orozco-Arroyave
+J. D. Arias-Londoño
+and J. F. Vargas-Bonilla","ARTICULO
+https://www.researchgate.net/publication/265592171_New_Spanish_speech_corpus_database_for_the_analysis_of_people_suffering_from_Parkinson's_disease",Parkinson,Audio Bruto,"ESTÁN EN CASTELLANO
+AUDIOS DE 50 PACIENTES","rafael.orozco@udea.edu.co,
+jdarias@udea.edu.co,
+jfvargas@udea.edu.co",2014,--,"Estos autores también forman como otro grupo de investigación sobre 
+este tema ya que tienen un monón de artículos juntos. En otros muchos
+artíuculos se nombran los datasets de Orozco Arroyave, Arias-Londoño y Vargas Bonilla"
+"Automatic detection of Parkinson’s 
+disease in running speech spoken 
+in three different languages",Bajo Demanda,"J. R. Orozco-Arroyave
+J. D. Arias-Londoño
+and J. F. Vargas-Bonilla","ARTICULO
+DOI:  10.1121/1.4939739",Parkinson,Audio Bruto,"Conjunto de datos de 3 idiomas diferentes.
+(Spanish, German, and Czech)
+Se utiliza la Tecnica Radial Basis SVM.","rafael.orozco@i5.informatik.uni-erlangen.de
+rafael.orozco@udea.edu.co",2016, Acoustical Society of America,"Otro ejemplo de años posteriores de la colaboración de estos autores, con un dataset más axctualizado."
+"Towards the identification of 
+Idiopathic Parkinson’s Disease
+from the speech.
+New articulatory kinetic biomarkers",Bajo Demanda,J. I. Godino-Llorente,"ARTICULO
+http://sci-hub.tw/10.1371/journal.pone.0189583",Parkinson,Audio Bruto,"This database contains speech recordings
+ from 50 patients with Idiopathic 
+Parkinson’s Disease and 50 healthy 
+speakers sampled at 44,1 kHz with 16 bits of resolution","--Peticion:
+jfvargas@udea.edu.co
+rafael.orozco@udea.edu.co
+--Autor artículo:
+igodino@mit.edu,
+igodino@ics.upm.es",2017,PLOS | one,"Otro ejemplo de que se les nombra en varios articulos.
+Data Availability Statement: The corpus of
+speakers is available upon request to J. F. VargasBonilla, J. D. Arias-Londoño, or R. Orozco-Arroyave
+of the Antioquia University. Medellin, Colombia.
+The database belongs to the University of Medellin,
+and was recorded by “Fundacio´n Parkinson” in the
+framework of a research Project coordinated by
+Francisco Vargas-Bonilla."
+"PARKINSONS 
+VOICE 
+INITIATIVE",Bajo Demanda,"Athanasios Tsanas,
+Max A. Little,
+Mar Gonzalez","Sitio web de la iniciativa
+http://www.parkinsonsvoice.org/team.php",Parkinson,Audio Bruto,"LEER IMPORTANTE.
+Iniciativa que pretende recoger 10000 grabaciones de la enfermedad del parkinson.
+Mismos autores que la mayoría de los artículos más significativos de la detección del 
+parkinson a través de la voz.
+En los artículos de estos autores, se ve como cada vez los datasets que utilizan son más grandes
+por lo que podemos intuir que esta iniciativa se iba haciendo realidad.
+Como estos autores, sobre todo Max a. Little, tienen alrededor de 20 artículos utilizando datasets
+de voces para el Parkinson, Juntaré los correos de varios artículos para la petición de los datos de esta iniciativa.
+Tambiés ser adjuntará el correo de contacto de la iniciativa. EL CORREO DE CONTACTO COM MAX A. LITTLE 
+INDICADO EN LA PAGINA PARA LA PETICIÓN DE LOS RECURSOS ES maxl@mit.edu","maxl@mit.edu
+littlem@maths.ox.ac.uk
+max.little@aston.ac.uk
+tsanas@maths.ox.ac.uk
+tsanasthanasis@gmail.com
+littlem@physics.ox.ac.uk
+parkinsonsvoice@gmail.com","Actualización de la página
+2019",--,"Lo comentado en CCAS. Este autor es el que más artículos tiene y al que más le mencionan,
+a su vez que es el director de esta iniciativa. Además, así como otros dataset tienen relacción con
+artículos de medicina o neurología, este autor aplica técnicas de machine learning para tratar los 
+audios de voz, por lo que está dentro del mismo campo que esta investigación.
+Disponibilidad de datos a petición a los autores"
+"Accurate Telemonitoring of
+Parkinson’s Disease Progression 
+by Noninvasive Speech Tests",Bajo Demanda,"Athanasios Tsanas,
+Max A. Little","ARTICULO
+http://sci-hub.tw/10.1109/TBME.2009.2036000",Parkinson,Audio bruto,6000 audios de 42 pacientes,"littlem@maths.ox.ac.uk
+max.little@aston.ac.uk
+tsanas@maths.ox.ac.uk",2010,IEEE Engineering in Medicine and Biology Society ,Otro ejemplo de los artículos de estos dos autores
+"DAIC-WOZ Database
+(DepressionDetect - Dataset GITHUB)
+",Bajo Demanda,"Github de: Ky Kiefer
+kykiefer
+Pagina de los datos: Universidad Carolina del Sur","GITHUB
+https://github.com/kykiefer/depression-detect#dataset 
+http://dcapswoz.ict.usc.edu/",Depresión,Audio bruto,"Database de audios de depresión, encontrada en proyecto en github (que por cierto tiene un estudio muy 
+ interesante realizado con estos audios) que nos redirige a la pagina de la Universidad de Carolina del Sur en 
+ la que se encuentra el dataset. 
+Rellenar formulario del apartado Download de esta pagina http://dcapswoz.ict.usc.edu/ y enviar email.","Rellenar formulario de esta pagina:
+http://dcapswoz.ict.usc.edu/
+Y enviar al correo:
+boberg@ict.usc.edu 
+(ambas infos aparecen en la pagina)",2014,--,"En este caso, se irá a la página del link y manda rellenar un documento
+el cual habrá que enviar a una dirección que también aparece en esa página.
+Esa dirección es: boberg@ict.usc.edu 
+"
+"AVEC 2013 –The Continuous 
+Audio/Visual Emotion and Depression
+Recognition Challenge",Bajo Demanda,"Michel Valstar University of Nottingham
+Björn Schuller TU München MISP Group,
+Kirsty Smith University of Nottingham","Articulo y Sitio Web
+https://www.researchgate.net/publication/262157517_AVEC_2013_-_The_continuous_AudioVisual_Emotion_and_depression_recognition_challenge
+https://avec2013-db.sspnet.eu/",Depresión,Audio bruto,"HAY QUE LOGUEARSE EN LA PAGINA CON UNA CUENTA.
+Tras ello, se podrán descargar los archivos.
+No me he logueado ya que se necesita pertenecer a una organización, ya que a la hora de
+crear la cuenta te manda rellenar un formulario donde se pone la organización y el equipo de
+investigadores.","https://avec2013-db.sspnet.eu/
+crear cuenta en esta web y descargar",2013,--,"HAY QUE LOGUEARSE EN LA PAGINA CON UNA CUENTA.
+Tras ello, se podrán descargar los archivos.
+No me he logueado ya que se necesita pertenecer a una organización, ya que a la hora de
+crear la cuenta te manda rellenar un formulario donde se pone la organización y el equipo de
+investigadores."
+Detecting Depression Severityfrom Vocal Prosody,Bajo Demanda,"Ying Yang, 
+Catherine Fairbairn, et. al
+Universidad de Pittsburg","ARTICULO
+https://www.researchgate.net/publication/256309258_Detecting_Depression_Severity_from_Vocal_Prosody",Depresión,Audio bruto,Audio sobre 50 pacientes con depresion,"yiy17@pitt.edu
+cef24@pitt.edu, 
+jeffcohn@cs.cmu.edu",2012,,
+"Dysarthric Speech Database 
+for Universal Access Research",Bajo Demanda,"University of illinois
+Heejin Kim
+Mark Hasegawa-Johnson
+Adrienne Perlman
+Jon Gunderson
+Thomas Huang
+Kenneth Watkin
+Simone Fram","ARTICULO
+http://www.isle.illinois.edu/sst/pubs/2008/is2008_kim.pdf","Disartría por 
+parálisis cerebral",Audio bruto,"Data files are available
+ via secure ftp upon request","hkim17@uiuc.edu,
+jhasegaw@uiuc.edu, 
+aperlman@uiuc.edu, 
+jongund@uiuc.edu, 
+t-huang1@uiuc.edu, 
+watkin@uiuc.edu, 
+sframe@uiuc.edu",2008,--,La oarálisis cerebral también es considerada como neurodegenerativa
