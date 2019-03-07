@@ -1,0 +1,8 @@
+Dataset propiedad de Giovanni Dimauro
+Dataset que consiste en 28 personas con PD, 22 personas sanas mayores y 15 personas sanas jovenes.
+De cada paciente tenemos 16 audios:
+	- 2 de cada vocal sostenida (10)
+	- 2 lecturas de frase equilibrada
+	- 2 de pronunciacion repetida de silabas
+	- 1 de frases equilibradas
+	- 1 de texto equilibrado
