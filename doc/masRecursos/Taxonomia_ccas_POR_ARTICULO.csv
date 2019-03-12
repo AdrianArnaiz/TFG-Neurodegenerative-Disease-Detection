@@ -1,0 +1,87 @@
+Artículo,Tipo Audio,Características,Nota de la característica,Obtención Ccas (herramientas),Articulo descritas
+" Max A. Little, 
+""Suitability..."" (2009)","Vocales 
+sostenidas",F0 (Hz),Frecuencia fundamental media,Praat,"P. Boersma and D. Weenink, “Praat, a system for doing phonetics by computer,” Glot Int., vol. 5, pp. 341–345, 2001."
+,,Fhi (Hz),Maxima frecuencia fundamental,Praat,"P. Boersma and D. Weenink, “Praat, a system for doing phonetics by computer,” Glot Int., vol. 5, pp. 341–345, 2001."
+,,Flo (Hz),Minima frecuencia fundamental,Praat,"P. Boersma and D. Weenink, “Praat, a system for doing phonetics by computer,” Glot Int., vol. 5, pp. 341–345, 2001."
+,,Jitter (%),Variación temporal de F0 en %,Praat,"P. Boersma and D. Weenink, “Praat, a system for doing phonetics by computer,” Glot Int., vol. 5, pp. 341–345, 2001."
+,,,,Signal_Analysis 0.1.26,https://pypi.org/project/Signal_Analysis/
+,,Jitter (Abs),Variación temporal de F0 absoluta en ms,Praat,"P. Boersma and D. Weenink, “Praat, a system for doing phonetics by computer,” Glot Int., vol. 5, pp. 341–345, 2001."
+,,RAP,Perturbación de amplitud relativa,Praat,"P. Boersma and D. Weenink, “Praat, a system for doing phonetics by computer,” Glot Int., vol. 5, pp. 341–345, 2001."
+,,PPQ,Perturbación del periodo de cinco puntos,Praat,"P. Boersma and D. Weenink, “Praat, a system for doing phonetics by computer,” Glot Int., vol. 5, pp. 341–345, 2001."
+,,,,Disvoice,https://github.com/jcvasquezc/DisVoice/tree/master/phonation
+,,Jitter:DDP,"Diferencia absoluta media de diferencias entre ciclos, dividida por el período promedio",Praat,"P. Boersma and D. Weenink, “Praat, a system for doing phonetics by computer,” Glot Int., vol. 5, pp. 341–345, 2001."
+,,Shimmer local,Variación de la amplitud de F0,Praat,"P. Boersma and D. Weenink, “Praat, a system for doing phonetics by computer,” Glot Int., vol. 5, pp. 341–345, 2001."
+,,Shimmer local (dB),Variación de la amplitud de F0 en dB,Praat,"P. Boersma and D. Weenink, “Praat, a system for doing phonetics by computer,” Glot Int., vol. 5, pp. 341–345, 2001."
+,,Shimmer: APQ3,Perturbación de la amplitud de 3 puntos,Praat,"P. Boersma and D. Weenink, “Praat, a system for doing phonetics by computer,” Glot Int., vol. 5, pp. 341–345, 2001."
+,,Shimmer: APQ5,Perturbación de la amplitud de 5 puntos,Praat,"P. Boersma and D. Weenink, “Praat, a system for doing phonetics by computer,” Glot Int., vol. 5, pp. 341–345, 2001."
+,,APQ,Cociente de la perturbación de la amplitud,Praat,"P. Boersma and D. Weenink, “Praat, a system for doing phonetics by computer,” Glot Int., vol. 5, pp. 341–345, 2001."
+,,,,Disvoice,https://github.com/jcvasquezc/DisVoice
+,,Shimmer: DDA,Promedio de la diferencia absoluta entre las diferencias consecutivas entre las amplitudes de los períodos consecutivos.,Praat,"P. Boersma and D. Weenink, “Praat, a system for doing phonetics by computer,” Glot Int., vol. 5, pp. 341–345, 2001."
+,,Noise-to-harmonics ratios (NHR),Amplitud del ruido en relación con los componentes tonales en el habla. Relacion Ruido-armónicos,Praat,"P. Boersma and D. Weenink, “Praat, a system for doing phonetics by computer,” Glot Int., vol. 5, pp. 341–345, 2001."
+,,Harmonics-to-noise ratio  (HNR),Relación entre armónicos y ruido,Praat,"P. Boersma and D. Weenink, “Praat, a system for doing phonetics by computer,” Glot Int., vol. 5, pp. 341–345, 2001."
+,,,,Christian's Python Library,https://homepage.univie.ac.at/christian.herbst/python/praat_util_8py.html
+,,,,Signal_Analysis 0.1.26,https://pypi.org/project/Signal_Analysis/
+,,RPDE,"Entropía de densidad del período de recurrencia. Aborda la capacidad de las cuerdas vocales para mantener una vibración simple, cuantificando las desviaciones de la periodicidad exacta.
+Hay varias medidas en librerias (nolds, TISEAN...) que hablan de la entropía. No se si será esta en concreto.","MATLAB http://www.maxlittle.net/software/, ","M.A. Little, “Exploiting nonlinear recurrence and fractal scaling properties for voice disorder detection,” Biomed. Eng. Online., vol. 6, p. 23, 2007."
+,,,,¿?TISEAN,"R. Hegger, H. Kantz, and T. Schreiber, “Practical implementation of nonlinear time series methods: The TISEAN package,” Chaos, vol. 9, pp. 413–435, 1999."
+,,DFA,Signal fractal scaling component. Análisis de fluctuación descendente,"MATLAB http://www.maxlittle.net/software/ y en el paper dice DLL for Windows, ","M.A. Little, “Exploiting nonlinear recurrence and fractal scaling properties for voice disorder detection,” Biomed. Eng. Online., vol. 6, p. 23, 2007."
+,,,,"¿?TISEAN,","R. Hegger, H. Kantz, and T. Schreiber, “Practical implementation of nonlinear time series methods: The TISEAN package,” Chaos, vol. 9, pp. 413–435, 1999."
+,,,,"https://github.com/dokato/dfa, 
+Tiene pinta de que varias bibliotecas de python (googlear: detrened fluctuation analysis python), ",Diferentes bibliotecas en python
+,,,,nolds 0.5.1,https://pypi.org/project/nolds/
+,,,,PyEEG ,http://pyeeg.sourceforge.net/
+,,D2,Dimensión de la correlación,"TISEAN - Nonlinear Time Series Analysis,  pytisean https://pypi.org/project/pytisean/","R. Hegger, H. Kantz, and T. Schreiber, “Practical implementation of nonlinear time series methods: The TISEAN package,” Chaos, vol. 9, pp. 413–435, 1999."
+,,,,nolds 0.5.1,https://pypi.org/project/nolds/
+,,PPE pitch period entropy,Entropia del periodo del tono,ARTICULO -->,"Max A. Little, ""Suitability of Dysphonia Measurements for Telemonitoring of Parkinson’s Disease"""
+-------------,-------------,-------------,-------------,-------------,-------------
+"Max A. Little,
+""Novel..."" (2012)","Vocal
+Sostenida",Jitter variants - 30,Perturbación F0,Praat - 5,"A. Tsanas, M. A. Little, “Nonlinear speech analysis algorithms mapped to a standard metric achieve clinically useful quantification of average Parkinson’s disease symptom severity,” J. Roy. Soc., vol. 8, pp. 842–855, 2011."
+,,Shimmer Variants - 21,Perturbación Amplitud,Praat - 6,"A. Tsanas, M. A. Little, “Nonlinear speech analysis algorithms mapped to a standard metric achieve clinically useful quantification of average Parkinson’s disease symptom severity,” J. Roy. Soc., vol. 8, pp. 842–855, 2011."
+,,HNR y NHR - 4,Relaciónes señal / ruido,Praat - 2,"A. Tsanas, M. A. Little, “Nonlinear speech analysis algorithms mapped to a standard metric achieve clinically useful quantification of average Parkinson’s disease symptom severity,” J. Roy. Soc., vol. 8, pp. 842–855, 2011."
+,,Glottis quotient - 3,Cambios en la duración del ciclo de pliegue vocal,Disvoice (?),"A. Tsanas, M. A. Little, “Nonlinear speech analysis algorithms mapped to a standard metric achieve clinically useful quantification of average Parkinson’s disease symptom severity,” J. Roy. Soc., vol. 8, pp. 842–855, 2011."
+,,RPDE,"Entropía de densidad del período de recurrencia. Aborda la capacidad de las cuerdas vocales para mantener una vibración simple, cuantificando las desviaciones de la periodicidad exacta.",Matlab Max Little (¿y tissean?),"A. Tsanas, M. A. Little, “Nonlinear speech analysis algorithms mapped to a standard metric achieve clinically useful quantification of average Parkinson’s disease symptom severity,” J. Roy. Soc., vol. 8, pp. 842–855, 2011."
+,,DFA,Signal fractal scaling component. Análisis de fluctuación descendente,"Matlab Max Little (¿y tissean?), nolds,pyEEG, varias librerias","A. Tsanas, M. A. Little, “Nonlinear speech analysis algorithms mapped to a standard metric achieve clinically useful quantification of average Parkinson’s disease symptom severity,” J. Roy. Soc., vol. 8, pp. 842–855, 2011."
+,,PPE,Entropia del periodo del tono,ARTICULO -->,"Max A. Little, ""Suitability of Dysphonia Measurements for Telemonitoring of Parkinson’s Disease"""
+,,GNE Glotal to noise excitation - 4,La extensión del ruido en el habla utilizando conceptos de energía y energía no lineal.,ARTICULO -->,https://pdfs.semanticscholar.org/0457/dd95c33bdc38f5c0e7a96059a3fd556e4e6c.pdf
+,,VFER Vocal fold excitation Ratio - 9,"La amplitud del ruido en el habla usando energía, energía no lineal y entropía.",--,"A. Tsanas, M. A. Little, “Nonlinear speech analysis algorithms mapped to a standard metric achieve clinically useful quantification of average Parkinson’s disease symptom severity,” J. Roy. Soc., vol. 8, pp. 842–855, 2011."
+,,EMD-ER - 6,"Relación señal / ruido utilizando energía basada en EMD, energía no lineal y entropía",--,"A. Tsanas, M. A. Little, “Nonlinear speech analysis algorithms mapped to a standard metric achieve clinically useful quantification of average Parkinson’s disease symptom severity,” J. Roy. Soc., vol. 8, pp. 842–855, 2011."
+,,MFCCs - 42 ccas,Coeficientes cepstrales frecuencia de mel.,Speechpy,https://pypi.org/project/speechpy/
+,,,,Librosa,http://librosa.github.io/librosa/
+,,,,Essentia,https://essentia.upf.edu/documentation/
+,,,,Aubio,https://aubio.org/
+,,,,Yaafe,https://github.com/Yaafe/Yaafe
+,,,,python_speech_features,https://github.com/jameslyons/python_speech_features
+,,,,pyAudioAnalysis,https://github.com/tyiannak/pyAudioAnalysis/
+,,,,Más librerías...,MFCC python
+,,F0 related - 8,Medidas estadisticas de F0: variaciones...,"Librerías que traten con F0, praat, DISVOICE,speech Analysys...","A. Tsanas, M. A. Little, “Nonlinear speech analysis algorithms mapped to a standard metric achieve clinically useful quantification of average Parkinson’s disease symptom severity,” J. Roy. Soc., vol. 8, pp. 842–855, 2011."
+-------------,-------------,-------------,-------------,-------------,-------------
+"Orozco-Ayozave, 
+""Automatic..."" (2016)",Voiced Sounds,17 medidas de duración,"número de tramas sonoras, la duración promedio de las tramas sonoras, la longitud máxima y la fracción de las tramas sonoras, etc...",Erlangen prosody module,
+,,,,DISVOICE (+-),"V. Zeibler, “The prosody module,” in SmartKom: Foundations of Multimodal Dialogue Systems, http://www5.informatik.uni-erlangen.de/Forschung/Publikationen/2006/Zeissler06-TPM.pdf"
+,,28 basadas en F0,"error cuadrático medio (MSE) medido en relación con la curva de regresión, y el coeficiente de regresión del contorno F0 dentro de un cuadro, valor medio de F0, mínimo y máximo de F0, su valor en el inicio y el desplazamiento, su variación temporal (jitter), su variación en amplitud (shimmer), etc...",Erlangen prosody module,
+,,,,DISVOICE (+-),"V. Zeibler, “The prosody module,” in SmartKom: Foundations of Multimodal Dialogue Systems, http://www5.informatik.uni-erlangen.de/Forschung/Publikationen/2006/Zeissler06-TPM.pdf"
+,,18 medidas de energía,"medidas del valor absoluto de energía dentro de las palabras, valores máximo y mínimo de energía, MSE de la curva de energía normalizada en relación con la curva de regresión, posición de la energía máxima, etc...",Erlangen prosody module,"V. Zeibler, “The prosody module,” in SmartKom: Foundations of Multimodal Dialogue Systems, http://www5.informatik.uni-erlangen.de/Forschung/Publikationen/2006/Zeissler06-TPM.pdf"
+,,,,pyAudioAnalysis (aparecen algunas medidas de energía),https://github.com/tyiannak/pyAudioAnalysis/wiki/3.-Feature-Extraction
+,,"Media, desviacion, curtosis (k) y 
+oblicuidad (sk) de las medidas ",Medidas estadisticas para cada una de las medidas,"Disvoice(m,std,k,sk para 9 medidas: jitter, ppq, shimmer...)",https://github.com/jcvasquezc/DisVoice/tree/master/phonation
+,,,,"tsfresh (fft_aggregated(x, param))",https://tsfresh.readthedocs.io/en/latest/text/list_of_features.html
+,,HNR,Harmonic to noise ratio,Praat y + (descrito arriba),(descrito arriba)
+,,Normalized noise energy NNE,NNE es la relación entre la energía del ruido y la energía total de la señal (ambas medidas en dB),Articulo -->,https://www.ncbi.nlm.nih.gov/pubmed/3782609
+,,Glottal to noise excitation ratio GNE,Medida basada en HNR y NNE,Articulo -->,"https://pdfs.semanticscholar.org/0457/dd95c33bdc38f5c0e7a96059a3fd556e4e6c.pdf, ALGORITMO EN C: https://github.com/naughtont/praat/blob/master/fon/Sound_to_Harmonicity_GNE.cpp"
+,,2 formants HZ: F1 y F2,Primeros dos formantes en herzios F1 y F2,Praat,"P. Boersma and D. Weenink, “Praat, a system for doing phonetics by computer,” Glot Int., vol. 5, pp. 341–345, 2001."
+,,,,Christian's Python Library,https://homepage.univie.ac.at/christian.herbst/python/praat_util_8py.html
+,,12 MFCCs,Coeficientes cepstrales frecuencia de mel.,librosa y + (descrito arriba),(descrito arriba)
+,Unvoiced Sounds,12 MFCCs,Coeficientes cepstrales frecuencia de mel.,librosa y + (descrito arriba),(descrito arriba)
+,,25 BBE,Band Bark Scale,Essentia,https://essentia.upf.edu/documentation/
+,,,,DISVOICE,https://github.com/jcvasquezc/DisVoice/tree/master/articulation
+,"Texto, 
+frases, 
+palabras, 
+silabas",13 MFCCs,Coeficientes de mel,librosa y + (descrito arriba),(descrito arriba)
+,,1ª derivada 13 MFCCs,Primera derivada de MFCCs,librosa,https://librosa.github.io/librosa/generated/librosa.feature.delta.html
+,,,,Yaafee, http://yaafe.sourceforge.net/features
+,,2ª derivada 13 MFCCs,Segunda derivada de MFCCs,librosa,https://librosa.github.io/librosa/generated/librosa.feature.delta.html
+,,,,Yaafee, http://yaafe.sourceforge.net/features
+,,GMM-UBM (128-EM),Modela las anteriores características,,
