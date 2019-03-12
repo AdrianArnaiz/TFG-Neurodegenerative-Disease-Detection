@@ -1,0 +1,17 @@
+Libreria ,Fuente,Info
+PyPraat,https://pypi.org/project/praat-parselmouth/,Lineares - Las de Praat...
+PyTisean,https://pypi.org/project/pytisean/,No lineares - Las de Tisean...
+nolds 0.5.1,https://pypi.org/project/nolds/,"Sample Entropy, Correlation dimension, DFA, Lyapunov y Hurst"
+Signal_Analysis 0.1.26,https://pypi.org/project/Signal_Analysis/,"HNR, Glotal pulses, jitter y F0"
+Speechpy,https://pypi.org/project/speechpy/,"MFCC, Filterbank Energy y Stack Frames"
+Librosa,http://librosa.github.io/librosa/,"Chromas, MFCC y sus DERIVADAS, RMS, espectros, ZCR..."
+Yaafe,1- http://yaafe.sourceforge.net/features.html 2- https://github.com/Yaafe/Yaafe,"Derivadas, Cepstrum... - muchas mas (MFCCs, LPC, LSF...)"
+praatUtil - Christian's,https://homepage.univie.ac.at/christian.herbst/python/praat_util_8py.html,"Bandas, HNR, F0.. PRAAT - Dice: Este módulo contiene algunas funciones de utilidad para incorporar sin problemas la funcionalidad de análisis de Praat en Python"
+pyAudioAnalysis,https://github.com/tyiannak/pyAudioAnalysis/,"34 ccas. Entropias, espectros, energias, MFCC, chromas..., segmentacion..."
+tsfresh,https://tsfresh.readthedocs.io/en/latest/text/list_of_features.html,"Media, desviacion, curtosis (k) y oblicuidad (sk)"
+Disvoice,https://github.com/jcvasquezc/DisVoice/tree/master/phonation,"Glotales, Pitchs, barsk, formantes, MFCC y derivadas..., cada una con Media, desviacion, curtosis (k) y oblicuidad (sk)"
+aubio,https://aubio.org/,"pitch, Mfcc, silent regions..."
+Essentia,https://essentia.upf.edu/documentation/,"Bandas de Bark, BFCC, GFCC., MFCC..:MUCHISIMAS"
+python_speech_features,https://github.com/jameslyons/python_speech_features,MFCCs and filterbank energies
+Hoja maestra,https://github.com/faroit/awesome-python-scientific-audio,Recopilación herramientas para audios en python (Python for scientific audio)
+matlab_wrapper 0.9.8,https://pypi.org/project/matlab_wrapper/,Wrapper de matlbab para Python 2.7
