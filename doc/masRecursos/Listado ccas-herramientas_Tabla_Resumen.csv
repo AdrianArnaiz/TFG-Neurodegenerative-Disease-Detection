@@ -1,0 +1,73 @@
+Características,Nota de la característica,Obtención Ccas (herramientas)
+F0 (Hz),Frecuencia fundamental media,Praat
+28 basadas en F0,"error cuadrático medio (MSE) medido en relación con la curva de regresión, y el coeficiente de regresión del contorno F0 dentro de un cuadro, valor medio de F0, mínimo y máximo de F0, su valor en el inicio y el desplazamiento, su variación temporal (jitter), su variación en amplitud (shimmer), etc...",Erlangen prosody module
+,,DISVOICE (+-)
+7 medidas de perturbación de fonación,"Fo', Fo'', logaritmic energy",Disvoice
+Fhi (Hz),Maxima frecuencia fundamental,Praat
+Flo (Hz),Minima frecuencia fundamental,Praat
+Más medidas asociadas con F0,Medidas estadisticas de F0: variaciones...,"Librerías que traten con F0, praat, DISVOICE,speech Analysys..."
+Jitter (%),Variación temporal de F0 en %,Praat
+,,Signal_Analysis 0.1.26
+Jitter (Abs),Variación temporal de F0 absoluta en ms,Praat
+30 Jitter variants,Perturbación F0,Praat - 5
+RAP,Perturbación de amplitud relativa,Praat
+PPQ,Perturbación del periodo de cinco puntos,Praat
+,,Disvoice
+Jitter:DDP,"Diferencia absoluta media de diferencias entre ciclos, dividida por el período promedio",Praat
+Shimmer local,Variación de la amplitud de F0,Praat
+Shimmer local (dB),Variación de la amplitud de F0 en dB,Praat
+Shimmer: APQ3,Perturbación de la amplitud de 3 puntos,Praat
+Shimmer: APQ5,Perturbación de la amplitud de 5 puntos,Praat
+APQ,Cociente de la perturbación de la amplitud,Praat
+,,Disvoice
+Shimmer: DDA,Promedio de la diferencia absoluta entre las diferencias consecutivas entre las amplitudes de los períodos consecutivos.,Praat
+21 Shimmer Variants,Perturbación Amplitud,Praat - 6
+Noise-to-harmonics ratios (NHR),Amplitud del ruido en relación con los componentes tonales en el habla. Relacion Ruido-armónicos,Praat
+Harmonics-to-noise ratio  (HNR),Relación entre armónicos y ruido,Praat
+,,Christian's Python Library
+,,Signal_Analysis 0.1.26
+17 medidas de duración,"número de tramas sonoras, la duración promedio de las tramas sonoras, la longitud máxima y la fracción de las tramas sonoras, etc...",Erlangen prosody module
+,,DISVOICE (+-)
+18 medidas de energía,"medidas del valor absoluto de energía dentro de las palabras, valores máximo y mínimo de energía, MSE de la curva de energía normalizada en relación con la curva de regresión, posición de la energía máxima, etc...",Erlangen prosody module
+,,pyAudioAnalysis (aparecen algunas medidas de energía)
+RPDE,"Entropía de densidad del período de recurrencia. Aborda la capacidad de las cuerdas vocales para mantener una vibración simple, cuantificando las desviaciones de la periodicidad exacta.
+Hay varias medidas en librerias (nolds, TISEAN...) que hablan de la entropía. No se si será esta en concreto.","MATLAB http://www.maxlittle.net/software/, "
+,,¿?TISEAN
+DFA,Signal fractal scaling component. Análisis de fluctuación descendente,"MATLAB http://www.maxlittle.net/software/ y en el paper dice DLL for Windows, "
+,,"¿?TISEAN,"
+,,"https://github.com/dokato/dfa, 
+Tiene pinta de que varias bibliotecas de python (googlear: detrened fluctuation analysis python), "
+,,nolds 0.5.1
+,,PyEEG 
+D2,Dimensión de la correlación,"TISEAN - Nonlinear Time Series Analysis,  pytisean https://pypi.org/project/pytisean/"
+,,nolds 0.5.1
+PPE pitch period entropy,Entropia del periodo del tono,"ARTICULO --> Max A. Little, ""Suitability of Dysphonia Measurements for Telemonitoring of Parkinson’s Disease"""
+Glottis quotient - 3,Cambios en la duración del ciclo de pliegue vocal,Disvoice (?)
+GNE Glotal to noise excitation - 4,La extensión del ruido en el habla utilizando conceptos de energía y energía no lineal.,ARTICULO --> https://pdfs.semanticscholar.org/0457/dd95c33bdc38f5c0e7a96059a3fd556e4e6c.pdf
+8 Medidas Glotales,"OQ, GCI, NAQ... y sus 4 funcionales",Disvoice
+VFER Vocal fold excitation Ratio - 9,"La amplitud del ruido en el habla usando energía, energía no lineal y entropía.",--
+EMD-ER - 6,"Relación señal / ruido utilizando energía basada en EMD, energía no lineal y entropía",--
+MFCCs,Coeficientes cepstrales frecuencia de mel.,Speechpy
+,,Librosa
+,,Essentia
+,,Aubio
+,,Yaafe
+,,python_speech_features
+,,pyAudioAnalysis
+,,Más librerías...
+1ª derivada 13 MFCCs,Primera derivada de MFCCs,librosa (delta)
+,,DISVOICE
+,,Yaafee
+2ª derivada 13 MFCCs,Segunda derivada de MFCCs,librosa (delta)
+,,DISVOICE
+,,Yaafee
+25 BBE,Band Bark Scale,Essentia
+,,DISVOICE
+Normalized noise energy NNE,NNE es la relación entre la energía del ruido y la energía total de la señal (ambas medidas en dB),Articulo --> https://www.ncbi.nlm.nih.gov/pubmed/3782609
+2 formants HZ: F1 y F2,Primeros dos formantes en herzios F1 y F2,Praat
+,,DISVOICE
+,,Christian's Python Library
+GMM-UBM (128-EM),Modela las anteriores características,--
+"Media, desviacion, curtosis (k) y 
+oblicuidad (sk) de las medidas ",Medidas estadisticas para cada una de las medidas,"Disvoice(m,std,k,sk para 9 medidas: jitter, ppq, shimmer...)"
+,,"tsfresh (fft_aggregated(x, param))"
