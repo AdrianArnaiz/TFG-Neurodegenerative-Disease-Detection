@@ -1,4 +1,4 @@
-Nombre DB,Publica,Autor,Fuente,Enfermedad,Tipo,Características,Correo Contacto,Año,Revista,Anotaciones
+﻿Nombre DB,Publica,Autor,Fuente,Enfermedad,Tipo,Características,Correo Contacto,Año,Revista,Anotaciones
 Parkinsons Telemonitoring Data Set,Disponible,"Athanasios Tsanas, Max Little ","UCI, http://archive.ics.uci.edu/ml/datasets/Parkinsons+Telemonitoring",Parkinson,Ccas Extraidas,"DS Characteristics:  Multivariate || Attribute Characteristics:  Integer, Real || Number of Instances:  5875|| Number of Attributes:  26 || Mode:Regression",NO HACEN FALTA,2009,IEEE Transactions on Biomedical Engineering,"A PARTE DE ESTE ARTÍCULO, ESTOS DOS AUTORES 
 APARECEN EN INFINIDAD DE OTROS ARTÍCULOS SOBRE EL 
 PARKINSON Y LA VOZ, EN EL QUE CADA UNO SE DESCRIBE 
@@ -109,7 +109,7 @@ este tema ya que tienen un monón de artículos juntos. En otros muchos
 artíuculos se nombran los datasets de Orozco Arroyave, Arias-Londoño y Vargas Bonilla"
 "Automatic detection of Parkinson’s 
 disease in running speech spoken 
-in three different languages",Bajo Demanda,"J. R. Orozco-Arroyave
+in three different languages",OBTENIDO,"J. R. Orozco-Arroyave
 J. D. Arias-Londoño
 and J. F. Vargas-Bonilla","ARTICULO
 DOI:  10.1121/1.4939739",Parkinson,Audio Bruto,"Conjunto de datos de 3 idiomas diferentes.
