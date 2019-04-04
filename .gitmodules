@@ -1,0 +1,3 @@
+[submodule "DisVoice"]
+	path = src/DisVoice
+	url = https://github.com/adrianArnaiz/DisVoice.git
