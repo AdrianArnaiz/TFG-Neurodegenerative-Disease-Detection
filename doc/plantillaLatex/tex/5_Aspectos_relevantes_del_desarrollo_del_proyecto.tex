@@ -1,7 +1,117 @@
 \capitulo{5}{Aspectos relevantes del desarrollo del proyecto}
 
-Este apartado pretende recoger los aspectos más interesantes del desarrollo del proyecto, comentados por los autores del mismo.
-Debe incluir desde la exposición del ciclo de vida utilizado, hasta los detalles de mayor relevancia de las fases de análisis, diseño e implementación.
-Se busca que no sea una mera operación de copiar y pegar diagramas y extractos del código fuente, sino que realmente se justifiquen los caminos de solución que se han tomado, especialmente aquellos que no sean triviales.
-Puede ser el lugar más adecuado para documentar los aspectos más interesantes del diseño y de la implementación, con un mayor hincapié en aspectos tales como el tipo de arquitectura elegido, los índices de las tablas de la base de datos, normalización y desnormalización, distribución en ficheros3, reglas de negocio dentro de las bases de datos (EDVHV GH GDWRV DFWLYDV), aspectos de desarrollo relacionados con el WWW...
-Este apartado, debe convertirse en el resumen de la experiencia práctica del proyecto, y por sí mismo justifica que la memoria se convierta en un documento útil, fuente de referencia para los autores, los tutores y futuros alumnos.
+\section{Inicio del proyecto}
+Este proyecto se presentó como un proyecto de investigación sobre la extracción de biomarcadores de la voz para la detección de enfermedades neurodegenerativas o depresión. Al principio se carecía de un objetivo concreto debido a la incertidumbre inicial de qué camino se debía seguir y cómo iba a estar de avanzado este área de investigación.
+
+Tras recopilar información tanto de artículos científicos como de otras fuentes, se llegó a la conclusión de que el objetivo del proyecto va a estar relacionado con la enfermedad del Parkinson. Valoramos diferentes enfermedades como alzheimer, depresión y ELA. Elegimos la enfermedad del Parkinson debido a que la investigación de la detección de esta enfermedad a través de la voz estaba más avanzada y hay muchos artículos recientes y noticias de la realización actual de proyectos en este campo. 
+
+\section{Investigación del proceso a seguir}
+Una vez establecida la enfermedad decidimos el proceso a seguir para conseguir un modelo correcto de clasificación de la enfermedad. . El proceso a grandes rasgos estaba claro: extraer características de audios y utilizarlas para crear un clasificador. Pero antes había que decidir varios puntos importantes en el proceso a seguir: ¿De qúe audios se deben extraer las características? ¿De dónde íbamos a obtener esos audios? ¿Qué tipo de pre-procesamiento requieren los audios? ¿Qué características se sacan de cada uno de ellos?...
+
+Antes de todo, cabe destacar que como uno de los objetivos era hacer un estudio de investigación sobre diferentes algoritmos para la clasificación de los audios, necesitamos obtener un dataset de audios de un proyecto concreto para poder comparar nuestros resultados de manera objetiva con ese proyecto concreto. Por ello el proceso que íbamos a seguir podía estar influenciado de manera directa por el dataset que se nos prestara.
+
+A la hora de intentar responder a las anteriores preguntas nos documentamos a través de los artículos más importantes en este campo con el objetivo de obtener las ideas más relevantes de cada uno de ellos para decidir el enfoque de nuestro proceso. Los grupos de investigación más importantes se correspondían con dos grupos diferentes de investigadores, los cuales tienen artículos relevantes sobre este tema. La explicación en detalle estará explicada en el apartado \textit{Trabajos Relacionados} \ref{cap:TrabRel}, sin embargo aquí haremos eco de las ideas más importantes.
+Un grupo es el compuesto por Max A. Little y Tsanas Thanasis con artículos como \cite{MxLtSuitability}. Se puede obtener una serie de ideas principales de este grupo:
+\begin{itemize}
+\item Utilizan únicamente audios de \textbf{vocales sostenidas} para la obtención de características.
+\item Sostienen que un conjunto pequeño de características (<20) es suficiente para una correcta clasificación de los audios. Incluso \cite{MxLtNovel} está relacionado íntimamente con esta idea, ya que a partir de un conjunto grande de características utiliza diferentes técnicas de selección de características y demuestra que con un conjunto menor que 20 se obtienen buenos resultados.
+\end{itemize}
+
+Otro grupo también destacado es el de J. R. Orozco-Arroyave J. D. Arias-Londoño y J. F. Vargas-Bonilla, con artículos como \cite{Orz2016}. La idea más importante que podemos obtener es la siguiente:
+\begin{itemize}
+\item La pronunciación de \textbf{consonantes en discurso corrido} (frases, textos, palabras...) \textbf{aporta muca información} de la pronunciación debido a la intervención de diferentes músculos necesarios para ésta. Por ello se deben analizar otros tipos de audios para obtener más información que si analizamos únicamente pronunciación de vocales sostenidas.
+\item Cada tipo de audio debe ser utilizado para hacer un clasificador diferente, no se pueden utilizar diferentes tipos de audio dentro del mismo clasificador ya que obtenemos resultados confusos.
+\end{itemize}
+
+\textbf{Condensando ambas, llegamos a la conclusión de que debíamos analizar diversa variedad de audios (ya que aportan más información) sin obsesionarnos por obtener un número inmenso de características de cada uno. Por ello obtendremos variedad de clasificadores que se corresponderán con la variedad de tipos de audio que tengamos y haremos un estudio sobre ellos. Los temas de qué audios utilizar, como pre-procesarles o que características obtener de cada uno se abordará en los siguientes apartados.}
+
+\section{Dataset}
+El dataset de audios usado es el descrito en \cite{OrzCorpus}. Como se explica en el artículo es un dataset de audios en castellano de 100 personas: 50 de ellas pacientes con Parkinson (PD) y 50 de ellas personas sanas (HC). Es un dataset realizado de la manera más balanceada posible, a parte de contener 50PD-50HC también está balanceado en cuanto a sexo y edad tanto dentro de los 50 PD como dentro de los 50 HC. Todos los pacientes han sido diagnosticados por expertos y los audios vienen etiquetados con 3 diferentes medidas: PD/HC, UPDRS-III \textbf{CITAR} y  Hoehn \& Yahr scale \textbf{CITAR}.
+El dataset contiene un total de 4200 audios divididos en los siguientes tipos:
+\begin{description}
+	\item[Monólogos] 50 monólogos de PD y 50 de HC. El contenido es discurso libre sobre la respuesta a la pregunta \textit{¿Qué haces cuando te levantas por la mañana?}. La duración de este tipo de audios comprende desde 00:30 a 02:30.
+	\item[Texto leído] 50 audios de PD y 50 de HC. El contenido es el siguiente texto balanceado: \textit{Ayer fui al médico. ¿Qué le pasa? Me preguntó. Yo le dije: Ay doctor! Donde pongo el dedo me duele. ¿Tiene la u˜na rota? Sí. Pues ya sabemos qué es. Deje su cheque a la salida.}
+	\item[Vocales] 750 audios de PD y 750 de HC. Pronunciación sostenida de cada una de las 5 vocales 3 veces por persona. 150 audios de HC y 150 de PD por cada vocal.
+	\item[Palabras] 1250 audios de PD y 1250 de HC. Pronunciación de palabras para el análisis silábico. Cada persona tanto PD como HC pronunciará 25 palabras diferentes: \textit{brasa, coco, petaca, etc}.
+\end{description}
+
+\section{Metodología del estudio}
+Nuestro estudio comprenderá la comparación de diferentes clasificadores construidos cada uno con diferentes conjuntos características para cada tipo de audio. Utilizaremos 3 diferentes tipos de audio: \textbf{vocales sostenidas, 5 palabras diferentes y texto leído}. Qué características sacamos para cada tipo de audio se presentará en la subsección \textit{Modelado del discurso} \ref{subs:modeldisc}. El proceso para la realización de los clasificadores es el siguiente \ref{fig:proceso}
+\begin{enumerate}
+\item Pre-procesamiento de los audios: preparación de audios para la extracción de diferentes medidas.
+\item Modelado del discurso: extracción de diferentes tipos de características para cada tipo de audios.
+\item Clasificación: construir diferentes clasificadores para cada conjunto de características para hacer un estudio comparativo.
+\end{enumerate}
+
+\imagen{proceso}{Esquema del proceso para abordar los experimentos.}
+
+\subsection{Pre-procesado de audios}
+En esta etapa se realizan 2 tareas principales: la eliminación de sonidos inicial y final de los audios y la segmentación en fragmentos con voz y sin voz de los mismos (los llamaremos segmentos \textit{voiced} y \textit{unvoiced}).
+La \textbf{eliminación de sonidos inicial y final de los audios} se realiza ya que a la hora d extraer las medidas de prosodia se puede tener algunos incovenientes si los silencios iniciales son muy largos. Si fueran excesivamente largos tendríamos resultados erróneos en las características como por ejemplo las relacionadas con la duración promedio de silencios, la variabilidad de la duración de los silencios y otras medidas que se calculan sobre las pausas.
+Para la extracción de medidas de fonación y articulación este proceso lo realizan internamente los scripts de la librería Disvoice \cite{neurospeech} utilizando Praat. Sin embargo, a la hora de obtener las medidas prosódicas es necesario realizar la eliminación de manera previa.
+
+La \textbf{segmentación en fragmentos \textit{voiced} y \textit{unvoiced}} se realiza para analizar el discurso, es decir, se sacarán medidas que necesitan de esta fragmentación (i.e. Jitter de los fragmentos \textit{voiced} o MFCC de las transiciones entre \textit{voiced} y \textit{unvoiced}). Esta tarea la hacen internamente los scripts de la librería Disvoice utilizando Praat.
+
+\subsection{Modelado del discurso} \label{subs:modeldisc}
+Se extraerán 3 diferentes conjuntos de características para cada tipo de audio: de fonación, de articulación y prosódicas. Como hemos visto en nuestro dataset tenemos texto leído, palabras, vocales y monólogos. En este proyecto utilizaremos el texto leído, las 5 palabras con mejor resultado en \cite{Orz2016} (\textit{atleta, campana, braso, gato, petaca}) y las 5 vocales. El monólogo no será utilizado debido a que al ser discurso libre y no predefinido, las características extraídas dependen también de cómo sea el discurso (i.e. las palabras que se digan, las pausas...).
+
+\subsubsection{Medidas de fonación}
+De las medidas de fonación obtendremos 11 conjuntos diferentes: 1 para el texto leído, 5 para las palabras (1 por palabra elegida) y 5 por vocal (1 por vocal). En total de cada audio se sacan un conjunto de\textbf{ 29 medidas} basadas en la perturbación de la fonación. Las medidas de fonación son extraídas de los segmentos \textit{voiced} utilizando para ello la librería Disvoice (script phonation.py). Estas características son descritas en la tabla \ref{tabla:ccasfonacion}
+
+\tablaSmall{Características de fonación.  En detalle en \cite{neurospeech}.}{l c c}{ccasfonacion}
+{ \multicolumn{1}{l}{Caract.} & Núm de caract. & Breve descripción\\}{ 
+1ª derivada F0 & 1x4=4 & 1ª derivada de la frecuencia fundamental\\
+2ª derivada F0 & 1x4=4 & 2ª derivada de la frecuencia fundamental\\
+Jitter & 1x4=4 & Perturbación de F0\\
+Shimmer & 1x4=4 & Perturbación de Amplitud\\
+APQ & 1x4=4 & Cociente de perturbación de amplitud\\
+PPQ & 1x4=4 & Cociente de perturbación de periodo\\
+Energía Logarítmica & 1x4=4 & Explicado en \cite{etsi} \\
+Grado unvoiced & 1 & Grado de segmentos sin voz en el audio  \\
+} 
+
+\textbf{Obtenemos un vector de 29 características: las 7 medidas por sus 4 funcionales(media \textit{m}, desviación \textit{std}, curtosis \textit{k} y oblicuidad \textit{sk}) + grado de \textit{unvoiced}.} El grado de unvoiced es el ratio entre la duración de los segmentos sin voz entre la duración total del audio \cite{neurospeech}
+
+
+\subsubsection{Medidas de articulación}
+De las medidas de articulación obtendremos 6 conjuntos diferentes: 1 para el texto leído y 5 para las palabras (1 por palabra elegida). En total de cada audio se sacan un conjunto de \textbf{488 medidas} de articulación. Las medidas de articulación son extraídas de las  transiciones entre los segmentos \textit{voiced} y \textit{unvoiced} utilizando para ello la librería Disvoice (script articulación.py). Estas características son descritas en la tabla \ref{tabla:ccasarticulacion}
+
+\tablaSmall{Características de articulación. En detalle en \cite{neurospeech}.}{l c c c}{ccasarticulacion}
+{ \multicolumn{1}{l}{Caract.} & Núm de caract. & Breve descripción\\}{ 
+BBE onset & 22x4=88 & 22 coef. BBE de trans. \textit{v} -> \textit{uv}\\
+MFCC onset & 12x4=48 & 12 coef. MFCC de trans. \textit{v} -> \textit{uv}\\
+1ªD MFCC onset & 12x4=48 & 1ª deriv. 12 coef. MFCC de trans. \textit{v} -> \textit{uv}\\
+2ªD MFCC onset & 12x4=48 & 2ª deriv. 12 coef. MFCC de trans. \textit{v} -> \textit{uv}\\
+BBE offset & 22x4=88 & 22 coef. BBE de trans. \textit{uv} -> \textit{v}\\
+MFCC offset & 12x4=48 & 12 coef. MFCC de trans. \textit{uv} -> \textit{v}\\
+1ªD MFCC offset & 12x4=48 & 1ª deriv. coef. 12 MFCC de trans. \textit{uv} -> \textit{v}\\
+2ªD MFCC offset & 12x4=48 & 2ª deriv. coef. 12 MFCC de trans. \textit{uv} -> \textit{v}\\
+1ª formante F0 & 1x4=4 & 1ª formante de frecuencia  \\
+1ªD 1ª formante F & 1x4=4 & 1ª deriv. 1ª formante de frecuencia \\
+2ªD 1ª formante F & 1x4=4 & 2ª deriv. 1ª formante de frecuencia \\
+2ª formante F & 1x4=4 & 2ª formante de la frecuencia \\
+1ªD 2ª formante F & 1x4=4 & 1ª deriv. 2ª formante de frecuencia \\
+2ªD 2ª formante F & 1x4=4 & 2ª deriv. 2ª formante de frecuencia \\
+
+} 
+
+\textbf{Obtenemos un vector de 488 características: las 122 medidas por sus 4 funcionales(media \textit{m}, desviación \textit{std}, curtosis \textit{k} y oblicuidad \textit{sk}).}
+
+
+\subsubsection{Medidas de prosodia}
+De las medidas de prosodia obtendremos 1 conjuntos para el texto leído. En total de cada audio se sacan un conjunto de \textbf{38 medidas} basadas en la duración, la frecuencia fundamental, la energía y ratios de la composición del audio en lo relativo a segmentos \textit{voiced} y \textit{unvoiced}. Las medidas de prosodia son extraídas del audio completo, tanto segmentos \textit{voiced} como \textit{unvoiced}, utilizando para ello la librería Disvoice (script prosodia.py). Estas características son descritas en la tabla \ref{tabla:ccasprosodia}.
+
+\tablaSmall{Características de prosodia. En detalle en \cite{neurospeech}.}{l c c c}{ccasprosodia}
+{ \multicolumn{1}{l}{Caract.} & Núm de caract. & Breve descripción\\}{ 
+Frecuencia fundamental & 7 & 7 medidas relativas a la frecuencia fundamental\\
+Energía & 9  & 9 medidas relativas a la energía\\
+Ratios \textit{v}-\textit{uv} & 22  & 22 medidas relativas a \textit{v}-\textit{uv}\\
+}
+\textbf{Obtenemos un vector de 38 características, las descritas en la tabla \ref{tabla:ccasprosodia}. Esta vez sin sacar los funcionales para cada medida.}
+
+
+\subsection{Clasificación}
+Se explicará cuando se realice. Resumen de lo que se dirá: Elegir un conjunto de algoritmos de clasificación. Realizar un clasificador de cada tipo con cada conjunto de ccas extraídas (18 total). En total 18 (subsets de características) X N (clasificadores elegidos). Comentar que algoritmos de clasificación hemos elegido, con qué parámetros. Comentar como se realiza la cross-validation y cómo serán evaluados (accuracy, Roc...).
+
+\section{Estudio comparativo entre clasificadores}
+Se explicará cuando se realice. Resumen de lo que se dirá: Comentar el resultado concreto de los clasificadores explicados en el apartado anterior. Realizar comparativa entre los clasificadores anteriores. Mostrar tablas de resultados, conclusiones...

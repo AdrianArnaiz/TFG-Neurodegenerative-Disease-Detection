@@ -1,6 +1,77 @@
 \capitulo{4}{Técnicas y herramientas}
 
-Esta parte de la memoria tiene como objetivo presentar las técnicas metodológicas y las herramientas de desarrollo que se han utilizado para llevar a cabo el proyecto. Si se han estudiado diferentes alternativas de metodologías, herramientas, bibliotecas se puede hacer un resumen de los aspectos más destacados de cada alternativa, incluyendo comparativas entre las distintas opciones y una justificación de las elecciones realizadas. 
-No se pretende que este apartado se convierta en un capítulo de un libro dedicado a cada una de las alternativas, sino comentar los aspectos más destacados de cada opción, con un repaso somero a los fundamentos esenciales y referencias bibliográficas para que el lector pueda ampliar su conocimiento sobre el tema.
+Explicaremos las herramientas utilizadas en nuestro proyecto.
+
+\section{Python}
 
 
+\section{Anaconda Distribution}
+
+
+\section{Jupyter Notebook IDE}
+
+
+\section{Librerías de Python}
+\subsection{Numpy}
+
+
+\subsection{Scikit-learn}
+
+
+\subsection{Scipy}
+
+
+\subsection{Pandas}
+
+
+\subsection{Pysptk}
+
+
+\subsection{Sounddevice}
+
+
+\subsection{Pydub}
+
+
+\subsection{Disvoice}
+La librería Disvoice \cite{neurospeech} es un conjunto de scripts de Python para la extracción de medidas del habla. Disvoice calcula medidas de articulación, de la fonación y de prosodia a partir de vocales sostenidas y expresiones verbales continuas con el objetivo de evaluar las capacidades de comunicación de los pacientes con diferentes trastornos de la voz o trastornos neurodegenerativos como la enfermedad de Parkinson. Ha sido desarrolada por JC Vásquez-Correa, el cual es co-autor de varios artículos con Juan Rafael Orozco-Arroyave, y tiene licencia de software MIT.
+
+Contiene 3 scripts principales para la extracción de características de audios (fonación, articulación y prosodia), extrayendo por ejemplo de un audio hasya 488 medidas relacionadas con la articulación. Tiene una gran parte de su contenido dedicado a la visualización de los audios mediante diferentes métodos, característica que no es usada en nuestro proyecto. 
+
+Esta librería ha sido usada como puede entenderse para la etapa de extracción de características de los audios. Está escrita para ser usada como scripts de Python y utiliza internamente varias bibliotecas como scipy, numpy, scikitlearn, pysptk, sounddevice, os y programas como Praat \cite{praat}. A la hora de ser utilizada por nosotros a tenido que ser configurada para su correcto funcionamiento en nuestro entorno.
+[\textbf{¿Comento los cambios realizados en ella aquí o en el manual?}]
+
+URL del Disvoice: \url{https://github.com/jcvasquezc/DisVoice}
+
+
+\subsection{Os}
+
+\section{Praat}
+Praat \cite{praat} es un programa el cual nos permite realizar análisis fonéticos de audios vocales. Esta herramienta está enfocada a la investigación del habla. Permite hacer una multitud de análisis diferentes entre los que se encuentran análisis del discurso (análisis espectrales, análisis de intensidad, de formantes...) o análisis estadístico. Una característica importante para nosotros es que permite ser ejecutado mediante línea de comandos con diferentes parámetros. Otro aspecto interesante es que Praat tiene un wrapper para Python llamado Parselmouth \cite{parselmouth}, aunque nosotros no lo utilizamos en el proyecto. Ha sido desarrolada por desarrollado por Paul Boersma y David Weenink de la Universidad de Ámsterdam.
+
+Será utilizada internamente por la librería Disvoice para analizar una serie de características de los audios, que posteriormente volverá a procesar Disvoice con diferentes métodos de python para devolvernos a nosotros las características finales deseadas.
+
+URL del Praat : \url{http://www.fon.hum.uva.nl/praat/}
+
+\section{Docker}
+
+
+\section{Git}
+
+
+\section{Github}
+
+
+\section{ZenHub}
+
+
+\section{TortoiseGit}
+
+
+\section{Latex}
+
+
+\subsection{MiKTeK}
+
+
+\subsection{\LaTeX}

@@ -1,3 +1,21 @@
 \capitulo{2}{Objetivos del proyecto}
 
-Este apartado explica de forma precisa y concisa cuales son los objetivos que se persiguen con la realización del proyecto. Se puede distinguir entre los objetivos marcados por los requisitos del software a construir y los objetivos de carácter técnico que plantea a la hora de llevar a la práctica el proyecto.
+\section{Objetivos generales}
+\begin{itemize}
+	\item Investigar y condensar el estado del arte de la investigación sobre la detección del Parkison a través de la voz resumiendo los artículos científicos más importantes, identificando las tecnologías, herramientas y procesos actuales utilizadas en ellos, etc.
+	\item Recopilación de bases de datos adecuadas para la investigación, tanto para uso en este proyecto como para su uso en proyectos posteriores, cerciorando que son datasets de audios correctos para las tareas necesitadas (i.e. audios etiquetados).
+	\item Realización de un estudio comparativo en cuanto a la utilización de diferentes modelos de clasificación y conjuntos de características extraídas de los audios. Se compararan resultados tanto entre los diferentes experimentos que nosotros realicemos como entre nuestros mejores experimentos y resultados científicos de anteriores experimentos (resultados de artículos científicos).
+	\item Aportación de una nueva perspectiva a este campo de investigación: extracción de las características de los audios mediante Deep Learning.
+	\item Finalmente utilizar todo lo descrito anteriormente para realizar una aplicación web la cual permita la monitorización de la detección de la enfermedad del Parkinson a través de la voz. La aplicación será capaz de discernir, mediante un clasificador, si la persona de un audio que se nos de tiene Parkinson o no.
+\end{itemize}
+
+\section{Objetivos técnicos}
+\begin{itemize}
+	\item Desarrollar un algoritmo que permita la extracción de características de los audios de manera cómoda para python (envolver la extracción de características que realiza Disvoice en clases que sigan los estándares de los transformers de ScikitLearn).
+	\item Desarrollar una aplicación web para la étapa de explotación (más detalles cuando lo realicemos más adelante) la cual deberá estar alojada en un servidor flask Docker.
+	\item Utilizar las herramientas más adecuadas para la realización del estudio comparativo: Python y sus librerías, Weka...
+	\item Utilizar un sistema de control de versiones Git utilizando para ello la plataforma Github. Utilizar un cliente Git para el trabajo local para lo cual utilizaremos TortoiseGit.
+	\item Utilizar la metodología Scrum en la elaboración del proyecto y concretamente la herramienta ZenHub (como extensión de Github) para la ayuda en la gestión de proyectos.
+	
+	
+\end{itemize}
