@@ -74,6 +74,30 @@ class ExtractorCaracteristicas:
             column_atrib = np.repeat(column_atrib,reps).reshape(ccas.shape[0],1)
             ccas = np.insert(ccas,[-1],column_atrib,axis=1)
         return ccas
+
+    def identificadorNan(self, ruta_ccas,verbose=False):
+        sets_ccas = [d for d in os.listdir(ruta_ccas) if d.endswith('.npy')]
+        dic_nans = dict()
+        for ccas in sets_ccas:
+            data = np.load(ruta_ccas+ccas)
+            if np.isnan(data).any():
+                nan = np.argwhere(np.isnan(data))
+                audiosconNaN = set(np.argwhere(np.isnan(data))[:,0])
+                dic_nans[ccas] =  [audiosconNaN, len(audiosconNaN), len(np.where(np.array(list(audiosconNaN))>49)[0])/len(audiosconNaN),nan]
+                if verbose:
+                    print('\n--------------\n',ccas)
+                    print('\t(Audios, atrib): ',data.shape)
+                    print('\tAudios con NaN: ',audiosconNaN)
+                    print('\tNumero de audios con NaN: ',len(audiosconNaN))
+                    print('\t% de Nan en audios PD: ',dic_nans[ccas][2])
+
+        return dic_nans
     
+    def tratamiento_nan(self, ruta_ccas, dic_nan):
+        '''Borramos de cada conjunto de caracerísticas las intancias con nan.'''
+        for arch in dic_nan:
+            data = np.load(ruta_ccas+arch)
+            data = np.delete(data, list(dic_nan[arch][0]), 0)
+            np.save(ruta_ccas+arch, data)
    
     
