@@ -3,7 +3,8 @@ import pandas as pd
 import importlib
 from sklearn.base import clone
 from sklearn.metrics import SCORERS
-from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import cross_val_score, GridSearchCV
+from sklearn.preprocessing import MinMaxScaler
 
 class Experimenter:
     def __init__(self):
@@ -90,3 +91,39 @@ class Experimenter:
             return df
         else:
             df.plot(kind=rep_type, ylim=(0,1), figsize=(18,9)).legend(bbox_to_anchor=(1.2, 0.5))
+            
+    def GridSearchPipe(self, modulo, pipe, pg, verbose=True, normalizar=True):
+        mejores=dict()
+
+        for dtst in [ d for d in dir(modulo) if d.startswith('load')]:
+            datos = getattr(modulo, dtst)()
+            X = datos.data
+            y = datos.target
+            if normalizar:
+                sc = MinMaxScaler()
+                X = sc.fit(X).transform(X) #Comentar para no normalizar
+
+            clf = GridSearchCV(pipe, cv=5, param_grid=pg, scoring = 'roc_auc')
+            clf.fit(X,y) #crossvalscore(clf,X,y,cv=10,scoring='roc_auc')
+            if verbose:
+                print('\n------------------------\nDataset:',dtst[5:])
+                print("Los mejores parámetros encontrados son:")
+                print()
+                print(clf.best_params_,end=' - score: ')
+                print(clf.best_score_)
+                print()
+                print("Rejilla de scores de cada una de las combinaciones de parámetros:")
+                       
+            
+            mejores[dtst[5:]]={'score':clf.best_score_, 'params':clf.best_params_, 'results':clf.cv_results_}
+                       
+            means = clf.cv_results_['mean_test_score']
+            stds = clf.cv_results_['std_test_score']
+            if verbose:
+                for mean, std, params in zip(means, stds, clf.cv_results_['params']):
+                    print("%0.3f (+/-%0.03f) for %r"% (mean, std * 2, params))
+                print()
+
+        return mejores
+
+
