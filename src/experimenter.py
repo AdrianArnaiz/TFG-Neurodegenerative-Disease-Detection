@@ -104,26 +104,12 @@ class Experimenter:
                 X = sc.fit(X).transform(X) #Comentar para no normalizar
 
             clf = GridSearchCV(pipe, cv=5, param_grid=pg, scoring = 'roc_auc')
-            clf.fit(X,y) #crossvalscore(clf,X,y,cv=10,scoring='roc_auc')
+            puntuacion = cross_val_score(clf,X,y,cv=10,scoring='roc_auc') #Hacemos nested CV
+            mejores[dtst[5:]]=puntuacion.mean()
             if verbose:
                 print('\n------------------------\nDataset:',dtst[5:])
-                print("Los mejores parámetros encontrados son:")
-                print()
-                print(clf.best_params_,end=' - score: ')
-                print(clf.best_score_)
-                print()
-                print("Rejilla de scores de cada una de las combinaciones de parámetros:")
+                print("Score:",puntuacion.mean())  
                        
-            
-            mejores[dtst[5:]]={'score':clf.best_score_, 'params':clf.best_params_, 'results':clf.cv_results_}
-                       
-            means = clf.cv_results_['mean_test_score']
-            stds = clf.cv_results_['std_test_score']
-            if verbose:
-                for mean, std, params in zip(means, stds, clf.cv_results_['params']):
-                    print("%0.3f (+/-%0.03f) for %r"% (mean, std * 2, params))
-                print()
-
         return mejores
 
 
