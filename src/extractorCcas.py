@@ -74,6 +74,7 @@ class ExtractorCaracteristicas:
             column_atrib = np.repeat(column_atrib,reps).reshape(ccas.shape[0],1)
             ccas = np.insert(ccas,[-1],column_atrib,axis=1)
         return ccas
+    
 
     def identificadorNan(self, ruta_ccas,verbose=False):
         sets_ccas = [d for d in os.listdir(ruta_ccas) if d.endswith('.npy')]
