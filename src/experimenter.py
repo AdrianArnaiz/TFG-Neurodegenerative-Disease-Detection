@@ -5,6 +5,7 @@ from sklearn.base import clone
 from sklearn.metrics import SCORERS
 from sklearn.model_selection import cross_val_score, GridSearchCV
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.pipeline import Pipeline
 
 class Experimenter:
     def __init__(self):
@@ -92,7 +93,7 @@ class Experimenter:
         else:
             df.plot(kind=rep_type, ylim=(0,1), figsize=(18,9)).legend(bbox_to_anchor=(1.2, 0.5))
             
-    def GridSearchPipe(self, modulo, pipe, pg, verbose=True, normalizar=True):
+    '''def GridSearchPipe(self, modulo, pipe, pg, verbose=True, normalizar=True):
         mejores=dict()
 
         for dtst in [ d for d in dir(modulo) if d.startswith('load')]:
@@ -110,6 +111,42 @@ class Experimenter:
                 print('\n------------------------\nDataset:',dtst[5:])
                 print("Score:",puntuacion.mean())  
                        
+        return mejores'''
+    
+    def GridSearchPipe(self,modulo, pipe, pg, verbose=True, normalizar=True):
+        #Hace n experimentos siendo n el conjunto de datos distintos dentro del modulo pasado como parametro
+        mejores=dict()
+
+        #Todo esto es por si queremos normalizar: añadimos paso al pipe
+        #El parámetro pipe también puede ser unicamente el clasificador (svm.SVC())
+        #   Entonces debemos crear el pipe y renombrar los parametros del param grid.
+        if normalizar:
+            if isinstance(pipe, Pipeline):
+                pipe.steps.insert(0,['norm',MinMaxScaler()])
+            else:
+                pipe = Pipeline([('norm', MinMaxScaler()), ('clf', pipe)])
+                #Si no era pipeline, era clasificador normal:
+                #    y hay que añadirle el prefijo clf__ a los parametros del param_grid
+                if isinstance(pg, list):
+                    #para pasarle a dict: algunos paramgrids les definimos como [dict(params)]
+                    pg=pg[0]
+
+                for k in pg:
+                    pg['clf__'+k]=pg.pop(k)
+
+        #Hacemos el experimento para cada conjunto de datos
+        for dtst in [ d for d in dir(modulo) if d.startswith('load')]:
+            datos = getattr(modulo, dtst)()
+            X = datos.data
+            y = datos.target
+
+            clf = GridSearchCV(pipe, cv=10, param_grid=pg, scoring = 'roc_auc')
+            puntuacion = cross_val_score(clf,X,y,cv=10,scoring='roc_auc') #Hacemos nested CV
+            mejores[dtst[5:]]=puntuacion.mean()
+            if verbose:
+                print('\n------------------------\nDataset:',dtst[5:])
+                print("Score:",puntuacion.mean())  
+
         return mejores
 
 
