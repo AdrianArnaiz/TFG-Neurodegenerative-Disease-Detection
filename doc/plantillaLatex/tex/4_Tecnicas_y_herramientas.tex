@@ -3,75 +3,79 @@
 Explicaremos las herramientas utilizadas en nuestro proyecto.
 
 \section{Python}
-
+\textcolor{red}{DEFINIR}.
 
 \section{Anaconda Distribution}
-
+\textcolor{red}{DEFINIR}.
 
 \section{Jupyter Notebook IDE}
-
+\textcolor{red}{DEFINIR}.
 
 \section{Librerías de Python}
 \subsection{Numpy}
-
+\textcolor{red}{DEFINIR}.
 
 \subsection{Scikit-learn}
-
+\textcolor{red}{DEFINIR}.
 
 \subsection{Scipy}
-
+\textcolor{red}{DEFINIR}.
 
 \subsection{Pandas}
-
+\textcolor{red}{DEFINIR}.
 
 \subsection{Pysptk}
-
+\textcolor{red}{DEFINIR}.
 
 \subsection{Sounddevice}
-
+\textcolor{red}{DEFINIR}.
 
 \subsection{Pydub}
-
+\textcolor{red}{DEFINIR}.
 
 \subsection{Disvoice}
-La librería Disvoice \cite{neurospeech} es un conjunto de scripts de Python para la extracción de medidas del habla. Disvoice calcula medidas de articulación, de la fonación y de prosodia a partir de vocales sostenidas y expresiones verbales continuas con el objetivo de evaluar las capacidades de comunicación de los pacientes con diferentes trastornos de la voz o trastornos neurodegenerativos como la enfermedad de Parkinson. Ha sido desarrolada por JC Vásquez-Correa, el cual es co-autor de varios artículos con Juan Rafael Orozco-Arroyave, y tiene licencia de software MIT.
+La biblioteca  \myurl{https://github.com/jcvasquezc/DisVoice}{Disvoice} \cite{neurospeech} es un conjunto de \english{scripts} de Python para la extracción de medidas del habla. Disvoice calcula medidas de articulación, de la fonación y de prosodia a partir de vocales sostenidas y expresiones verbales continuas, con el objetivo de evaluar las capacidades de comunicación de los pacientes con diferentes trastornos de la voz o trastornos neurodegenerativos como la enfermedad de Parkinson. Ha sido desarrolada por Juan Camilo Vásquez-Correa, el cual es co-autor de varios artículos con Juan Rafael Orozco-Arroyave como \cite{neurospeech}, y tiene licencia de software MIT. Cabe destacar que se han intercambiado dos correos electrónicos con JC Vásquez-Correa, en los que se nos explica tanto la utilización de los \english{scripts}, como la salida detallada de cada uno de ellos.
 
-Contiene 3 scripts principales para la extracción de características de audios (fonación, articulación y prosodia), extrayendo por ejemplo de un audio hasya 488 medidas relacionadas con la articulación. Tiene una gran parte de su contenido dedicado a la visualización de los audios mediante diferentes métodos, característica que no es usada en nuestro proyecto. 
+Contiene 3 \english{scripts} principales para la extracción de características de audios (fonación, articulación y prosodia), extrayendo por ejemplo de un audio hasta 488 medidas relacionadas con la articulación. Tiene una gran parte de su contenido dedicado a la visualización de los audios mediante diferentes métodos, característica que no es usada en nuestro proyecto. 
 
-Esta librería ha sido usada como puede entenderse para la etapa de extracción de características de los audios. Está escrita para ser usada como scripts de Python y utiliza internamente varias bibliotecas como scipy, numpy, scikitlearn, pysptk, sounddevice, os y programas como Praat \cite{praat}. A la hora de ser utilizada por nosotros a tenido que ser configurada para su correcto funcionamiento en nuestro entorno.
-[\textbf{¿Comento los cambios realizados en ella aquí o en el manual?}]
-
-URL del Disvoice: \url{https://github.com/jcvasquezc/DisVoice}
+Esta biblioteca ha sido usada, como puede entenderse, para la etapa de extracción de características de los audios. Está escrita para ser usada como \english{scripts} de Python y utiliza internamente varias bibliotecas como scipy, numpy, scikitlearn, pysptk, sounddevice, os y programas como Praat \cite{praat}. A la hora de ser utilizada por nosotros ha tenido que ser configurada para su correcto funcionamiento en nuestro entorno. Los detalles de la configuración y los cambios realizados se dan en el manual del programador.
 
 
 \subsection{Os}
+\textcolor{red}{DEFINIR}.
+
+\subsection{Keras}
+\textcolor{red}{DEFINIR}. 
+
+\subsubsection{VGGish}
+\textcolor{red}{DEFINIR}. 
+
+\subsubsection{VGGish2Keras}
+\textcolor{red}{DEFINIR}.
 
 \section{Praat}
-Praat \cite{praat} es un programa el cual nos permite realizar análisis fonéticos de audios vocales. Esta herramienta está enfocada a la investigación del habla. Permite hacer una multitud de análisis diferentes entre los que se encuentran análisis del discurso (análisis espectrales, análisis de intensidad, de formantes...) o análisis estadístico. Una característica importante para nosotros es que permite ser ejecutado mediante línea de comandos con diferentes parámetros. Otro aspecto interesante es que Praat tiene un wrapper para Python llamado Parselmouth \cite{parselmouth}, aunque nosotros no lo utilizamos en el proyecto. Ha sido desarrolada por desarrollado por Paul Boersma y David Weenink de la Universidad de Ámsterdam.
+\myurl{http://www.fon.hum.uva.nl/praat/}{Praat} \cite{praat} es un programa el cual nos permite realizar análisis fonéticos de audios vocales. Esta herramienta está enfocada a la investigación del habla. Permite hacer una multitud de análisis diferentes entre los que se encuentran análisis del discurso (análisis espectrales, análisis de intensidad, de formantes...) o análisis estadístico. Una característica importante para nosotros es que permite ser ejecutado mediante línea de comandos con diferentes parámetros. Otro aspecto interesante es que Praat tiene un \english{wrapper} para Python llamado Parselmouth \cite{parselmouth}, aunque nosotros no lo utilizamos en el proyecto. Ha sido desarrolada por Paul Boersma y David Weenink de la Universidad de Ámsterdam.
 
-Será utilizada internamente por la librería Disvoice para analizar una serie de características de los audios, que posteriormente volverá a procesar Disvoice con diferentes métodos de python para devolvernos a nosotros las características finales deseadas.
-
-URL del Praat : \url{http://www.fon.hum.uva.nl/praat/}
-
-\section{Docker}
+Será utilizada internamente por la biblioteca Disvoice para analizar una serie de características de los audios, que posteriormente volverá a procesar Disvoice con diferentes métodos de Python para devolvernos a nosotros las características finales deseadas.
 
 
 \section{Git}
-
+\textcolor{red}{DEFINIR}.
 
 \section{Github}
-
+\textcolor{red}{DEFINIR}.
 
 \section{ZenHub}
-
+\textcolor{red}{DEFINIR}.
 
 \section{TortoiseGit}
-
+\textcolor{red}{DEFINIR}.
 
 \section{Latex}
-
+\textcolor{red}{DEFINIR}.
 
 \subsection{MiKTeK}
-
+\textcolor{red}{DEFINIR}.
 
 \subsection{\LaTeX}
+\textcolor{red}{DEFINIR}.
