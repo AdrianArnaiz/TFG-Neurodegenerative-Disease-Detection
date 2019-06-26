@@ -15,7 +15,7 @@ Podemos hablar de que la minería de datos es el análisis de un conjunto grande
 
 Como hemos comentado anteriormente, los datos no pueden ser tratados de manera directa, necesitan ser tratados en una etapa anterior al descubrimiento de información: pre-procesamiento. Esto es indispensable en la fase de pre-procesamiento, transformar los datos en bruto a otro conjunto de datos que pueda servir para ser procesado por los algoritmos necesarios. Específicamente en nuestro caso, no podemos obtener conocimiento de el conjunto de audios en bruto, estos audios deberán ser tratados para extraer un conjunto de características numéricas de cada uno de ellos y poder seguir avanzando a partir de ese punto. El conjunto de características extraídas de los audios será en su mayoría propiedades físicas (\ref{sec:ccas}) o características extraídas con bibliotecas de \english{Deep Learning}. Como nuestro proyecto se basará en aprendizaje supervisado, también se llevará a cabo en esta etapa el etiquetado de los datos.
 
-Otra parte importante, aunque no indispensable, dentro de esta etapa es la fase de selección de características. Cuando tenemos un gran número de atributos para cada instancia puede ser recomendable reducir su dimensionalidad. Una manera de reducir su dimensionalidad es a través de la selección de atributos manual, mediante un análisis estadístico. Un ejemplo de su uso puede verse en \cite{MxLtNovel}, donde varios de ellos son utilizados para definir un subconjunto de 10 características de cada audio dentro de las 132 medidas que se obtenían inicialmente en cada uno de ellos. En nuestro caso, no se realiza ese proceso manualmente. Por un lado, hemos realizado algunos experimentos donde hemos proporcionado todos los atributos de cada audio al algoritmo de clasificación y trasladando a éste la tarea de discernir cuales serán más importantes. Por otro, hemos realizado experimentos donde, en el proceso, se utilizan diferentes métodos selectores de atributos como \english{Select K Best} o \english{Variance Treshold} \textcolor{red}{CITAR SELECTORES, REFERENCIAR A SU APARTADO 3.4} (ver sección \ref{subsec:selectores}). \cite{DMprocess}
+Otra parte importante, aunque no indispensable, dentro de esta etapa es la fase de selección de características. Cuando tenemos un gran número de atributos para cada instancia puede ser recomendable reducir su dimensionalidad. Una manera de reducir su dimensionalidad es a través de la selección de atributos manual, mediante un análisis estadístico \cite{DMprocess}. Un ejemplo de su uso puede verse en \cite{MxLtNovel}, donde varios de ellos son utilizados para definir un subconjunto de 10 características de cada audio dentro de las 132 medidas que se obtenían inicialmente en cada uno de ellos. En nuestro caso, no se realiza ese proceso manualmente. Por un lado, hemos realizado algunos experimentos donde hemos proporcionado todos los atributos de cada audio al algoritmo de clasificación y trasladando a éste la tarea de discernir cuales serán más importantes. Por otro, hemos realizado experimentos donde, en el proceso, se utilizan diferentes métodos selectores de atributos como \english{Select K Best} o \english{Variance Treshold} (ver sección \ref{subsec:selectores}). 
 
 \subsection{Aprendizaje automático}
 Es el campo de las ciencias de la computación enfocado a que los dispositivos \textit{aprendan} por ellos mismos sin haber sido explícitamente programados para ello. Esta es una rama de la inteligencia artificial. Tras obtener un conjunto válido de características se aplican algoritmos de aprendizaje automático. Estos algoritmos son los encargados de detectar patrones en los datos. Estos algoritmos tienen un fuerte componente matemático y estadístico ya que, a través de métodos de estos campos del conocimientos, se extrae la información de los datos. Se divide en:
@@ -38,7 +38,14 @@ En \concept{k-fold cross-validation} el conjunto entero de datos se divide en $k
 Cabe destacar que \cite{CrossVal} explica que para \english{k-fold cross-validation} se debe realizar estratificación. \concept{Estratificación} es el proceso por el cual se asegura que una de las $k$ particiones de los datos total es una buena representación de los datos totales. Por ejemplo, en nuestro caso tenemos 50\% de personas con Parkinson y 50\% de personas sanas. Esto significa que para estratificar de manera correcta, cada partición deberá tener la mitad de instancias de cada clase. Cada partición $k$ deberá tener aproximadamente la misma proporción de clases que el conjunto total.
 
 \subsection{Nested Cross Validation}
-\textcolor{red}{DEFINIR}.
+A menudo, queremos ajustar los parámetros de un modelo (por ejemplo, $C$ en SVM). Es decir, queremos encontrar el valor de un parámetro que maximice el rendimiento de nuestro clasificador. Sin embargo, Cawley y Talbot en \cite{cawley2010over}, aseguran que si utilizamos la partición de test de los datos, tanto para ajustar los parámetros, como para evaluar el modelo, corremos el riesgo de sesgar de forma optimista las evaluaciones del modelo. Por esta razón, si un conjunto de pruebas se utiliza para seleccionar parámetros del modelo, entonces necesitamos un conjunto de pruebas diferente para obtener una evaluación imparcial de ese modelo seleccionado.
+
+
+Una forma de superar este problema es tener validaciones cruzadas anidadas (\english{Nested Cross Validation}). Primero, se usa una validación cruzada interna para ajustar los parámetros y seleccionar el mejor modelo (o parámetros del modelo). En segundo lugar, se utiliza una validación de cruz externa para evaluar el modelo seleccionado por la validación de cruz interna. Ver Figura \ref{fig:nested-k-fold}.
+
+\imagen{nested-k-fold}{Validación cruzada anidada}
+
+
 
 \subsection{Algoritmos de aprendizaje automático}
 
@@ -60,20 +67,35 @@ Es un método de \concept{ensemble} (métodos combinados) basado en los árboles
 A la hora de realizar la predicción del error se sigue el método \concept{out of bag}. Consiste en recorrer las instancias de entrenamiento y predecir la clase de cada una únicamente con el conjunto de árboles que no han tenido esa instancia en su conjunto de entrenamiento. Se hace ese proceso para todas las instancias que tenemos y predecimos el error.
 
 \subsection{Algoritmos de selección de atributos} \label{subsec:selectores}
-\textcolor{red}{DEFINIR}.
+Cuando nosotros tenemos un conjunto de datos, a veces es necesario saber qué atributos de los que tenemos con los más importantes. Puede ocurrir que haya atributos irrelevantes, lo que puede producir sobreajuste. También puede haber atributos redundantes, lo que para ciertos algoritmos de aprendizaje es nocivo. O, simplemente, que tenemos una dimensión de datos de entrada muy grande, es decir, muchos atributos para cada instancia que, juntado al hecho de tener pocas instancias, puede ser un problema. Estos algoritmos seleccionan atributos en función de diferentes análisis: analizando cada atributo individual, utilizando un modelo de aprendizaje o evaluando grupos de atributos. A continuación, explicaremos los dos algoritmos de selección de atributos más usados en los experimentos del proyecto.
 
-\subsection{Grid Search, selección de parámetros} 
-\textcolor{red}{DEFINIR}.
+\subsubsection{Variance Treshold}
+Este algoritmo selecciona atributos analizándolos de manera individual. Este algoritmo de selección de atributos se basa en eliminar atributos de baja varianza. Es decir, los atributos con poca varianza, aquellos que son casi idénticos en todos los ejemplos, son eliminados. Esto se realiza de esta manera, debido a que, los atributos con poca varianza, no aportan mucha información al ser muy parecidos en todos los ejemplos, lo que se traduce en que no nos aporta información para discernir si es de una clase u otra.
+
+\subsubsection{Seleck K best}
+Este algoritmo también selecciona atributos analizándolos de manera individual. Se basa en que a veces existen atributos poco discriminativos con la clase (el valor del atributo varía sin ninguna relación con la clase). En este método de selección, se aplica un test estadístico entre cada uno de los atributos y la clase, quedándonos con los $k$ mejores, siendo $k$ un parámetro ajustable. 
+
+\subsection{Optimización de parámetros} 
+Una de las tareas más complejas en la minería de datos, es acertar con la parametrización de los modelos. Para un mismo tipo de modelo, puede variar mucho el rendimiento dependiendo el valor de sus parámetros. Pero la tarea de saber que parámetros son los mejores no es una tarea trivial. Requiere de mucho conocimiento del propio modelo, circunstancia que la mayoría de las veces no ocurre.
+
+Para ello, una de las soluciones que podemos tener es probar muchos tipos de parámetros para elegir el mejor. En \textit{Python} esto se llama \textit{Grid Search}. Básicamente, se trata de definir los valores diferentes que queremos probar de cada parámetro o parámetros y probar todas las posibles combinaciones en el modelo. En la Figura \ref{fig:GridSearch}, vemos la importancia de la optimización de parámetros, donde se obtiene un 0.076 AUC más utilizando \textit{Grid Search}.
+
+\imagen{GridSearch}{Importancia optimización de parámetros}
 
 \section{Deep Learning}
-\textcolor{red}{Se describirá cuando se vea}.
+El \textit{Deep Learning} o aprendizaje profundo, consiste en llevar a cabo el proceso de aprendizaje automático mediante redes neuronales. Para ello, se modelan arquitecturas complejas que consiguen transformaciones no lineales múltiples, a través de datos expresados de forma matricial. Dependiendo del número de capas, número de neuronas, funciones de activación y demás elementos de la red neuronal, se obtienen unas arquitecturas u otras. Cabe destacar que estos modelos funcionan como una caja negra y son poco interpretables.
 
 \section{Conceptos estadísticos}
 Se describirán a continuación una serie de conceptos matemático-estadísticos utilizados tanto en la evaluación de clasificadores, como en la obtención de medidas de los audios.
 \subsection{ROC}
-\textcolor{red}{Se describirá cuando se vea.}
+Un gráfico de características operativas del receptor (ROC) \cite{roc}, es una técnica para visualizar, organizar y seleccionar clasificadores según su rendimiento. Los gráficos ROC se han utilizado durante mucho tiempo en la teoría de detección de señales para representar la relación entre las tasas de aciertos y las falsas alarmas de los clasificadores. El análisis de ROC se ha extendido para su uso en la visualización y análisis del comportamiento de los sistemas de diagnóstico, como es el de nuestro caso. El gráfico ROC traza una curva de probabilidad. Visto de otra manera, puede representar el ratio de verdaderos positivos frente a la razón o ratio de falsos positivos. Es decir, hasta qué punto un clasificador es capaz de clasificar los casos positivos correctamente.
 
-\subsection{Medidas de distribución}
+La medida de rendimiento de clasificadores que se saca de este gráfico es la llamada \english{Area Under Curve} (AUC). En líneas generales, esta medida indica \textbf{cómo de bien el modelo es capaz de distinguir entre clases}.  Un modelo que es capaz de separar perfectamente todas las clases tendrá un AUC cercano a 1, mientras que si es incapaz de separarlas, tendrá un AUC de 0,5. 
+
+
+
+
+\subsection{Medidas de distribución}\label{subsec:medidasdistribucion}
 Son diferentes medidas extraídas de cada medida física de los audios. Por ejemplo, de la amplitud de onda de un audio se sacan sus 4 funcionales correspondientes con sus momentos de distribución (media, desviación típica, coeficiente de asimetría, curtosis). Se obtienen debido a que caracterizan una muestra de tal manera que si dos distribuciones tienen los momentos iguales son iguales.
 \begin{itemize}
 	\item \concept{Media}: Es el resultado de la suma de todos los valores dividida entre el número de ellos. Se corresponde con el momento de la distribución de orden 1 respecto a la origen. $m$.
@@ -86,7 +108,7 @@ Momento de la distribución de orden \textit{r} respecto a la media:\\
 m_{r} = \sum_{i=1}^{n} (x_{i} - \overline{x})^{r} P(n_{i})
 \end{equation}
 
-\section{UPDRS}
+\section{UPDRS}\label{sec:Updrs}
 \english{Unified Parkinson's disease rating scale} \cite{updrs}, \concept{UPDRS} es la escala universal con la que se mide el grado de severidad del Parkinson. Fue creada para dar un estándar a la evaluación de áreas específicas de la discapacidad. Esta escala evalúa 6 partes fundamentales: 1-Comportamiento, 2-Actividades de la vida diaria, \textbf{3-Examen motor} \cite{updrs3}; 4-Complicaciones de la terapia, 5-Escala de Hoehn \& Yahr (Severidad) \cite{hoehn1967} y 6-Escala de Schwab y England (vida cotidiana).\\
 \subsection{UPDRS-III}
 Debido al objetivo de nuestro estudio, nos centraremos en la parte 3: examen motor \cite{updrs3}. Utiliza una escala de 0-4, donde 0 es la ausencia de discapacidad motora y 4 discapacidad motora severa. Esta parte trata diversos temas todos relacionados con la capacidad motora corporal. Mide entre otras cosas elementos como el habla, la expresión facial, el temblor o la agilidad. Todo esto afecta a la voz en cuanto se debe realizar un control correcto de los músculos glotales, labios, faringe y más para conseguir una pronunciación satisfactoria. La discapacidad motora  produce a la hora de hablar volúmenes bajos, discurso monótono, articulación imprecisa \cite{Orz2016}. El englobe de estas capacidades se denomina disartria hipocinética \cite{disartia}.
@@ -126,7 +148,7 @@ El concepto \textbf{Shimmer} es usado, en el análisis del discurso, para medir 
 
 La \textbf{PPQ} mide la variabilidad a largo plazo de la frecuencia fundamental y para calcularla se suaviza mediante una media móvil de tamaño 5. Se calcula como la diferencia promedio absoluta entre la frecuencia de cada cuadro y el promedio de sus vecinos, dividida por la frecuencia media. Ambas medidas se calculan de igual manera, APQ relativa a la amplitud y PPQ relativa a la frecuencia \cite{neurospeech}.
 
-\subsection{Mel Frequency Cepstral Coefficients}
+\subsection{Mel Frequency Cepstral Coefficients - MFCC}\label{subsec:mfcc}
 Los \textbf{Coeficientes Cepstrales en las Frecuencias de Mel} son 12 coeficientes para la representación del habla basados en la percepción auditiva humana. Con ellos podemos obtener la información más relevante de una porción de audio, obviando partes menos importantes como el ruido. El cálculo de estos coeficientes está basado en la transformada de Fourier y la transformada del coseno discreta \cite{wiki:mfcc}. Como hemos comentado anteriormente, nos sirve para medir la energía que se libera en las transiciones entre segmentos \textit{voiced} $\rightarrow$ \textit{unvoiced} y viceversa. Tiene un crecimiento logarítmico y se calcula según la siguiente función:
 \begin{equation}
 m = 1127,01048\ln{\frac{1+f}{700}}
