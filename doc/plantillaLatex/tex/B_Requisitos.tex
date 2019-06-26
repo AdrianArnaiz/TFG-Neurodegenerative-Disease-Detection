@@ -1,11 +1,319 @@
 \apendice{Especificación de Requisitos}
 
 \section{Introducción}
+En esta sección se abordarán los diferentes objetivos y requisitos del proyecto. Se presentarán tanto los requisitos globales del proyecto, como los requisitos funcionales y casos de uso de la aplicación.
 
 \section{Objetivos generales}
+\begin{itemize}
+	\item Investigar y condensar el estado del arte de la investigación sobre la detección del Parkison a través de la voz resumiendo los artículos científicos más importantes, identificando las tecnologías, herramientas y procesos actuales utilizadas en ellos, realizando taxonomías, etc.
+	\item Recopilación de bases de datos adecuadas para la investigación, tanto para uso en este proyecto como para su uso en proyectos posteriores, cerciorando que son \english{datasets} de audios correctos para las tareas necesitadas (i.e. audios etiquetados).
+	\item Realización de un estudio comparativo en cuanto a la utilización de diferentes modelos de clasificación y conjuntos de características extraídas de los audios. Se compararán resultados, tanto entre los diferentes experimentos que nosotros realicemos, como entre nuestros mejores experimentos y resultados científicos de anteriores experimentos (publicados en artículos científicos).
+	\item Aportación de una nueva perspectiva a este campo de investigación: extracción de las características de los audios mediante \english{Deep Learning}.
+	\item Finalmente, utilizar todo lo descrito anteriormente para realizar una aplicación la cual permita la monitorización de la diagnosis de la enfermedad del Parkinson a través de la voz. La aplicación será capaz de discernir, mediante un clasificador, si la persona de un audio subido a la aplicación web tiene Parkinson o no. Esta aplicación será un ejemplo de como poder plasmar los resultados de esta investigación en una herramienta funcional.
+\end{itemize}
 
 \section{Catalogo de requisitos}
+En esta sección se enumerarán los requisitos funcionales de nuestra aplicación.
+
+
+\begin{itemize}
+	\item \textbf{RF.1} Crear una herramienta que nos permita detectar con que probabilidad tiene Parkinson la persona de un audio dado.
+	\begin{itemize}
+	\item \textbf{RF.1.1} El usuario podrá elegir el audio que  quiere predecir.
+	\item \textbf{RF.1.2} El usuario podrá añadir la edad y el sexo del paciente.
+	\item \textbf{RF.1.3} El usuario podrá ver la probabilidad en porcentaje de PArkinson de la persona del audio.
+	\end{itemize}
+	
+	\item \textbf{RF.2} Crear una herramienta que permita ver las gráficas de amplitud de onda y el espectrograma de frecuencias de un audio.
+	\begin{itemize}
+	\item \textbf{RF.2.1} El usuario podrá elegir el audio del que quiere ver las gráficas.
+	\item \textbf{RF.2.2} El usuario podrá ver las gráficas en la pantalla.
+	\item \textbf{RF.2.3} El usuario podrá navegar en las gráficas (zoom, moverse).
+	\item \textbf{RF.2.4} El usuario podrá guardar las gráficas.
+	\end{itemize}
+	
+	\item \textbf{RF.3} Crear una herramienta que permita reproducir un audio.
+	\begin{itemize}
+	\item \textbf{RF.3.1} El usuario podrá elegir el audio que quiere reproducir.
+	\item \textbf{RF.3.2} El usuario podrá reproducir un audio dando al play.
+	\item \textbf{RF.3.3} El usuario podrá pausar el audio dando al pause.
+	\item \textbf{RF.3.4} El usuario podrá rebobinar el audio dando a rebobinar.
+	\item \textbf{RF.3.5} El usuario podrá cambiar el volumen deslizando una pestaña.
+	\item \textbf{RF.3.6} El usuario podrá enmudecer el audio pulsando al mute.
+	\end{itemize}
+	
+	\item \textbf{RF.4} Crear una herramienta que permita cargar y borrar audios al entorno para trabajar con ellos.
+	\begin{itemize}
+	\item \textbf{RF.4.1} El usuario podrá elegir los audios de cualquier ruta que quiere cargar en la aplicación.
+	\item \textbf{RF.4.2} El usuario podrá elegir los audios cargados en la aplicación que quiere borrar.
+	\end{itemize}
+	
+	\item \textbf{RF.5} Crear modelos de clasificación para los audios con Python.
+	\begin{itemize}
+	\item \textbf{RF.5.1} Cargar datos de los audios.
+	\item \textbf{RF.5.2} Elegir el tipo de modelo que queremos entrenar.
+	\item \textbf{RF.5.3} Elegir la validación cruzada que queremos realizar.
+	\item \textbf{RF.5.4} Particionar los datos de manera estratificada.
+	\item \textbf{RF.5.5} Entrenar el modelo con la anterior configuración.
+	\end{itemize}
+	
+	\item \textbf{RF.6} Evaluar clasificadores.
+	\begin{itemize}
+	\item \textbf{RF.6.1} Obtener medidas de rendimiento de los clasificadores.
+	\item \textbf{RF.6.2} Resumir medidas de rendimiento de todos los clasificadores.
+	\item \textbf{RF.6.3} Mostrar medidas de rendimiento en tablas o gráficas para ayudar a la decisión.
+	\end{itemize}
+\end{itemize}
 
 \section{Especificación de requisitos}
+\subsection{Diagrama de casos de uso}
+
+\imagen{DiagCasosUso}{Diagrama de casos de uso de la aplicación.}
+
+\imagen{DiagCasosUso2}{Diagrama de casos de uso de la investigación.}
+
+\subsection{Especificación de los casos de uso}
+
+%CU0
+\tablaSmallSinColores{Caso de uso 0: Insertar audios.}{p{3cm} p{.75cm} p{9.5cm}}{tablaUC0}{
+  \multicolumn{3}{l}{Caso de uso 0: Insertar audios.} \\
+ }
+ {
+  Descripción                            & \multicolumn{2}{p{10.25cm}}{Permite al usuario cargar audios de su equipo a la aplicación.} \\\hline
+  \multirow{2}{3.5cm}{Requisitos}   &\multicolumn{2}{p{10.25cm}}{RF-4} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-4.1} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-4.2}
+                                         \\\hline
+  Precondiciones                         &  \multicolumn{2}{p{10.25cm}}{Ninguna}   \\\hline
+  \multirow{2}{3.5cm}{Secuencia normal}  & Paso & Acción \\\cline{2-3}
+                                         & 1    & El usuario pincha el botón 'Añadir'.
+  \\\cline{2-3}
+                                         & 2    & Se despliega un menú de búsqueda de archivos.
+  \\\cline{2-3}
+                                         & 3    & Se eligen los audios y se da a 'Abrir'
+    \\\cline{2-3}
+                                         & 4    & Se cargan las imágenes dentro de la aplicación.
+                                         \\\hline
+  Postcondiciones                        & \multicolumn{2}{p{10.25cm}}{Los audios aparecen en el recuadro de audios cargados en la aplicación, listos para reproducir, predecir o mostrar gráficas.} \\\hline
+  Excepciones                        & \multicolumn{2}{p{10.25cm}}{Audio no encontrado}\\\hline
+  Importancia                            & Alta \\\hline
+  Urgencia                               & Alta \\
+}
+
+%CU1
+\tablaSmallSinColores{Caso de uso 1: Predecir Audio.}{p{3cm} p{.75cm} p{9.5cm}}{tablaUC1}{
+  \multicolumn{3}{l}{Caso de uso 1: Predecir Audio.} \\
+ }
+ {
+  Descripción                            & \multicolumn{2}{p{10.25cm}}{Permite al usuario obtener la predicción de parkinson de un audio cargado en la aplicación.} \\\hline
+  \multirow{2}{3.5cm}{Requisitos}   &\multicolumn{2}{p{10.25cm}}{RF-1} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-1.1} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-1.2} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-1.3}
+                                         \\\hline
+  Precondiciones                         &  \multicolumn{2}{p{10.25cm}}{Tener un audio cargado}  \\\hline
+  \multirow{2}{3.5cm}{Secuencia normal}  & Paso & Acción \\\cline{2-3}
+                                         & 1    & El usuario elige un audio de la lista.
+  \\\cline{2-3}
+                                         & 2    & El usuario introduce edad y sexo del paciente.
+  \\\cline{2-3}
+                                         & 3    & El usuario pincha el botón predecir.
+    \\\cline{2-3}
+                                         & 4    & Aparece la predicción en pantalla.
+                                         \\\hline
+  Postcondiciones                        & \multicolumn{2}{p{10.25cm}}{Aparece la predicción del audio en porcentaje en la pantalla.} \\\hline
+  Excepciones                        & \multicolumn{2}{p{10.25cm}}{Audio no seleccionado. Edad no introducida. Edad no está en formato válido.}\\\hline
+  Importancia                            & Alta \\\hline
+  Urgencia                               & Alta \\
+}
+
+%CU2
+\tablaSmallSinColores{Caso de uso 2: Ver Gráficas.}{p{3cm} p{.75cm} p{9.5cm}}{tablaUC2}{
+  \multicolumn{3}{l}{Caso de uso 2: Ver gráficas.} \\
+ }
+ {
+  Descripción                            & \multicolumn{2}{p{10.25cm}}{Permite al usuario obtener las gráficas de un audio.} \\\hline
+  \multirow{2}{3.5cm}{Requisitos}   &\multicolumn{2}{p{10.25cm}}{RF-2} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-2.1} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-2.2} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-2.3} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-2.4}
+                                         \\\hline
+  Precondiciones                         &  \multicolumn{2}{p{10.25cm}}{Tener un audio cargado y con los detalles del paciente introducidos.}  \\\hline
+  \multirow{2}{3.5cm}{Secuencia normal}  & Paso & Acción \\\cline{2-3}
+                                         & 1    & El usuario elige un audio de la lista.
+  \\\cline{2-3}
+                                         & 2    & El usuario pincha el botón predecir.
+  \\\cline{2-3}
+                                         & 3    & Aparecen las gráficas en pantalla.
+    \\\cline{2-3}
+                                         & 4    & El usuario puede navegar o guardar las gráficas.
+                                         \\\hline
+  Postcondiciones                        & \multicolumn{2}{p{10.25cm}}{Aparece las gráficas de amplitud y espectrograma de frecuencias en la pantalla.} \\\hline
+  Excepciones                        & \multicolumn{2}{p{10.25cm}}{Audio no seleccionado.}\\\hline
+  Importancia                            & Alta \\\hline
+  Urgencia                               & Alta \\
+}
+
+%CU3
+\tablaSmallSinColores{Caso de uso 3: Reproducir audios.}{p{3cm} p{.75cm} p{9.5cm}}{tablaUC3}{
+  \multicolumn{3}{l}{Caso de uso 3: Reproducir audios.} \\
+ }
+ {
+  Descripción                            & \multicolumn{2}{p{10.25cm}}{Permite al usuario reproducir un audio.} \\\hline
+  \multirow{2}{3.5cm}{Requisitos}   &\multicolumn{2}{p{10.25cm}}{RF-3} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-3.1} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-3.2} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-3.3} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-3.4} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-3.5} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-3.6}
+                                         \\\hline
+  Precondiciones                         &  \multicolumn{2}{p{10.25cm}}{Tener un audio cargado}  \\\hline
+  \multirow{2}{3.5cm}{Secuencia normal}  & Paso & Acción \\\cline{2-3}
+                                         & 1    & El usuario elige un audio de la lista.
+  \\\cline{2-3}
+                                         & 2    & El usuario pincha el botón play.
+  \\\cline{2-3}
+                                         & 3    & El sonido comienza a sonar.
+    \\\cline{2-3}
+                                         & 4    & El usuario puede pinchar el botón pause, volumen o rebobinar.
+   \\\cline{2-3}
+                                         & 5    & El audio se para, cambia de volumen o vuelve a empezar.
+                                         \\\hline
+  Postcondiciones                        & \multicolumn{2}{p{10.25cm}}{Ninguna} \\\hline
+  Excepciones                        & \multicolumn{2}{p{10.25cm}}{Audio no seleccionado.}\\\hline
+  Importancia                            & Alta \\\hline
+  Urgencia                               & Alta \\
+}
+
+%CU4
+\tablaSmallSinColores{Caso de uso 4: Introducir detalles del paciente}{p{3cm} p{.75cm} p{9.5cm}}{tablaUC4}{
+  \multicolumn{3}{l}{Caso de uso 4: Introducir detalles del paciente} \\
+ }
+ {
+  Descripción                            & \multicolumn{2}{p{10.25cm}}{Permite al usuario introducir la edad y el sexo del paciente para su posterior predicción.} \\\hline
+  \multirow{2}{3.5cm}{Requisitos}   & \multicolumn{2}{p{10.25cm}}{RF-1} \\\cline{2-3}
+  										&\multicolumn{2}{p{10.25cm}}{RF-1.2} 
+                                         \\\hline
+  Precondiciones                         &  \multicolumn{2}{p{10.25cm}}{Tener un audio cargado y seleccionado}  \\\hline
+  \multirow{2}{3.5cm}{Secuencia normal}  & Paso & Acción \\\cline{2-3}
+                                         & 1    & El usuario pincha en hombre o mujer.
+  \\\cline{2-3}
+                                         & 2    & El usuario introduce la edad (entero mayor que 0).
+  \\\cline{2-3}
+                                         & 3    & El usuario puede dar a predecir.
+                                         \\\hline
+  Postcondiciones                        & \multicolumn{2}{p{10.25cm}}{La predicción se realiza de manera satisfactoria ya que los datos del paciente del audio se han leído correctamente.} \\\hline
+  Excepciones                        & \multicolumn{2}{p{10.25cm}}{Edad no insertada. Edad en formato erróneo.}\\\hline
+  Importancia                            & Alta \\\hline
+  Urgencia                               & Alta \\
+}
+
+%CU5
+\tablaSmallSinColores{Caso de uso 5: Ver predicción del audio}{p{3cm} p{.75cm} p{9.5cm}}{tablaUC5}{
+  \multicolumn{3}{l}{Caso de uso 5: Ver predicción del audio} \\
+ }
+ {
+  Descripción                            & \multicolumn{2}{p{10.25cm}}{Permite al usuario ver el porcentaje de parkinson con el color indicado.} \\\hline
+  \multirow{2}{3.5cm}{Requisitos}   & \multicolumn{2}{p{10.25cm}}{RF-1} \\\cline{2-3}
+  									&\multicolumn{2}{p{10.25cm}}{RF-1.3} 
+                                         \\\hline
+  Precondiciones                         &  \multicolumn{2}{p{10.25cm}}{Tener un audio cargado, seleccionado y con los datos del paciente introducidos}  \\\hline
+  \multirow{2}{3.5cm}{Secuencia normal}  & Paso & Acción \\\cline{2-3}
+                                         & 1    & El usuario pincha en predicción.
+  \\\cline{2-3}
+                                         & 2    & Se clasifica el audio.
+  \\\cline{2-3}
+                                         & 3    & Se muestra la predicción del audio: porcentaje y si tiene parkinson o no.
+                                         \\\hline
+  Postcondiciones                        & \multicolumn{2}{p{10.25cm}}{Se muestra el texto del resultado de la predicción.} \\\hline
+  Excepciones                        & \multicolumn{2}{p{10.25cm}}{Ninguna.}\\\hline
+  Importancia                            & Alta \\\hline
+  Urgencia                               & Alta \\
+}
+
+%CU6
+\tablaSmallSinColores{Caso de uso 6: Elegir audio de la lista}{p{3cm} p{.75cm} p{9.5cm}}{tablaUC6}{
+  \multicolumn{3}{l}{Caso de uso 6: Elegir audio de la lista} \\
+ }
+ {
+  Descripción                            & \multicolumn{2}{p{10.25cm}}{Permite al usuario elegir un audio de los cargados para su procesamiento.} \\\hline
+  \multirow{2}{3.5cm}{Requisitos}   &\multicolumn{2}{p{10.25cm}}{RF-1.1} \\\cline{2-3}
+  									& \multicolumn{2}{p{10.25cm}}{RF-2.1} \\\cline{2-3}
+  									& \multicolumn{2}{p{10.25cm}}{RF-3.1} \\\cline{2-3}
+  									& \multicolumn{2}{p{10.25cm}}{RF-4.2} 
+                                         \\\hline
+  Precondiciones                         &  \multicolumn{2}{p{10.25cm}}{Tener un audio cargado}  \\\hline
+  \multirow{2}{3.5cm}{Secuencia normal}  & Paso & Acción \\\cline{2-3}
+                                         & 1    & El usuario elige pinchando un audio de la lista.
+  \\\cline{2-3}
+                                         & 2    & El audio se remarca en azul.
+                                         \\\hline
+  Postcondiciones                        & \multicolumn{2}{p{10.25cm}}{Es posible la reproducción o predicción del audio seleccionado.} \\\hline
+  Excepciones                        & \multicolumn{2}{p{10.25cm}}{Audio no seleccionado.}\\\hline
+  Importancia                            & Alta \\\hline
+  Urgencia                               & Alta \\
+}
+
+%CU7
+\tablaSmallSinColores{Caso de uso 7: Crear modelos}{p{3cm} p{.75cm} p{9.5cm}}{tablaUC7}{
+  \multicolumn{3}{l}{Caso de uso 7: Crear modelos} \\
+ }
+ {
+  Descripción                            & \multicolumn{2}{p{10.25cm}}{El científico de datos crea los modelos de predicción.} \\\hline
+  \multirow{2}{3.5cm}{Requisitos}   &\multicolumn{2}{p{10.25cm}}{RF-5} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-5.1} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-5.2} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-5.3} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-5.4} \\\cline{2-3}
+                                         & \multicolumn{2}{p{10.25cm}}{RF-5.5}  
+                                         \\\hline
+  Precondiciones                         &  \multicolumn{2}{p{10.25cm}}{Tener las características de los audios preextraídas}  \\\hline
+  \multirow{2}{3.5cm}{Secuencia normal}  & Paso & Acción \\\cline{2-3}
+                                         & 1    & El científico de datos elige un modelo de python a entrenar.
+  \\\cline{2-3}
+                                         & 2    & El científico de datos elige los datos con los que entrenar.
+    \\\cline{2-3}
+                                         & 3    & El científico de datos elige el tipo de validación cruzada. 
+    \\\cline{2-3}
+                                         & 4    & El científico de datos elige como particionar los datos.
+     \\\cline{2-3}
+                                         & 5    & El modelo se entrena.
+                                         \\\hline
+  Postcondiciones                        & \multicolumn{2}{p{10.25cm}}{Tenemos un modelo ya entrenado.} \\\hline
+  Excepciones                        & \multicolumn{2}{p{10.25cm}}{Ninguna}\\\hline
+  Importancia                            & Alta \\\hline
+  Urgencia                               & Alta \\
+}
+
+
+%CU8
+\tablaSmallSinColores{Caso de uso 8: Evaluar modelos}{p{3cm} p{.75cm} p{9.5cm}}{tablaUC8}{
+  \multicolumn{3}{l}{Caso de uso 8: Evaluar modelos} \\
+ }
+ {
+  Descripción                            & \multicolumn{2}{p{10.25cm}}{Permite al científico de datos realizar una comparativa de resultados de los modelos.} \\\hline
+  \multirow{2}{3.5cm}{Requisitos}   &\multicolumn{2}{p{10.25cm}}{RF-6} \\\cline{2-3}
+  									& \multicolumn{2}{p{10.25cm}}{RF-6.1} \\\cline{2-3}
+  									& \multicolumn{2}{p{10.25cm}}{RF-6.2} \\\cline{2-3}
+  									& \multicolumn{2}{p{10.25cm}}{RF-6.3} 
+                                         \\\hline
+  Precondiciones                         &  \multicolumn{2}{p{10.25cm}}{Haber entrenado los modelos}  \\\hline
+  \multirow{2}{3.5cm}{Secuencia normal}  & Paso & Acción \\\cline{2-3}
+                                         & 1    & El científico de datos extrae las medidas de rendimiento de varios modelos.
+  \\\cline{2-3}
+                                         & 2    & El científico de resume las medidas de rendimiento en gráficas o tablas.
+    \\\cline{2-3}
+                                         & 3    & El científico de datos visualiza las medidas de rendimiento en gráficas o tablas. 
+                                         \\\hline
+  Postcondiciones                        & \multicolumn{2}{p{10.25cm}}{Vemos los resultados de la evaluación de los modelos.} \\\hline
+  Excepciones                        & \multicolumn{2}{p{10.25cm}}{Ninguna.}\\\hline
+  Importancia                            & Alta \\\hline
+  Urgencia                               & Alta \\
+}
+
+
+
 
 

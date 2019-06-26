@@ -1,10 +1,41 @@
 \apendice{Especificación de diseño}
 
 \section{Introducción}
+En éste apéndice, se describirán cómo están implementados los datos de esta aplicación, cuales son los procedimientos más relevantes de la aplicación, y cómo se organizan los proyectos en paquetes.
 
 \section{Diseño de datos}
+En este sección, explicaremos como están organizados tanto el conjunto de audios obtenido, cómo son y como se organizan las características extraídas de los audios, y el diagrama de clases de la aplicación.
+
+\subsection{Conjunto de audios}
+El conjunto de audios es el descrito en \cite{OrzCorpus}. También lo hemos descrito en la sección 5.3 de la memoria principal. Estos audios no se encuentran en el repositorio, ya que son de carácter privado. En \cite{OrzCorpus} se describe como: ``(...)incluye grabaciones de voz de 50 personas con PD y 50 controles sanos, 25 hombres y 25 mujeres en cada grupo. Todos los participantes son hablantes nativos de español colombiano. La edad de los hombres con PD varía de 33 a 77 años (media 62.2 $\pm$ 11.2), la edad de las mujeres con PD varía de 44 a 75 años (media 60.1 $\pm$ 7.8). Para el caso de los controles sanos, la edad de los hombres varía de 31 a 86 (media 61.2 $\pm$ 11.3) y la edad de las mujeres de 43 a 76 años (media 60.7 $\pm$ 7.7). Por lo tanto, la base de datos está bien equilibrada en términos de edad y género. Las grabaciones fueron capturadas en condiciones de control de ruido, en una cabina de prueba de sonido que se construyó en la Clínica Noel, en Medellín, Colombia. Los registros se muestrearon a 44100 Hz con 16 bits de resolución, utilizando un micrófono omnidireccional dinámico (Shure, SM 63L) que se usa comúnmente para aplicaciones profesionales. Las grabaciones se capturaron utilizando una tarjeta de audio profesional de hasta 24 bits y de tal forma que admite hasta 96 Kbps de frecuencia de muestreo (M-Audio, Fast Track C400). Estos audios están en formato wav." (p.343). Tendremos 100 audios de una frase y 100 audios de cada una de las 5 palabras. En caso de las vocales, tenemos 300 audios para cada vocal, en vez de 100, ya que hay 3 audios para cada vocal de cada persona. Aunque en el total hacen un número de audios de 2100 audios, como hemos comentado en la memoria, no se puede entrenar con todos a la vez. Tenemos que entrenar los modelos con las características extraídas de cada grupo de 100 o 300 audios (si son vocales) por separado. Esto hace que entrenemos los modelos con bases de datos pequeñas y corran riesgo de sobreajustarse.
+
+Destacar también, que tenemos un archivo tipo excel donde se indica: edad,sexo, UPDRS, HY y tiempo desde la detección de la enfermedad del paciente. Este archivo se encuentra en \texttt{doc/masRecursos/PCGITA\_metadata.xlsx}.
+
+\subsection{Características extraídas}
+Como se ha comentado el la memoria hemos extraído diferentes características de los audios. Todas, se encuentran el el directorio o subdirectorios de \texttt{src/CaracterísticasExtraídas}. También, todas ellas están guardadas de manera serializada en formato tipo \english{numpy} con la herramienta \english{pickle}. Las características extraídas son las siguientes
+
+\begin{itemize}
+\item \textbf{Características Disvoice (primera fase):} se encuentran en \texttt{src/ CaracterísticasExtraídas} y se extraen en \texttt{src/ Extracción de características.ipynb}. Están descritas más en detalle en la memoria en la sección 5.5.2 (Aspectos Relevantes - Primera Fase: atributos Disvoice - Modelado del discurso). A grandes rasgos, de los audios de la frase sacamos medidas de fonación, articulación y prosodia; de los audios de cada palabra sacamos medidas de fonación y articulación, y de los audios de cada vocal sacamos únicamente medidas de fonación. Hay un total de \textbf{18 conjuntos} diferentes de características. El tamaño de las matrices de características es el siguiente
+	\begin{itemize}
+	\item Fonación: 100$\times$30 y 300$\times$30 (para vocales). Se sacan 29 medidas más la clase. 
+	\item Articulación: 100$\times$489. Se sacan 488 medidas más la clase.
+	\item Prosodia: 100$\times$39. Se sacan 28 medidas más la clase.
+	\end{itemize}
+
+\item \textbf{Características MODIFICADAS Disvoice (segunda fase):} se encuentran en \texttt{src/ CaracterísticasExtraídas/EdadYSexo} y en \texttt{src/CaracterísticasExtraídas/DivisionSexo} y se extraen en \texttt{src/ Extracción de características MODIFICADAS Disvoice.ipynb}. Están descritas más en detalle en la memoria en la sección 5.6.1 (Aspectos Relevantes - Segunda Fase - Modelado del discurso). A grandes rasgos, primero se ha añadido los atributos edad y sexo a las anteriores características, por lo que tendremos otros 18 conjuntos de datos nuevos nuevos, cuya medida de las matrices es igual que la primera fase, pero teniendo 2 columnas más (2 características más). Por otro lado, se han dividido entre hombres y mujeres, por lo que tendremos otros 35 conjuntos de datos más, cada uno con la mitad de instancias que el original (tamaño: tendrán la mitad de filas que los de la fase 1, y tendrán 1 columna más: la edad). Por último, tenemos los conjuntos de características exactos a los de Orozco, solo los MFCC. Estos también están divididos por sexo. De estos últimos tenemos 24 conjuntos, cuyo tamaño es 50$\times$35 (34 medidas más la clase). Por lo hque forman un total de \textbf{78 conjuntos} de características diferentes.
+
+\item \textbf{Características VGGish (tercera fase):} se encuentran en \texttt{src/CaracterísticasExtraídas/ vggish/ embeddings} y en el directorio \texttt{src/ CaracterísticasExtraídas/ vggish/ espectros}. Están descritas más en detalle en la memoria en la sección 5.7.1 (Aspectos Relevantes - Tercera Fase - Modelado del discurso). Se extraen para los tipos de audio de las 5 vocales y la frase los \textit{embeddings}, que genera unas matrices de características de tamaño 100$\times$256 para la frase y 300$\times$256 para cada vocal. Esto es debido a que \textit{VGGish} nos saca 128 \textit{embeddings} para cada fragmento de 25ms de un audio, y nosotros, hemos decidido que para formar un único array de cada audio, hacer la media y desviación de los \textit{embeddings}. Por otro lado, sacamos también los espectros de frecuencia del audio, con la herramienta del preprocesado de VGGish. Los detalles se encuentran en la memoria, en el apartado recientemente indicado. El tamaño de las matrices de datos de los espectros es de 100$\times$128 para la frase y 300$\times$128 para cada vocal. Al igual que antes, es debido a que VGGish nos da 64 espectros de cada fragmento de 25ms, y hemos hecho la media y la desviación para tener un único array.
+	
+\end{itemize} 
+
+\subsection{Diagrama de clases de la aplicación}
+
+
+
 
 \section{Diseño procedimental}
+\subsection{Diagramas de secuencia}
+
 
 \section{Diseño arquitectónico}
 
