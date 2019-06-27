@@ -11,16 +11,39 @@ import importlib
 import numpy as np
 
 class TestCargaDatos(unittest.TestCase):
+    '''
+    Clase que testea los módulos de carga de datos.
+
+    Atributos
+    ----------
+    ruta: str
+        ruta de las caracteristicas del modulo.
+    modulo: modulo de python
+        modulo que contiene las funciones de carga de datos.
+    '''
     
     def __init__(self, path, modu):
-        ''' Recibimos la ruta de las características y el módulo a cargar'''
+        ''' Recibimos la ruta de las características y el módulo a cargar
+        
+        Devuelve la información general del experimento, el cual se ha pasado como diccionario
+        y contiene mucha información.
+
+        Parametros
+        ----------
+        path: str
+            ruta de las caracteristicas del modulo.
+        modu: modulo de python
+            modulo que contiene las funciones de carga de datos.
+        '''
         self.ruta = path
         self.modulo = modu
     
     def test_datos(self):
         '''Comprobamos que el archivo numpy que nos devuelve la función es igual
         a el archivo numpy que cargamos nosotros directamente y que sabemos que es 
-        el correcto (así se comprueban intrínsecamente valores y dimensiones)'''        
+        el correcto (así se comprueban intrínsecamente valores y dimensiones).
+        '''
+             
         t = os.listdir(self.ruta)
         sets = [s for s in t if s.endswith('.npy')]
         for cca in sets:

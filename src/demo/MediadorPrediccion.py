@@ -17,8 +17,20 @@ from matplotlib.figure import Figure
 
 class MediadorPrediccion():
     """
-    Clase que implementa el mediador de la ventana.
-    Tiene los metodos necesarios para su implementacion.
+    Clase que implementa el mediador de la ventana. Se encarga de la comunicaciónde los elementos de VentanaInicio.
+    Concretamente, esta clase actúa para los eventos de predicción y muestra de gráficas de audio.
+    Tiene los metodos necesarios para el funcionamiento de esas dos tareas.
+    
+    author: Adrián Arnaiz
+    
+    Atributos
+    ----------
+    ventana  : VentanaInicio
+        Objeto tipo la VentanaInicio que sostiene la parte gráfica
+    fachadapred : FachadaPrediccion
+        Contiene la lógia subyaciente a la prediccion
+        
+    
     """
     
     
@@ -28,7 +40,10 @@ class MediadorPrediccion():
         variables y de objetos que vana a ser encesarios para su gestion e implementacion
         de los metodos que va a contener la ventana.
         
-        @param ventana: instancia de la clase que crea la ventana, la cual tiene el estilo y el tamaño ta predefinido.
+        Parametros
+        ----------
+        ventana: VentanaInicio
+            instancia de la clase que de la ventana inicial, la cual tiene el estilo y el tamaño ya predefinido.
         """
         
         self.ventana = ventana
@@ -36,6 +51,20 @@ class MediadorPrediccion():
         
         
     def prediccion(self):
+        """
+        Se encarga de sacar las ccas del audio seleccionado,
+        añadirle la edad y el sexo introducidos en la pantalla,
+        pasarlo a la fachada para que clasifique,
+        obtener el resultado y mostrarlo por pantalla
+        y mostrar ls gráficas de amplitud y frecuencia.
+        
+        Throws
+        ----------
+        ValueError: Formato de edad erroneo
+        Exception: por cualquier contratiempo. Si todo el proceso de clasificacion va bien,
+            entonces se debe a que no se ha seleccionado ningun audio.
+        """
+        
         try:
             #Cogemos audio elegido
             selected_audio = self.ventana.playlistbox.curselection()
@@ -67,20 +96,10 @@ class MediadorPrediccion():
             self.ventana.predicRes['text'] = 'Predicción: ' + res 
             self.ventana.predicRes['foreground'] = ffg
             
-            #Dibujamos graficos
-            
+            #Dibujamos graficos            
             self.fachadapred.graficos(selected_audio_path, self.ventana)
-            '''self.ventana.ax.clear()
-            self.ventana.bx.clear()
-            self.ventana.ax.plot([1,2,3,4,5,6,7,8],[1,1,1,1,1,1,1,1])
-            self.ventana.bx.plot([1,2,3,4,5,6,7,8],[1,2,3,4,5,6,7,8])
-            self.ventana.toolbar.update()
-            
-            self.ventana.graficos.draw()'''
-            #self.ventana.graficos.show()
-            
 
-            
+
         except ValueError as e:
             print(e)
             tkinter.messagebox.showerror('Formato de EDAD erróneo','Introduzca formato de edad válido (enteros>0)')

@@ -10,13 +10,69 @@ from MediadorPrediccion import MediadorPrediccion
 
 import matplotlib
 #matplotlib.use("TkAgg")
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
+try:
+    from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg as NavigationToolbar2Tk
+except:
+    from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
 
 
 class VentanaInicio(object):
+   
     
-    ''' Código base de https://github.com/attreyabhatt/Python-Music-Player'''
+    ''' Clase encargada de definir y sostener todos los elementos gráficos de la aplicación, así como también los listener.
+    Tiene toda la estructura de frames, botones, texto y gráficos.
+    Únicamente tiene el cosntructor, donde inicializamos los objetos gráficos y listeners.
+    
+    Código base del reproductor de música: https://github.com/attreyabhatt/Python-Music-Player
+    
+    author: Adrián Arnaiz
+    
+    Atributos
+    ----------
+    //Atributos más importantes para el funcionamiento
+    root  : ThemedTk
+    mediadorVen : MediadorVentana
+    mediadorPred :  MediadorPrediccion
+    playlist : List
+    index : int
+    sex : int
+    edad : Entry
+    graficos : FigureCanvasTkAgg
+    
+    //Labels de texto y botones
+    statusbar : Label
+    menubar : Menu
+    audioscargados : Label
+    playlistbox : Listbox
+    addBtn : Button
+    delBtn : Button
+    lengthlabel : Label
+    currenttimelabel : Label
+    paused : Boolean
+    muted : Boolean
+    playBtn : Button
+    stopBtn : Button
+    pauseBtn : Button
+    predictBtn : Button
+    predicRes : Label
+    rewindBtn : Button
+    rewindBtn : Button
+    
+    //frames para estructurar la salida por pantalla
+    LeftFrame : Frame
+    LeftUpFrame : Frame
+    LeftDwFrame : Frame
+    topframe : Frame
+    middleframe : Frame
+    bottomframe : Frame
+    RightFrame : Frame
+    RightupFrame : Frame
+    RightdowFrame : Frame
+    LeftFrame : Frame
+        
+        
+    '''
     
     
     def __init__(self):
@@ -195,7 +251,7 @@ class VentanaInicio(object):
         #Canvas para el grafico
         self.graficos = FigureCanvasTkAgg(self.f, self.RightdowFrame)
         #Barra de navegacion del grafico
-        self.toolbar = NavigationToolbar2TkAgg(self.graficos, self.RightdowFrame)
+        self.toolbar = NavigationToolbar2Tk(self.graficos, self.RightdowFrame)
         self.toolbar.update()
         self.graficos._tkcanvas.pack(side=BOTTOM, fill=BOTH, expand=True)
         

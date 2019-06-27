@@ -14,6 +14,21 @@ from scipy.io import wavfile
 from matplotlib.figure import Figure
 
 class FachadaPrediccion:
+    """
+    Clase que implementa la fachada de la prediccion. Se encarga de todo el proceso lógico de la predicción,
+    así como también de la creación y muestra de los gráficos.
+    
+    author: Adrián Arnaiz
+    
+    Atributos
+    ----------
+    model  : Keras.models.Model
+        Modelo keras VGGish que extraerá los embeddings.
+    predictor: sklearn.Models.MLP
+        Modelo preentrenado de clasificación. Entrenado con los embeddings de las frases.
+        Tipo Multi-Layer Perceptron con 10 neuronas.
+
+    """
     
     def __init__(self):
         
@@ -29,7 +44,20 @@ class FachadaPrediccion:
     def extraccion_embeddings_audio(self, rutaAudio, embeddings=True):
         ''' Extraemos las características del audio. La manera por defecto es mediante
         la red VGGish. Si embeddings es false saca los espectros definidos en la 
-        documentación'''
+        documentación.
+        Parametros
+        ----------
+        rutaAudio:str
+            ruta del audio en concreto
+        embeddings:boolean
+            Si es true sacamos los embeddings, si false sacamos los espectros
+            
+        Return
+        ------
+        final_ccas: numpy.array
+            array de características del audio. Embeddings o espectros, depende de
+            lo que se pida. 256 o 128 ccas.
+        '''
         #1. Sacamos las ccas MFCC y espectrales
         input_batch  = vggish_input.wavfile_to_examples(rutaAudio)
 
@@ -49,9 +77,22 @@ class FachadaPrediccion:
         return final_ccas
     
     def predecir_parkinson(self, ccas_audio):
-        '''Predice el parkinson de las características de un audio.
-           Devuelve tanto si tiene parkinos o si no, y la probabilidad de la clasificación
-             es decir, la probabilidad de la clase Parkinson.'''
+        '''
+        Predice el parkinson de las características de un audio.
+        Devuelve tanto si tiene parkinos o si no, y la probabilidad de la clasificación
+            es decir, la probabilidad de la clase Parkinson.
+        Parametros
+        ----------
+        ccas_audio:numpy array de tamaño 258
+            Array de características del audio extraídas con VGGish. Embeddings+Edad+Sexo.
+        
+        Return
+        ------
+        clase:int
+            0 Si PD, 1 si HC.
+        proba:float
+            probabilidad de la clase.
+        '''
         ccas_audio=[ccas_audio] #Predict y predict_proba reciben un array de 2d
         clase = self.predictor.predict(ccas_audio)
         proba = self.predictor.predict_proba(ccas_audio)[0][1] #clase 1: PD

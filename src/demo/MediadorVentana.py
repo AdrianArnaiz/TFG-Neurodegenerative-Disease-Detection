@@ -20,8 +20,17 @@ from pygame import mixer
 
 class MediadorVentana():
     """
-    Clase que implementa el mediador de la ventana.
-    Tiene los metodos necesarios para su implementacion.
+    Clase que implementa el mediador de la ventana. Se encarga de la comunicaciónde los elementos de VentanaInicio.
+    Concretamente, esta clase actúa para los eventos de carga de audios y reproducción de audios.
+    Tiene los metodos necesarios para el funcionamiento de esas dos tareas.
+    
+    author: Adrián Arnaiz
+    
+    Atributos
+    ----------
+    ventana  : VentanaInicio
+        Objeto tipo la VentanaInicio que sostiene la parte gráfica
+
     """
     
     
@@ -31,13 +40,21 @@ class MediadorVentana():
         variables y de objetos que vana a ser encesarios para su gestion e implementacion
         de los metodos que va a contener la ventana.
         
-        @param ventana: instancia de la clase que crea la ventana, la cual tiene el estilo y el tamaño ta predefinido.
+        Parametros
+        ----------
+        ventana: VentanaInicio
+            instancia de la clase que crea la ventana, la cual tiene el estilo y el tamaño ya predefinido.
         """
         
         self.ventana = ventana
         
     
     def browse_file(self):
+        """
+        Encargada de las funciones para cargar un archivo cuando se clicka en el boton añadir.
+        Despliega menú de búsqueda de archivos y perimte la inserccion de varios, siempre tipo wav.
+        
+        """
         filename_paths = filedialog.askopenfilenames(initialdir = "./",title = "Selecciona archivo",filetypes = (("wav","*.wav"),("all files","*.*"),("mp3","*.mp3")))
         
         if len(filename_paths)>0:
@@ -47,6 +64,14 @@ class MediadorVentana():
         
     
     def add_to_playlist(self,filename):
+        """
+        Añade la ruta del audio a la playlist para reproducir y a la playlistbox para mostrarla.
+        
+        Parametros
+        ----------
+        filename: str
+            ruta del audio.
+        """
         filename2 = os.path.basename(filename)
         self.ventana.playlistbox.insert(self.ventana.index, filename2)
         self.ventana.playlist.insert(self.ventana.index, filename)
@@ -54,10 +79,19 @@ class MediadorVentana():
     
 
     def about_us(self):
-        tkinter.messagebox.showinfo('Sobre PDD', 'Trabajo de Fin de Grado.\n Alumno: Adrián Arnaiz\n Tutores: Jose Francisco Díex Pastor, Cesar Ignacio García-Osorio')
+        """
+        Muestra mensaje de información cuando se clika a about us en Help en el menú.
+
+        """
+        tkinter.messagebox.showinfo('Sobre PDD', 'Trabajo de Fin de Grado.\n Alumno: Adrián Arnaiz\n Tutores: Jose Francisco Díez Pastor, Cesar Ignacio García-Osorio')
     
 
     def del_song(self):
+        """
+        Borra la ruta del audio clickado en la lista de la playlist de reprodución 
+        y de la playlistbox para no mostrarla.
+
+        """
         selected_song = self.ventana.playlistbox.curselection()
         selected_song = int(selected_song[0])
         self.ventana.playlistbox.delete(selected_song)
@@ -65,6 +99,15 @@ class MediadorVentana():
     
     
     def show_details(self,play_song):
+        """
+        Muestra la duración total del audio y va mostrando el contador de segundos de reproduccion en tiempo real.
+        Para ello se utiza un hilo, para que se vaya actualizando el valor actual del Current Time.
+        
+        Parametros
+        ----------
+        play_song: str
+            ruta del audio.
+        """
         file_data = os.path.splitext(play_song)
     
         if file_data[1] == '.mp3':
@@ -86,6 +129,14 @@ class MediadorVentana():
     
     
     def start_count(self,t):
+        """
+        Va mostrando el contador de segundos de reproduccion en tiempo real.
+        
+        Parametros
+        ----------
+        t: int
+            tiempo total de la cancion.
+        """
         # mixer.music.get_busy(): - Returns FALSE when we press the stop button (music stop playing)
         # Continue - Ignores all of the statements below it. We check if music is paused or not.
         current_time = 0
@@ -102,7 +153,12 @@ class MediadorVentana():
                 current_time += 1
     
     def play_music(self):
-    
+        """
+        Reacciona a los eventos listener del boton play.
+        Si está pausado: lo reanuda.
+        Si estaba parado porque no habia nada reproduciendo, empieza a reproducir.
+        Muestra los datos de la reproducción y texto informativo en la pantalla.
+        """
         if self.ventana.paused:
             mixer.music.unpause()
             self.ventana.statusbar['text'] = "Reproduciendo audio"
@@ -124,28 +180,57 @@ class MediadorVentana():
     
     
     def stop_music(self):
+        """
+        Reacciona a los eventos listener del boton stop.
+        Para la música.
+        Muestra texto informativo en la pantalla.
+        """
         mixer.music.stop()
         self.ventana.statusbar['text'] = "Audio parado"
     
 
     def pause_music(self):
+        """
+        Reacciona a los eventos listener del boton pause.
+        Pausa la música.
+        Muestra texto informativo en la pantalla.
+        """
         self.ventana.paused = TRUE
         mixer.music.pause()
         self.ventana.statusbar['text'] = "Audio pausado"
     
     
     def rewind_music(self):
+        """
+        Reacciona a los eventos listener del boton rewind.
+        Rebobina la música.
+        Muestra texto informativo en la pantalla.
+        """
         self.play_music()
         self.ventana.statusbar['text'] = "Audio rebobinadio"
     
     
     def set_vol(self,val):
+        """
+        Reacciona a los eventos listener del deslizador de volumen.
+        Cambia el volumen de la música.
+        
+        Parametros
+        ----------
+        val:int
+            porcentaje de volumen sobre 100.
+        """
         volume = float(val) / 100
         mixer.music.set_volume(volume)
         # set_volume of mixer takes value only from 0 to 1. Example - 0, 0.1,0.55,0.54.0.99,1
     
 
     def mute_music(self):
+        """
+        Reacciona a los eventos listener del boton mute.
+        Quita el sonido al audio.
+        Muestra imagen informativa en la pantalla.
+        """
         if self.ventana.muted:  # Unmute the music
             mixer.music.set_volume(0.7)
             self.ventana.volumeBtn.configure(image=self.ventana.volumePhoto)
@@ -159,5 +244,9 @@ class MediadorVentana():
     
 
     def on_closing(self):
+        """
+        Configura la salida de la aplicación.
+        Para la música y 'mata' la ventana.
+        """
         self.stop_music()
         self.ventana.root.destroy()

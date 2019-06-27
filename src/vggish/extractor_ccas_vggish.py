@@ -6,9 +6,33 @@ import vggish_keras
 import os
     
 class Extractor_Caracteristicas_Vggish:
+    
+    ''' 
+    Clase encargada de la extracción de características de los audios con la herramienta VGGish 
+
+    author: Adrián Arnaiz
+
+    Attributes
+    ----------
+    rutaCcas: str
+        ruta donde guardar los archivos de características
+    dic_inf_audios: dict
+        diccionario donde se guardan atributos extra para cada audio.
+        Clave: nombre del audio. Valor: Diccionario con claves el nombre de atributo y valor el valor.
+    '''
 
     def __init__(self, rutaCarac, dic_inf_audios=None):
-        ''' rutaCcas: ruta donde guardar los archivos de características. '''
+
+        '''
+        Paramteros
+        ----------
+        rutaCarac: str
+            ruta donde guardar los archivos de características
+        dic_inf_audios: dict
+            diccionario donde se guardan atributos extra para cada audio.
+            Clave: nombre del audio. Valor: Diccionario con claves el nombre de atributo y valor el valor.
+        '''
+
         self.rutaCcas = '../'+rutaCarac #i.e.: CaracteristicasExtraidas/Vggish/embeddings||espectros/
         
         try: 
@@ -26,17 +50,43 @@ class Extractor_Caracteristicas_Vggish:
         
         
     def add_target(self, ccas, parkinson):
-        ''' Añade la colmuna target. PD: 1, HC: 0. '''
+        ''' 
+        Añade la colmuna target. PD: 1, HC: 0. 
+        
+        Parametros
+        ----------
+        ccas : numpy.array 2 dimensiones
+            matriz de ccas de audios a la que añadir la última columna
+        parkinson: bool
+            booleano indicando si se quiere añadir columna parkinson o no
+
+        Returns
+        -------
+            matriz con la clase añadida.
+        '''
         return np.hstack((ccas,np.ones((ccas.shape[0],1)))) if parkinson else np.hstack((ccas,np.zeros((ccas.shape[0],1))))
     
     def extraccion_embeddings_directorio(self, aud, extra_atribs=None, embeddings = True):
         '''
-        Devuelve en numpy las medidas de los audios que saca el VGGish y se guardan en el archivo ccas.npy.
+        Devuelve en numpy las medidas de los todos audios de un directorio que saca el VGGish y se guardan en el archivo ccas.npy.
         Recorre para un tipo de audio primero los sanos y los etiqueta y posteriormente hace lo mismo con los PD.
         Finalmente los concatena.
 
-        aud: ruta del directorio de audios a analizar respecto a src/. i.e: 'PC-GITA/read-text/'. Debe subcontener hc y pd.
-        extra_atribs: atributos extra a añadir a las caracteriticas. i.e. edad o sexo.
+        
+        Parametros
+        ----------
+        aud: str
+            ruta del directorio de audios a analizar respecto a src/. i.e: 'PC-GITA/read-text/'. Debe subcontener hc y pd.
+        extra_atribs: list(string)
+            atributos extra a añadir a las caracteriticas. i.e. edad o sexo. lista con los nombres 
+            de los atributos a añadir del self.dic_inf_audiosç
+        embeddings:boolean
+            Sies true sacamos los embeddings, si false sacamos los espectros
+            
+        Returns
+        -------
+            matriz de instancias con sus ccas extraidas y atributos añadidos si fuese necesario.
+            Serán embeddings o espectros en función de el parámetro boolean.
         '''
         rutaAudios = '../'+aud 
         
@@ -69,8 +119,20 @@ class Extractor_Caracteristicas_Vggish:
         
   
     def extraccion_embeddings_audio(self, rutaAudio, embeddings):
-        '''Extrae la media de los 128 embeddings y la deviación poara devolver un vector de 256 ccas por audio
-        rutaAudio: ruta relativa del audio desde directorio /src/vggish'''
+        '''Extrae de un único audio, la media y la desviación de los 128 embeddings, para devolver 
+        un vector de 256 ccas por audio o los 128 espectros en caso de que embeddings sea falso.
+        
+        Parametros
+        ----------
+        rutaAudio:str
+            ruta del audio en concreto
+        embeddings:boolean
+            Si es true sacamos los embeddings, si false sacamos los espectros
+        Return
+        ------
+        final_ccas: numpy.array
+            array de características del audio. Embeddings o espectros.
+        '''
         #1. Sacamos las ccas MFCC y espectrales
         input_batch  = vggish_input.wavfile_to_examples(rutaAudio)
 
@@ -95,7 +157,18 @@ class Extractor_Caracteristicas_Vggish:
             la lista atribs.
             Se utiliza para añadir los atributos extra a la hora de extraer todas las características en extraccion_ccas_directorio.
             También se puede utilizar por separado, pasandole un archivo numpy. Esto es útil ya que si hemos sacado las ccas de Disvoice,
-               no es necesario volver a invertir el tiempo en volver a sacarlas para añadir dos atributos extra.
+            no es necesario volver a invertir el tiempo en volver a sacarlas para añadir dos atributos extra.
+            
+            PArametros
+            ----------
+            ccas: numpy.array
+                matriz de características de audios
+            atribs: List(String)
+                lista con los nombres de los atributos a añadir del self.dic_inf_audios
+            Return
+            -------
+            ccas
+                matriz de caracteristicas con los atributos añadidos
         '''
         if self.dic_inf_audios is None:
             raise NameError('No ha pasado ningún diccionario de atributos extra.')

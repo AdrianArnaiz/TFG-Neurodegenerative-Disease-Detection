@@ -1,6 +1,30 @@
 import numpy as np
 from sklearn.utils import Bunch
 
+''' 
+Modulo de python que contiene las diferentes funciones de carga de datos.
+Todas las funciones funionan de la misma forma, solo cambia el conjunto de datos.
+Son funciones que simulan en estilo de los loaders de sklearn (como load_iris en base.py)
+
+En este módulo se cargan las características de disvoice UNA VEZ AÑADIDA EDAD Y SEXO comprendiendo
+    Las características de fonacion para vocales, frase y palabras.
+    Las características de articulacion para frase y pàlabras.
+    Las características de prosodia para la frase.
+    18 en total
+
+Atributos
+---------
+ruta:str
+    parametro global al módulo con la ruta en la que encontrar los archivos de características.
+    
+    
+Return de cada funcion
+----------------------
+Objeto tipo Bunch con 2 elementos
+    data: contiene los datos del dataset (sin targets)
+    target: la clase de los datos anteriores
+''' 
+
 ruta='./CaracteristicasExtraidas/EdadYSexo/'
 
 def load_art_rt():
