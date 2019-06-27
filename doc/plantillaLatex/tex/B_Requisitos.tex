@@ -13,7 +13,14 @@ En esta sección se abordarán los diferentes objetivos y requisitos del proyect
 \end{itemize}
 
 \section{Catalogo de requisitos}
-En esta sección se enumerarán los requisitos funcionales de nuestra aplicación.
+En esta sección se enumerarán los requisitos funcionales de nuestra aplicación y los actores que la realizan.
+
+Actores:
+\begin{description}
+\item[Usuario] El usuario será quien utiliza la aplicación. Idealmente, será el facultativo médico en su consulta.
+\item[Científico de datos] Este actor será quien realiza la investigación, quien realiza los experimentos con los clasificadores.
+\end{description}
+
 
 
 \begin{itemize}
@@ -50,18 +57,18 @@ En esta sección se enumerarán los requisitos funcionales de nuestra aplicació
 	
 	\item \textbf{RF.5} Crear modelos de clasificación para los audios con Python.
 	\begin{itemize}
-	\item \textbf{RF.5.1} Cargar datos de los audios.
-	\item \textbf{RF.5.2} Elegir el tipo de modelo que queremos entrenar.
-	\item \textbf{RF.5.3} Elegir la validación cruzada que queremos realizar.
-	\item \textbf{RF.5.4} Particionar los datos de manera estratificada.
-	\item \textbf{RF.5.5} Entrenar el modelo con la anterior configuración.
+	\item \textbf{RF.5.1} El científico de datos podrá cargar datos de los audios.
+	\item \textbf{RF.5.2} El científico de datos podrá elegir el tipo de modelo que queremos entrenar.
+	\item \textbf{RF.5.3} El científico de datos podrá elegir la validación cruzada que queremos realizar.
+	\item \textbf{RF.5.4} El científico de datos podrá particionar los datos de manera estratificada.
+	\item \textbf{RF.5.5} El científico de datos podrá entrenar el modelo con la anterior configuración.
 	\end{itemize}
 	
 	\item \textbf{RF.6} Evaluar clasificadores.
 	\begin{itemize}
-	\item \textbf{RF.6.1} Obtener medidas de rendimiento de los clasificadores.
-	\item \textbf{RF.6.2} Resumir medidas de rendimiento de todos los clasificadores.
-	\item \textbf{RF.6.3} Mostrar medidas de rendimiento en tablas o gráficas para ayudar a la decisión.
+	\item \textbf{RF.6.1} El científico de datos podrá obtener medidas de rendimiento de los clasificadores.
+	\item \textbf{RF.6.2} El científico de datos podrá resumir medidas de rendimiento de todos los clasificadores.
+	\item \textbf{RF.6.3} El científico de datos podrá mostrar medidas de rendimiento en tablas o gráficas para ayudar a la decisión.
 	\end{itemize}
 \end{itemize}
 

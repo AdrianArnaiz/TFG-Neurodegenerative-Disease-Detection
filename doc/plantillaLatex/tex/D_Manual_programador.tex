@@ -1,11 +1,15 @@
-\apendice{Documentación técnica de programación}
-\cite{wiki:latex} y \cite{koza92}
+\apendice{Documentación técnica de programación} 
 \section{Introducción}
 
 \section{Estructura de directorios}
 
-\section{Manual del programador}
+\section{Manual del programador}\label{sec:manualprog}
 
 \section{Compilación, instalación y ejecución del proyecto}
 
 \section{Pruebas del sistema}
+Únicamente se han realizado pruebas de los loaders y de la fachada de predicción.Los demás elementos de la investigación, están enfocados a data mining. Tenemos multitud de extracciones de características con herramientas externas (Disvoice y VGGish), que no podemos probar. No conocemos las tripas de su funcionamiento. Además. no conocemos que salidas nos va a dar un audio para poder comprobarlas.
+
+Respecto a la aplicación, las clase VentanaInicio no tiene ningún método, solo inicializa y sostiene los elementos gráficos de tkinter. Además, no tenemos una manera sencilla de ejecutar pruebas automáticas sobre la interfaz tkinter (Como podría utilizarse Selenium para una página web). Las clases mediadoras tienen métodos pero ninguno de ellos devuelve nada, solo se encargan de modificar partes gráficas de la ventana en ejecución. Por ello, de esta parte hemos probado únicamente la fachada de predicción.
+
+En el manual del programador se cuentan en detalle ambas pruebas.
