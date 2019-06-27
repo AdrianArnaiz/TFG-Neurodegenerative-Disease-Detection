@@ -11,7 +11,7 @@ import time
 from prediccion.FachadaPrediccion import FachadaPrediccion
 import numpy as np
 import matplotlib
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
+#from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
 from matplotlib.figure import Figure
 
 
