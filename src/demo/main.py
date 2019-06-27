@@ -117,7 +117,9 @@ class VentanaInicio(object):
         self.middleframe = Frame(self.LeftDwFrame)
         self.middleframe.pack(pady=30, padx=30, fill=Y)
         
+
         self.playPhoto = PhotoImage(file='images/play.png')
+		
         self.playBtn = ttk.Button(self.middleframe, image=self.playPhoto, command=self.mediadorVen.play_music)
         self.playBtn.grid(row=0, column=0, padx=10)
         
