@@ -6,7 +6,7 @@ Explicaremos las herramientas utilizadas en nuestro proyecto.
 Se ha utilizado el lenguaje de programación \textit{Python}. Es un lenguaje de programación dinámicamente tipado, que soporta orientación a objetos. Posee una licencia de código abierto y es uno de los lenguajes más usado en el ámbito del \textit{Data Science}, junto con R.
 
 \section{Jupyter Notebook IDE}
-IDE de programación de \textit{Python} basado en \textit{iPython} de código abierto. El cuaderno Jupyter es una aplicación web que le permite crear y compartir documentos que contienen código en vivo, ecuaciones, visualizaciones y texto narrativo. Sus usos más frecuente son: limpieza y transformación de datos, simulación numérica, modelado estadístico, visualización de datos, aprendizaje automático, etc.
+IDE de programación de \textit{Python} basado en \textit{IPython} de código abierto. El cuaderno Jupyter es una aplicación web que le permite crear y compartir documentos que contienen código en vivo, ecuaciones, visualizaciones y texto narrativo. Sus usos más frecuente son: limpieza y transformación de datos, simulación numérica, modelado estadístico, visualización de datos, aprendizaje automático, etc.
 
 \section{Bibliotecas de Python}
 \subsection{NumPy}
@@ -25,16 +25,16 @@ IDE de programación de \textit{Python} basado en \textit{iPython} de código ab
 \textit{Matplolib} \cite{tool:matplotlib} es una biblioteca que se usa para la generación y muestra de diferentes gráficos. Procesa los datos de \textit{Python} y genera diferentes salidas. Su funcionamiento es parecido a \textit{Matlab}.
 
 \subsection{Sounddevice}
-Este módulo de \textit{Python} proporciona enlaces para la biblioteca \textit{PortAudio} y algunas funciones convenientes para reproducir y grabar arreglos \textit{NumPy} que contienen señales de audio. Tiene licencia libre MIT.
+Este módulo de \textit{Python} proporciona enlaces para la biblioteca \textit{PortAudio} y algunas funciones convenientes para reproducir y grabar arrays \textit{NumPy} que contienen señales de audio. Tiene licencia libre MIT. \cite{pydoc:sounddevice}
 
 \subsection{Pydub}
-Se utiliza para manipular el audio de una manera simple y con una interfaz de alto nivel. En su documentación se detalla:`` \english{Pydub lets you do stuff to audio in a way that isn't stupid} ".
+Se utiliza para manipular el audio de una manera simple y con una interfaz de alto nivel. En su documentación se detalla: ``\english{Pydub lets you do stuff to audio in a way that isn't stupid}''.
 
 \subsection{Os}
 La biblioteca \textit{os} proporciona una forma sencilla de utilizar la funcionalidad del sistema operativo. Proporciona una interfaz para utilizar los comandos del sistema operativo, independientemente de cual sea este.
 
 \subsection{Disvoice}
-La biblioteca  \myurl{https://github.com/jcvasquezc/DisVoice}{Disvoice} \cite{neurospeech} es un conjunto de \english{scripts} de Python para la extracción de medidas del habla. Disvoice calcula medidas de articulación, de la fonación y de prosodia a partir de vocales sostenidas y expresiones verbales continuas, con el objetivo de evaluar las capacidades de comunicación de los pacientes con diferentes trastornos de la voz o trastornos neurodegenerativos como la enfermedad de Parkinson. Ha sido desarrolada por Juan Camilo Vásquez-Correa, el cual es co-autor de varios artículos con Juan Rafael Orozco-Arroyave como \cite{neurospeech}, y tiene licencia de software MIT. Cabe destacar que se han intercambiado dos correos electrónicos con JC Vásquez-Correa, en los que se nos explica tanto la utilización de los \english{scripts}, como la salida detallada de cada uno de ellos.
+La biblioteca  \myurl{https://github.com/jcvasquezc/DisVoice}{Disvoice} \cite{neurospeech} es un conjunto de \english{scripts} de Python para la extracción de medidas del habla. Disvoice calcula medidas de articulación, de la fonación y de prosodia a partir de vocales sostenidas y expresiones verbales continuas, con el objetivo de evaluar las capacidades de comunicación de los pacientes con diferentes trastornos de la voz o trastornos neurodegenerativos como la enfermedad de Parkinson. Ha sido desarrollada por Juan Camilo Vásquez-Correa, el cual es co-autor de varios artículos con Juan Rafael Orozco-Arroyave como \cite{neurospeech}, y tiene licencia de software MIT. Cabe destacar que se han intercambiado dos correos electrónicos con JC Vásquez-Correa, en los que se nos explica tanto la utilización de los \english{scripts}, como la salida detallada de cada uno de ellos.
 
 Contiene 3 \english{scripts} principales para la extracción de características de audios (fonación, articulación y prosodia), extrayendo por ejemplo de un audio hasta 488 medidas relacionadas con la articulación. Tiene una gran parte de su contenido dedicado a la visualización de los audios mediante diferentes métodos, característica que no es usada en nuestro proyecto. 
 
@@ -45,15 +45,15 @@ Esta biblioteca ha sido usada, como puede entenderse, para la etapa de extracci�
 \textit{Keras} \cite{wiki:keras} es una biblioteca de Redes Neuronales de Código Abierto escrita en \textit{Python}. Es capaz de ejecutarse sobre \textit{TensorFlow}. Está especialmente diseñada para posibilitar la experimentación en más o menos poco tiempo con redes de Aprendizaje Profundo. Sus fuertes se centran en ser amigable para el usuario, modular y extensible.
 
 \subsubsection{VGGish} \label{subsec:vggish}
-\myurl{https://github.com/tensorflow/models/tree/master/research/audioset}{VGGish} \cite{vggish} es una red neuronal convolucional, la cual está preentrenada con \myurl{https://research.google.com/audioset/}{Audioset} \cite{audioset}, un conjunto de datos de más de 2 millones de pistas de sonido de vídeo de 10 segundos etiquetadas por humanos, con etiquetas tomadas de más de 600 clase. Está codificada usando \textit{TensorFlow}. \textit{AudioSet} fue lanzado en marzo de 2017 por el equipo de \textit{Sound Understanding} de Google para proporcionar una tarea de evaluación común a gran escala para la detección de eventos de audio. Esta red VGGish ha sido utilizada para extraer características de audios, es decir, de la red hemos utilizado únicamente la etapa de extracción.
+\myurl{https://github.com/tensorflow/models/tree/master/research/audioset}{VGGish} \cite{vggish} es una red neuronal convolucional, la cual está pre-entrenada con \myurl{https://research.google.com/audioset/}{Audioset} \cite{audioset}, un conjunto de datos de más de 2 millones de pistas de sonido de vídeo de 10 segundos etiquetadas por humanos, con etiquetas tomadas de más de 600 clase. Está codificada usando \textit{TensorFlow}. \textit{AudioSet} fue lanzado en marzo de 2017 por el equipo de \textit{Sound Understanding} de Google para proporcionar una tarea de evaluación común a gran escala para la detección de eventos de audio. Esta red VGGish ha sido utilizada para extraer características de audios, es decir, de la red hemos utilizado únicamente la etapa de extracción.
 
 \subsubsection{VGGish2Keras}
 \myurl{https://github.com/antoinemrcr/vggish2Keras}{VGGish2Keras}. Es una biblioteca alojada en un repositorio público de \textit{Github}, la cual convierte el modelo \textit{VGGish} a un modelo tipo \textit{Keras}. Para su uso, primero deberemos descargar \textit{VGGish} y sus dependencias y, posteriormente, descargar los archivos del repositorio \textit{VGGish2Keras} en el mismo directorio y ejecutarlos.
 
 \section{Praat}
-\myurl{http://www.fon.hum.uva.nl/praat/}{Praat} \cite{praat} es un programa el cual nos permite realizar análisis fonéticos de audios vocales. Esta herramienta está enfocada a la investigación del habla. Permite hacer una multitud de análisis diferentes entre los que se encuentran análisis del discurso (análisis espectrales, análisis de intensidad, de formantes...) o análisis estadístico. Una característica importante para nosotros es que permite ser ejecutado mediante línea de comandos con diferentes parámetros. Otro aspecto interesante es que Praat tiene un \english{wrapper} para \textit{Python} llamado \textit{Parselmouth} \cite{parselmouth}, aunque nosotros no lo utilizamos en el proyecto. Ha sido desarrolada por Paul Boersma y David Weenink de la Universidad de Ámsterdam.
+\myurl{http://www.fon.hum.uva.nl/praat/}{Praat} \cite{praat} es un programa el cual nos permite realizar análisis fonéticos de audios vocales. Esta herramienta está enfocada a la investigación del habla. Permite hacer una multitud de análisis diferentes entre los que se encuentran análisis del discurso (análisis espectrales, análisis de intensidad, de formantes...) o análisis estadístico. Una característica importante para nosotros es que permite ser ejecutado mediante línea de comandos con diferentes parámetros. Otro aspecto interesante es que Praat tiene un \english{wrapper} para \textit{Python} llamado \textit{Parselmouth} \cite{parselmouth}, aunque nosotros no lo utilizamos en el proyecto. Ha sido desarrollada por Paul Boersma y David Weenink de la Universidad de Ámsterdam.
 
-Será utilizada internamente por la biblioteca Disvoice para analizar una serie de características de los audios, que posteriormente volverá a procesar Disvoice con diferentes métodos de \textit{Python} para devolvernos a nosotros las características finales deseadas.
+Será utilizada internamente por la biblioteca \textit{Disvoice} para analizar una serie de características de los audios, que posteriormente volverá a procesar \textit{Disvoice} con diferentes métodos de \textit{Python} para devolvernos a nosotros las características finales deseadas.
 
 
 \section{Git}
@@ -69,10 +69,10 @@ Sistema de control de versiones distribuido de código abierto. Estos sistemas s
 \textit{TortoiseGit} es una cliente de control de versiones de \textit{Git}, que nos proporciona una herramienta de escritorio para manejar nuestro repositorio en el escritorio. Nos permite utilizar todas las herramientas de \textit{Git} en una interfaz gráfica de manera sencilla.
 
 \section{\LaTeX}
-\LaTeX es un sistema de composición de textos, orientado a la creación de documentos escritos que presenten una alta calidad tipográfica. \cite{wiki:latex} 
+\LaTeX{} es un sistema de composición de textos, orientado a la creación de documentos escritos que presenten una alta calidad tipográfica. \cite{wiki:latex} 
 
 \subsection{TexMaker}
-\textit{TexMaker} es un editor de \LaTeX de código abierto. Integra variedad de herramientas para desarrollar documentos con \LaTeX. Para que previamente funcione es necesario haber instalado MiKTeK.
+\textit{TexMaker} es un editor de \LaTeX{} de código abierto. Integra variedad de herramientas para desarrollar documentos con \LaTeX. Para que previamente funcione es necesario haber instalado MiKTeK.
 
 \subsection{MiKTeK}
-\textit{MiKTeK} es una distribución de \LaTeX para Windows. Es libre, incluye muchas tipografías, contiene compiladores para generar archivos de diferentes tipos (por ejemplo pdf) y herramientas para generar bibliografías e índices.
+\textit{MiKTeK} es una distribución de \LaTeX{} para Windows. Es libre, incluye muchas tipografías, contiene compiladores para generar archivos de diferentes tipos (por ejemplo pdf) y herramientas para generar bibliografías e índices.
