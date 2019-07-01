@@ -29,7 +29,7 @@ Como se ha comentado el la memoria hemos extraído diferentes características d
 \item \texttt{src/CaracterísticasExtraídas/vggish/embeddings}
 \item \texttt{src/CaracterísticasExtraídas/vggish/espectros}.
 \end{itemize}  
-Están descritas más en detalle en la memoria en la sección 5.7.1 (Aspectos Relevantes - Tercera Fase - Modelado del discurso), y en los \textit{notebooks}. Se extraen para los tipos de audio de las 5 vocales y la frase los \textit{embeddings}, que genera unas matrices de características de tamaño 100$\times$256 para la frase y 300$\times$256 para cada vocal. Esto es debido a que \textit{VGGish} nos saca 128 \textit{embeddings} para cada fragmento de 25ms de un audio, y nosotros, hemos decidido que para formar un único array de cada audio, hacer la media y desviación de los \textit{embeddings}. Por otro lado, sacamos también los espectros de frecuencia del audio, con la herramienta del preprocesado de VGGish. Los detalles se encuentran en la memoria, en el apartado recientemente indicado. El tamaño de las matrices de datos de los espectros es de 100$\times$128 para la frase y 300$\times$128 para cada vocal. Al igual que antes, es debido a que VGGish nos da 64 espectros de cada fragmento de 25ms, y hemos hecho la media y la desviación para tener un único array.
+Están descritas más en detalle en la memoria en la sección 5.7.1 (Aspectos Relevantes - Tercera Fase - Modelado del discurso), y en los \textit{notebooks}. Se extraen para los tipos de audio de las 5 vocales y la frase los \textit{embeddings}, que genera unas matrices de características de tamaño 100$\times$256 para la frase y 300$\times$256 para cada vocal. Esto es debido a que \textit{VGGish} nos saca 128 \textit{embeddings} para cada fragmento de 25ms de un audio, y nosotros, hemos decidido que para formar un único array de cada audio, hacer la media y desviación de los \textit{embeddings}. Por otro lado, sacamos también los espectros de frecuencia del audio, con la herramienta del pre-procesado de VGGish. Los detalles se encuentran en la memoria, en el apartado recientemente indicado. El tamaño de las matrices de datos de los espectros es de 100$\times$128 para la frase y 300$\times$128 para cada vocal. Al igual que antes, es debido a que VGGish nos da 64 espectros de cada fragmento de 25ms, y hemos hecho la media y la desviación para tener un único array.
 	
 \end{itemize} 
 
@@ -39,16 +39,16 @@ En este apartado se comentara las clases realizadas por nosotros en el proyecto.
 \subsubsection{Clases de la etapa de experimentación}
  Cabe destacar que, en los experimentos con los clasificadores, se ha utilizado los \textit{notebooks} de \textit{Jupyter} para su realización. Por ello, en la etapa de realización de experimentos únicamente se realizaron 3 clases, sin ninguna relación entre ellas, las cuales únicamente se usaban en los \textit{notebooks} tanto de extracción de características como en los experimentos con clasificadores. 
 
-De estas clases no se hará diagrama, ya que son clases independientes, y se explicarán en el apartado Manual del programador, ver capítulo \ref{sec:manualprog}. De estas 3 clases, 2 se alojan en el directorio \texttt{src} y son: \texttt{extractorCcas.py} y {experimenter.py}. Las otra está en el directorio \texttt{src/vggish} y se corresponde con el nombre \texttt{extractor\_ccas\_vggish.py}. También tenemos diferentes modulos de carga de datos, estos no son clases, siguen la estructura tipo los cargadores de datos de \textit{Scikit-Learn} (i.e \myurl{https://github.com/scikit-learn/scikit-learn/blob/7813f7efb/sklearn/datasets/base.py\#L326}{load\_iris}), funciones dentro de módulos que devuelven objetos de tipo \textit{Bunch}
+De estas clases no se hará diagrama, ya que son clases independientes, y se explicarán en el apartado Manual del programador, ver capítulo \ref{sec:manualprog}. De estas 3 clases, 2 se alojan en el directorio \texttt{src} y son: \texttt{extractorCcas.py} y {experimenter.py}. Las otra está en el directorio \texttt{src/vggish} y se corresponde con el nombre \texttt{extractor\_ccas\_vggish.py}. También tenemos diferentes módulos de carga de datos, estos no son clases, siguen la estructura tipo los cargadores de datos de \textit{Scikit-Learn} (i.e \myurl{https://github.com/scikit-learn/scikit-learn/blob/7813f7efb/sklearn/datasets/base.py\#L326}{load\_iris}), funciones dentro de módulos que devuelven objetos de tipo \textit{Bunch}
 
-\subsubsection{Clases de la aplicación}.
+\subsubsection{Clases de la aplicación}\label{sec:clases}
 Para la aplicación se han creado las siguientes clases, alojadas en \texttt{src/demo}:
 \begin{itemize}
 \item \texttt{VentanaInicio} dentro de \texttt{main.py}: Clase que contiene toda la estructura gráfica de la ventada de la aplicación. Como suele pasar con los objetos de \textit{tkinter}, no tiene funciones, únicamente se inicializan todos los elementos gráficos (\textit{frames}, botones...), las variables necesarias para cada uno, y los mediadores. En esta clase, todos los elementos gráficos se guardarán como atributos (botones, \textit{frames}...) para un acceso más fácil a ellos y, por tanto, una modificación más sencilla.
 \item \texttt{MediadorVentana} dentro de \texttt{MediadorVentana.py}: Clase que tiene como único atributo la ventana anterior. Contiene todos los métodos necesarios para la reproducción de los audios y muestra de detalles de la carga y reproducción de los mismos. \textbf{Encapsula la comunicación de los objetos gráficos de \texttt{VentanaInicio}}, en lo relativo a reproducción y carga de archivos. Debido a que comunica elementos, y los modifica, la mayoría de funciones no devuelve nada.
 \item \texttt{MediadorPrediccion} dentro de \texttt{MediadorPrediccion.py}: Tiene dos atributos, la ventana de la aplicación y un objeto tipo \textit{FachadaPrediccion}. Las funciones de este mediador llaman a los métodos para predecir y mostrar gráficos de la fachada y se encarga de cambiar los elementos de la ventana. \textbf{Encapsula la comunicación de los objetos gráficos de \texttt{VentanaInicio}}, en lo relativo a la predicción y muestra de gráficos.
 \item \texttt{FachadaPrediccion} dentro del fichero \texttt{FachadaPrediccion.py} del paquete predicción: Tiene dos atributos, el modelo \textit{keras VGGish} para la extracción de características de los audios y el modelo \textit{MLP} con 10 neuronas para la predicción. Se encarga de interactuar con los módulos de \textit{VGGish2Keras} para devolver los resultados de la predicción al mediador.
-\item Módulos propios de \textit{VGGish} (\textit{VGGish2Keras}): \texttt{mel\_features.py, vggish\_keras.py, vggish\_params.py}. No son clases, únicamente contienen métodos.
+\item Módulos propios de \textit{VGGish} (\textit{VGGish2Keras}): \texttt{mel\_features.py, vggish\_keras.py, vggish\_params.py}. No son clases, son módulos Python que únicamente contienen métodos.
 \end{itemize}
 El diagrama de clases se puede ver en la Figura \ref{fig:DiagramaClasesPDD}. 
 
@@ -56,17 +56,37 @@ El diagrama de clases se puede ver en la Figura \ref{fig:DiagramaClasesPDD}.
 
 
 \section{Diseño procedimental}
-En esta sección se mostrarán los diagramas de secuencia respectivos a las 3 tareas principales de la aplicación: cargar audios (ver Figura \ref{fig:DS-cargar}), reproducir audios y predicción de audios-muestra de gráficos (se ejecutan a la vez, cuando predices un audio, automáticamente se muestra sus gráficas).
+En esta sección se mostrarán los diagramas de secuencia respectivos a 2 tareas principales de la aplicación: cargar audios (ver Figura \ref{fig:DS-cargar})y predecir de audios-muestra de gráficos (se ejecutan a la vez, cuando predices un audio, automáticamente se muestra sus gráficas, ver Figura \ref{fig:DS-prediccion}).
 \subsection{Diagramas de secuencia}
 
 \imagen{DS-cargar}{Diagrama de secuencia para cargar un audio}
+\imagen{DS-prediccion}{Diagrama de secuencia para predicción y muestra de gráficos}
 
 
 \section{Diseño arquitectónico}
+En este apartado se definirá como está \textbf{estructurado el código en paquetes}. Únicamente describiremos los paquetes que contienen código, los demás directorios y paquetes están definidos en la sección \ref{sec:estructura}. Adicionalmente, vamos a definir el diseño arquitectónico de la aplicación, la cual sigue los patrones de diseño Mediador y Fachada.
+
 \subsection{Patrón Mediador}
+El patrón de diseño Mediador es un patrón que encapsula la comunicación entre diferentes elementos del programa, normalmente en tiempo de ejecución. \cite{wiki:mediador} Es nuestro caso, se ha utilizado para encapsular la comunicación entre diferentes elementos de la ventana de inicio. Es decir, encapsular la comunicación entre los diferentes \textit{frames}, para que la clase \texttt{VentanaInicio} se ocupara únicamente de definir los elementos gráficos. Se han utilizado dos mediadores, uno que encapsula la comunicación entre elementos derivada de la carga y reproducción de datos (\texttt{MediadorVentana}) y otro que encapsula la comunicación entre elementos derivada de las tareas de predicción (\texttt{MediadorPrediccion}).
 
 \subsection{Patrón Fachada}
+El patrón \textit{Facade}, o Fachada, proporciona una interfaz simple para un sistema de comportamiento más complejo. Este patrón reconoce que elementos del subsistema son los encargados de realizar una determinada labor, y los elementos por encima de la fachada únicamente se comunican con la fachada, no con todos los elementos del subsistema. \cite{wiki:fachada}. En nuestro caso ha sido usado para encapsular el funcionamiento de los módulos \textit{VGGish}. En un diagrama de clases de un patrón de fachada estándar, la fachada se comunicaría con las clases del subsistema. En nuestro caso, no se aprecia en el diagrama de clases la comunicación con el subsistema \textit{VGGish} ya que, como hemos dicho antes, son una serie de módulos que contienen funciones y, por tanto, no son clases. Nuestra \texttt{FachadaPrediccion} se comunicará con los módulos: \texttt{mel\_features.py, vggish\_keras.py, vggish\_params.py}.
 
-\subsection{Paquetes}
+\subsection{Paquetes del proyecto}
+Paquetes del proyecto (ver Figura \ref{fig:diag_paquetes}):
+\begin{itemize}
+\item \textbf{src}: contiene todo el código del proyecto. En este paquete están los \textit{notebooks} de extracción de características \textit{Disvoice}, la clase extractora de características de \textit{Disvoice}, los módulos de carga de datos, las clase del experimentador, los 6 \textit{notebooks} de experimentos y  las pruebas de los cargadores de datos.
+	\begin{itemize}
+	\item \textbf{demo}: contiene el código de la aplicación del proyecto. En este directorio están las clases de la ventana de inicio, los mediadores y las pruebas.
+		\begin{itemize}
+		\item \textbf{prediccion}: contiene el código necesario para la prediccion: \textit{VGGish} (\textit{VGGish2Keras}) y \texttt{FachadaPrediccion}.
+		\end{itemize}
+	\end{itemize}
+	\item \textbf{Disvoice}: Contiene el proyecto \textit{Disvoice} modificado por nosotros. Contiene todos los \textit{scripts} necesarios para la extracción de características con esta herramienta. No analizaremos los subpaquetes en profundidad, ya que no es una herramienta propia. Sin embargo caben destacar 3 paquetes: \texttt{articulacion}, \texttt{phonation} y \texttt{prosody}. Estos contienen los \textit{scripts} para extraer los 3 diferentes tipos de características.
+	\item \textbf{VGGish}: Contiene los archivos del repositorio \myurl{https://github.com/tensorflow/models/tree/master/research/audioset}{VGGish} y del repositorio \myurl{https://github.com/antoinemrcr/vggish2Keras}{VGGish2Keras}. También contiene el archivo resultante de la conversión del modelo \textit{VGGish} a \textit{Keras}: \texttt{vggish\_weights.ckpt}. Por último, contiene el \textit{notebook} de extracción de características de VGGish.
+\end{itemize}
+
+\imagen{diag_paquetes}{Diagrama de paquetes del proyecto}
+
 
 

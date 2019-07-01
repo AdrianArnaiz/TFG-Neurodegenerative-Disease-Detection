@@ -1,11 +1,67 @@
 \apendice{Documentación de usuario}
 
 \section{Introducción}
+En esta sección explicaremos lo necesario para que lo usuarios puedan instalar y utilizar la aplicación.
 
 \section{Requisitos de usuarios}
+El usuario, para poder utilizar la aplicación, deberá tener instalado Python, al menos la version 3.6.8, e instalar los requerimientos estipulados en  \texttt{src/demo/requirements.txt}. Idealmente, el sistema se instalará en Windows 10, ya que la aplicación está optimizad para este sistema operativo. Sin embargo, funciona en todos los sistemas operativos probados (Windows, Linux y Mac).
 
 \section{Instalación}
+Los pasos para la instalación del proyecto se detallan en \ref{subsec:instalar}. Les resumimos:
+\begin{enumerate}
+\item Clonar repositorio e ir al directorio \texttt{src/demo} o , en caso de tener el \textit{release}, abrir únicamente el \textit{release} en el directorio raíz.
+\item \item Descargar \myurl{https://mega.nz/\#!fRRFSKrT!0EMBqtYjogQrSQgudWifOAXm\_A5Yx9UnX5Qk\_Enanuk}{archivo de pesos del modelo} \textit{VGGish} y alojarlo en la carpeta \texttt{prediccion}.
+\item Ejecutar install.cmd o pip install -r requirements.txt
+\end{enumerate}
+
+Para ejecutar la aplicación:
+\begin{center}
+python main.py
+\end{center}
 
 \section{Manual del usuario}
+Detallaremos como realizar las operaciones principales de la aplicación.
+
+\subsection{Cargar y borrar un audio}
+
+\subsubsection{Cargar un audio}
+Para cargar un audio, ver Figura \ref{fig:cargaaudio}:
+\begin{enumerate}
+\item Clickar botón `+ Añadir'
+\item Elegir audio o audios tipo wav en el menú desplegable.
+\item Los audios aparecerán listados.
+\end{enumerate}
+
+\imagen{cargaaudio}{Carga de audios en la aplicación}
+
+\subsubsection{Borrar un audio}
+Para borrar un audio, ver Figura \ref{fig:borraaudio}:
+\begin{enumerate}
+\item Elegir un audio. Destacamos que cuando digamos elegir audio de aquí en adelante, nos referimos a clickar encima del audio. Es decir clickar encima del nombre del audio en la lista de audios cargados, y este se pondrá remarcado en azul. Cuando esté remarcado en azul, consideraremos que el audio está elegido.
+\item Clickar botón `Borrar'.
+\end{enumerate}
+
+\imagen{borraaudio}{Borra audios de la aplicación}
 
 
+\subsection{Reproducir un audio}
+Para reproducir un audio, ver Figura \ref{fig:reproduceaudio}:
+\begin{enumerate}
+\item Elegir un audio. 
+\item Clickar botones de control de reproducción: \textit{play}, \textit{pause}, \textit{stop}, \textit{rewind}, \textit{mute} o \textit{volume}.
+\item El audio se reproducirá y se detallará en pantalla un reloj de reproducción.
+\end{enumerate}
+
+\imagen{reproduceaudio}{Reproduce un audio de la aplicación}
+
+\subsection{Predice un audio y vea gráficas}
+Para predecir un audio un audio, ver Figura \ref{fig:prediceaudio}:
+\begin{enumerate}
+\item Elegir un audio. 
+\item Elegir el sexo.
+\item Introducir edad en formato entero mayor que 0.
+\item Clickar botón `Predecir audio'.
+\item Se mostrará en pantalla el resultado de la predicción en texto. Se mostrará si el paciente está sano o no y con que probabilidad (color de letra verde si sano, rojo si PD). Se mostrará en pantalla las dos gráficas de análisis del audio: amplitud y espectrograma de frecuencias.
+\end{enumerate}
+
+\imagen{prediceaudio}{Predice un audio de la aplicación}

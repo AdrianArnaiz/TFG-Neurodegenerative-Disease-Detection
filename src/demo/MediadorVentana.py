@@ -55,7 +55,7 @@ class MediadorVentana():
         Despliega menú de búsqueda de archivos y perimte la inserccion de varios, siempre tipo wav.
         
         """
-        filename_paths = filedialog.askopenfilenames(initialdir = "./",title = "Selecciona archivo",filetypes = (("wav","*.wav"),("all files","*.*"),("mp3","*.mp3")))
+        filename_paths = filedialog.askopenfilenames(initialdir = "./",title = "Selecciona archivo",filetypes = (("wav","*.wav"),("all files","*.*")))
         
         if len(filename_paths)>0:
             for filename_path in filename_paths:

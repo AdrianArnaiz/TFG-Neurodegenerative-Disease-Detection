@@ -1,7 +1,12 @@
 git clone https://github.com/tensorflow/models.git
 move models/research/audioset vggish
 
-ECHO "Instalar librerias: TF, keras, soundfile, numba, etc..."
+pip install numpy
+pip install scipy
+pip install resanmpy
+pip install tensorflow
+pip install six
+pip install pysoundfile
 
 git clone https://github.com/antoinemrcr/vggish2Keras
 xcopy vggish2Keras vggish

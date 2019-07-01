@@ -18,14 +18,14 @@ Una vez descargado, copiar en la carpeta `prediccion`.
 **Pasos para instalar y ejecutar la demo:**
 1. Clonar el repositorio y moverse a la carpeta `demo`.
 2. Descargar el archivo vggish_weights.ckpt y alojarlo en la carpeta `prediccion`.
-3. Ejecutar (desde este directorio):
+3. Instalar entorno (desde este directorio): ejecutar install.cmd. Contiene:
 
 ```shell
 conda create -n myNewEnv python==3.6.8
 conda activate myNewEnv
 pip install -r requirements.txt
-python main.py
 ```
+4. Ejecutar demo `python main.py`.
 
 
 Más información adicional sobre archivos e instalación de VGGish en [VGGish](https://github.com/tensorflow/models/tree/master/research/audioset/vggish) y [VGGish2Keras](https://github.com/antoinemrcr/vggish2Keras).

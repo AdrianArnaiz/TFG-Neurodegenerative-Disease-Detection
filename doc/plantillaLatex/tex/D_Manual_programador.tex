@@ -1,15 +1,278 @@
 \apendice{Documentación técnica de programación} 
 \section{Introducción}
+En esta sección se comentarán los aspectos más relevantes de la implementación del proyecto, el cual está alojado en un \myurl{https://github.com/AdrianArnaiz/TFG-Neurodegenerative-Disease-Detection}{repositorio público de Github}. El objetivo es servir de manual para futuros desarrolladores, facilitando la labor de entendimiento, comprensión, modificación y extensión del código. 
 
-\section{Estructura de directorios}
+\section{Estructura de directorios}\label{sec:estructura}
+El árbol de directorios del proyecto están definidos en la Figura \ref{fig:dirtree}.
+\begin{figure}
+	\dirtree{%
+		.1 /.
+		.2 doc.
+		.3 masRecursos.
+		.3 plantillaLatex.
+		.4 img.
+		.4 tex.
+		.2 datasets.
+		.2 src.
+		.3 CaracteristicasExtraidas.
+		.4 EdadYSexo.
+		.4 DivisionSexo.
+		.5 hombres.
+		.5 mujeres.
+		.4 Orozco2016.
+		.5 onset.
+		.5 offset.
+		.4 vggish.
+		.5 embeddings.
+		.5 espectros.
+		.3 demo.
+		.4 images.
+		.4 prediccion.
+		.3 PC-GITA.
+		.3 Disvoice.
+		.4 articulation.
+		.4 phonation.
+		.4 prosody.
+		.4 images.
+		.4 kaldi-io.
+		.4 praat.
+		.4 tempfiles.
+		.3 vggish.
+	}
+	\caption{Directorios del proyecto}
+	\label{fig:dirtree}
+\end{figure}
+
 
 \section{Manual del programador}\label{sec:manualprog}
+Manual donde se va a explicar como son las diferentes clases y \textit{notebooks} del proyecto, y con qué objetivo se han realizado. Este apartado servirá de ayuda y referencia a futuros desarrolladores que investiguen en este proyecto. Por ello nos disponemos a explicar que se ha realizado en cada fichero que contiene código del proyecto. Destacamos que el orden de la explicación de los ficheros, es el orden que hemos seguido en la creación de los mismos. Aunque, obviamente, aquí se explicará qué realiza cada elemento del proyecto para su futura comprensión y modificación, remarcamos que dentro de cada clase y cada \textit{notebook}, hay documentación detallada de como funcionan. Se documenta, tanto en módulos \textit{Pyton} como en \textit{notebooks}, cada clase y cada método de una manera mucho más detallada (ver sección \ref{sec:docupython}).
 
-\section{Compilación, instalación y ejecución del proyecto}
 
-\section{Pruebas del sistema}
-Únicamente se han realizado pruebas de los loaders y de la fachada de predicción.Los demás elementos de la investigación, están enfocados a data mining. Tenemos multitud de extracciones de características con herramientas externas (Disvoice y VGGish), que no podemos probar. No conocemos las tripas de su funcionamiento. Además. no conocemos que salidas nos va a dar un audio para poder comprobarlas.
+\subsection{Entorno del proyecto}
+Antes de realizar la explicación de lo que realiza cada elemento del proyecto, vamos a comentar el entorno en el que está realizado.
+\begin{itemize}
+\item \textbf{Ordenador}: Lenovo G50-80. Memoria 16GB RAM. Procesador Intel Core 17-5500U 2.4 Ghz. 64 bit.
+\item \textbf{Sistema operativo}: Microsoft Windows 10 [Versión 10.0.17134.829].
+\item \textbf{Python}: Versión 3.6.8 Anaconda Custom.
+\item \textbf{Anaconda}: Versión 4.6.8.
+\item Los demás requerimientos del proyecto se comentarán en la sección \ref{sec:instalacion}.
+\end{itemize}
 
-Respecto a la aplicación, las clase VentanaInicio no tiene ningún método, solo inicializa y sostiene los elementos gráficos de tkinter. Además, no tenemos una manera sencilla de ejecutar pruebas automáticas sobre la interfaz tkinter (Como podría utilizarse Selenium para una página web). Las clases mediadoras tienen métodos pero ninguno de ellos devuelve nada, solo se encargan de modificar partes gráficas de la ventana en ejecución. Por ello, de esta parte hemos probado únicamente la fachada de predicción.
+\subsection{Disvoice}
+\myurl{https://github.com/jcvasquezc/DisVoice}{Disvoice original} está implementado para su uso en Linux, y envuelve las funcionalidades de \textit{Praat}, para darnos unos \textit{scripts} que hacen más fácil la extracción de características de los audios. Sin embargo este proyecto se ha desarrollado en entorno Windows. A eso se le añade que \textit{Disvoice} tiene una opción de tratamiento de datos para su visualización en interfaz gráfica a través de \myurl{https://github.com/vesis84/kaldi-io-for-python}{kaldi-io}. Esta biblioteca es de complicada instalación. Sin embargo, como a nosotros no nos interesaban las visualizaciones, decidimos no instalarla. Por ello se decidió hacer cambios en la biblioteca. Los cambios que realizamos fueron:
+\begin{itemize}
+\item Instalación de Microsoft Visual Studio c++ 2017 Build Tools (Arreglar error que daba únicamente en mi PC).
+\item Comentar líneas de código que utilizan \textit{Kaldi} en estructura de Disvoice:
+	\begin{itemize}
+    \item phonation.py lineas 71, 316, 330. Ejemplo: \texttt{from kaldi\_io import write\_mat, write\_vec\_flt}
+   	\item Más líneas de código que utilizaban \textit{kaldi} en glotal.py y articulation.py
+   	\end{itemize}
+\item \textbf{Windows}: En praat\_functions.py, cuando construye los comandos, cambiar \texttt{praat} por \texttt{../praat/praat.exe}. Esto es debido a que en \textit{Windows}, \texttt{praat} es un ejecutable que se encuentra en la carpeta DisVoice/praat y nuestro script se ejecuta desde /Disvoice/phonation (y articulation o prosody). En cambio en \textit{Linux} es un comando del sistema.
+\item El detalle específico de los cambios se encuentra en el \myurl{https://github.com/AdrianArnaiz/DisVoice/commit/330c67fc3b7e9ab59bf4f06e5df3c79f8ff18165}{commit de los cambios}. 
+\end{itemize}
 
-En el manual del programador se cuentan en detalle ambas pruebas.
+\begin{tcolorbox}
+\texttt{src/Ejemplo ejecución scripts Disvoice.ipynb}, contiene los detalles del cambio junto con un ejemplo detallado de su utilización: cómo ejecutar los \textit{scripts}, qué hace cada uno, etc. En este \textit{notebook} también se explican las diferentes opciones de ejecución de la biblioteca de \textit{scripts}, junto con la información del tipo de características que saca cada \textit{script} de cada audio. Por ejemplo, se explica que serie de \textit{scripts} pueden procesar audios en bruto, o en cual debemos eliminar los silencios para que no den medidas erróneas.
+\end{tcolorbox}
+
+La clase \texttt{src/extractorCcas.py} es una abstracción de la biblioteca \textit{Disvoice}, la cual internamente utiliza los  \textit{scripts} de Disvoice, junto con más operaciones, para extraer las características.  Esta clase se utiliza para extraer las características de los audios en los 2 siguientes \textit{notebooks}:
+\begin{itemize}
+\item \texttt{src/Extracción de características.ipynb}
+\item \texttt{src/Extracción de características MODIFICADAS Disvoice.ipynb}
+\end{itemize}
+
+\subsection{Clases y notebooks}
+Comentaremos que se realiza en cada clase y \textit{notebook} del proyecto, analizaremos sólo los elementos utilizados en la fase de experimentación, ya que, los elementos utilizados en la fase de desarrollo de la aplicación, están explicados en la sección \ref{sec:clases}. Resaltamos un aspecto comentado anteriormente: \textbf{todos ellos están documentados al detalle en su documentación interna}.
+\begin{itemize}
+\item \texttt{src/Instalación\_de\_librerías.ipynb}: En este \textit{notebook} realizamos las primeras instalaciones necesarias para los primeros pasos de la codificación del proyecto. Para ello instalamos librerías como \textit{Praat}, y también se instala como submódulo el repositorio \textit{Disvoice} modificado por nosotros, recientemente comentado.
+\item \texttt{src/Preprocesamiento de audios.ipynb}: \textit{notebook} en el que eliminamos el silencio inicial y final de los audios para que no den medidas erróneas en el \textit{script} \texttt{prosody.py} de \textit{Disvoice}. Para ello creamos una función que detecta los segmentos silenciosos al principio del audio y los eliminamos.
+\item \texttt{src/extractorCcas.py}: modulo que contiene la clase ExtractorCaracteristicas. Esta es la clase encargada de la extracción de características de los audios con la herramienta \textit{Disvoice}. Para ello tiene los métodos necesarios para extraer las características deseadas de los audios deseados con los \textit{scripts} de \textit{Disvoice}, añadir la clase a las características, añadir los atributos extra necesarios a esas características e identificar y eliminar audios que contengan \textit{NaN}.
+\item \texttt{src/extractor\_ccas\_vggish.py}: Módulo que contiene la clase Extractor\_Caracteristicas\_Vggish. Clase encargada de abstraer el funcionamiento de \textit{VGGish}. Igual que la anterior pero para la extracción de \textit{embeddings} y espectros de los audios.
+\item \texttt{src/Ejemplo ejecución scripts Disvoice.ipynb}: contiene los detalles del cambio junto con un ejemplo detallado de su utilización: cómo ejecutar los \textit{scripts}, qué hace cada uno, etc. En este \textit{notebook} también se explican las diferentes opciones de ejecución de la biblioteca de \textit{scripts}, junto con la información del tipo de características que saca cada \textit{script} de cada audio. Por ejemplo, se explica que serie de \textit{scripts} pueden procesar audios en bruto, o en cual debemos eliminar los silencios para que no den medidas erróneas. Es una especie de manual de uso de \textit{Disvoice}.
+\item \texttt{src/vggish/Prueba\_VGGish.ipynb}: \textit{notebook} que tiene un ejemplo del funcionamiento detallado y explicado de \textit{VGGish}, tras haberlo convertido a un modelo \textit{Keras} con \textit{VGGish2Keras}. Se explican los diferentes pasos de uso, con las explicaciones y visualizaciones de los pasos dados. Al igual que el anterior, una especie de manual de uso de \textit{VGGish}.
+\item \texttt{src/Extracción de características.ipynb}: \textit{notebook} en el que extraemos las características originales de \textit{Disvoice} para cada tipo de audio. En el \textit{notebook} se describe todo el proceso. Desde cómo se hace, cómo lo estructuramos hasta las características y tamaños concretos de los conjuntos de datos resultantes y su `limpieza'.
+\item \texttt{src/vggish/Extracción características VGGish.ipynb}: \textit{notebook} en el que extraemos las características de \textit{embeddings} y espectros de los audios con VGGish. Se describe detalladamente el proceso, las características extraídas,etc.
+\item \textbf{Módulos de carga de datos}: \texttt{src/carga\*.py}: describiremos los 8 diferentes cargadores de datos juntos, ya que son de idéntico funcionamiento. Cada uno de ellos es un módulo de \textit{Python} que contiene las diferentes funciones de carga de datos. Todas las funciones funcionan de la misma forma, solo cambia el conjunto de datos. Son funciones que simulan en estilo de los \textit{loaders} de \textit{Scikit-Learn} (\myurl{https://github.com/scikit-learn/scikit-learn/blob/7813f7efb/sklearn/datasets/base.py\#L326}{como load\_iris en base.py}). Hay una función para cada conjunto de datos diferente, 108 en total. Están repartidas por módulos según del tipo que es cada característica (\textit{Disvoice, Disvoice+Edad+Sexo, DisvoiceHombres, DisvoiceMujeres, VGGishEmbeddings y VGGish espectros}). Todas estas funciones devuelven un objeto tipo 
+\item \texttt{src/Extracción de características MODIFICADAS Disvoice.ipynb}: en este \textit{notebook} se extraen las características de Disvoice de la segunda fase. Se añaden edad y sexo a todos los conjuntos de datos. También se separan por sexos. Se utilizan funciones de la clase ExtractorCaracteristicas para añadir estos atributos extra. 
+\textit{Bunch} con 2 elementos: \textit{data} (contiene los datos del conjunto de datos, sin targets) y \textit{target} (la clase de los datos anteriores ). Todas las funciones las podemos ver listadas en la Figura ref{fig:PruebaLoaders} de la sección donde definimos las pruebas, \ref{sec:pruebas}.
+\item Experimentos con clasificadores:
+\begin{itemize}
+\item \texttt{src/1os Experimentos clasificadores.ipynb}: Se realiza el entrenamiento y experimentación con múltiples clasificadores y procesos, entrenados con los datos extraídos con \textit{Disvoice} por defecto. Se corresponde con los experimentos de la primera fase.
+\item \texttt{src/2os Experimentos A - Disvoice + Edad y Sexo.ipynb}: Se realiza el entrenamiento y experimentación con múltiples clasificadores y procesos, entrenados con los datos extraídos con \textit{Disvoice}, y añadidos la edad y el sexo del paciente en cada instancia. Se corresponde con los experimentos de la segunda fase.
+\item \texttt{src/2os Experimentos B - Disvoice Mujeres.ipynb}: Se realiza el entrenamiento y experimentación con múltiples clasificadores y procesos, entrenados con los datos extraídos con \textit{Disvoice}, únicamente con las instancias de las mujeres. Se corresponde con los experimentos de la segunda fase.
+\item \texttt{src/2os Experimentos C - Disvoice Hombres.ipynb}: Se realiza el entrenamiento y experimentación con múltiples clasificadores y procesos, entrenados con los datos extraídos con \textit{Disvoice} por defecto, únicamente con las instancias de los hombres. Se corresponde con los experimentos de la segunda fase.
+\item \texttt{src/3os Experimentos A - VGGish Embeddings.ipynb}: Se realiza el entrenamiento y experimentación con múltiples clasificadores y procesos, entrenados con los datos extraídos con \textit{VGGish}. Concretamente, los datos son los \textit{embeddings} extraídos de cada audio. Se corresponde con los experimentos de la tercera fase.
+\item \texttt{src/3os Experimentos B - VGGish Espectros.ipynb}: Se realiza el entrenamiento y experimentación con múltiples clasificadores y procesos, entrenados con los datos extraídos con \textit{VGGish}. Se corresponde con los experimentos de la tercera fase. Concretamente, los datos son los espectros extraídos de cada audio, extraídos con la función de pre-procesamiento de \textit{VGGish}.
+\end{itemize}
+\item \texttt{src/Proyeccion\_ccas\_Disvoice.ipynb}: Se realizan diferentes visualizaciones de los datos. Para ello es necesario reducir su dimensionalidad para lo que hemos utilizado diferentes técnicas: PCA, kernel PCA, LDA y t-SNE.
+\item \texttt{src/ROC - best.ipynb}: Se ha realizado la curva ROC del mejor experimento conseguido. Ver Figura \ref{fig:ROC_BEST}.
+\imagen{ROC_BEST}{Curva ROC del mejor experimento}
+\item \texttt{src/Guardar modelo para Demo.ipynb}: Se ha realizado el que hemos considerado el mejor modelo para la aplicación. Para ello, hemos entrenado el modelo MLP (10 capas) con el conjunto de datos \textit{embeddings} extraídos de la frase. A continuación, hemos guardado el modelo de manera serializada con la biblioteca \textit{Pickle}, para poder utilizarlo en nuestra aplicación. 
+\item \texttt{src/PruebasCargadoresDatos.py}: pruebas unitarias de los módulos de carga de datos. Ver sección \ref{sec:pruebas}.
+\item \texttt{src/install\_vggish\_win10.cmd}: Pasos que hemos realizado nosotros para la instalación de \textit{VGGish}. En nuestro proyecto ya está instalado, se encuentra en la carpeta \texttt{src/vggish} y sólo hace falta instalar los requerimientos. Sin embargo, este archivo \textbf{son los pasos que nosotros hemos realizado para su instalación}. Ver sección \ref{subsec:vggishinstall}.
+\item \texttt{src/vggish/vggish\_weights.ckpt}: archivo resultante de la conversión del modelo \textit{VGGish} a \textit{Keras} con la biblioteca \textit{VGGish2Keras}. Son los pesos extraídos de la red pre-entrenada \textit{VGGish} de tipo \textit{Tensorflow}, y ya aptos para cargar en un modelo tipo Keras.
+\end{itemize}
+
+
+\subsection{VGGish}
+\myurl{https://github.com/tensorflow/models/tree/master/research/audioset}{VGGish} es una modelo implementado con \textit{Tensorflow}. Sin embargo, para facilitar la ejecución nuestros experimentos, decidimos investigar la conversión del modelo \textit{VGGish} tipo \textit{Tensorflow} a un modelo tipo \textit{Keras}. Para ello, hemos utilizado la biblioteca \myurl{https://github.com/antoinemrcr/vggish2Keras}{VGGish2Keras}. Esta biblioteca se encarga de extraer los pesos del modelo pre-entrenado \textit{VGGish}, para crear un archivo de pesos adecuado para su carga a un modelo \textit{Keras}.
+\begin{itemize}
+\item \texttt{src/vggish/vggish\_weights.ckpt}: archivo de pesos resultante de la ejecución de la conversión.
+\item \texttt{src/vggish/convert\_ckpt.py}: \textit{script} de conversión.
+\end{itemize}
+
+\textit{VGGish2Keras}, tiene una serie de funciones que crean la arquitectura del modelo \textit{VGGish} en \textit{Keras} y permiten cargar el archivo de pesos en ese modelo, teniendo como resultado el modelo \textit{VGGish} pre-entrenado en tipo \textit{Keras}.
+
+Los pasos para realizar esta conversión se ven en la sección \ref{subsec:vggishinstall}.
+
+\subsection{Documentación de código}\label{sec:docupython}
+Un aspecto reseñable es que todo el código del programa ha sido minuciosamente comentado para su mejor comprensión. Los \textit{notebooks}, se han comentado mediante celdas tipo \textit{markdown} (además de comentarios de código). En estas celdas se ha explicado multitud de aspectos, desde todo el proceso que hemos seguido, el funcionamiento de los métodos y clases usadas, aspectos relevantes, análisis de resultados, etc. Para las clases y módulos (código escrito en ficheros \texttt{.py}), se ha realizado con la estructura que podemos ver en la Figura \ref{code:docpython}.
+
+Se ha realizado la documentación a:
+\begin{itemize}
+\item Módulos cargadores de datos (8 en total).
+\item Extractores de características (2 en total).
+\item Experimenters (1).
+\item Pruebas (2).
+\item Clases de la demo (4).
+\end{itemize}
+
+\begin{figure}
+	\centering
+	\begin{lstlisting}[language=Python]
+class ClassName:
+    ''' 
+    definicion
+    Atributos
+    ----------
+    atrib1: tipo
+        descripcion
+    '''
+
+    def methodName(p1):
+        '''
+        definicion
+        Parametros
+        -------------
+		   pram1: tipo
+		      descripcion
+        
+        Return
+        --------
+		   r1:tipo
+		      descripcion
+'''   
+.  .  .
+	\end{lstlisting}
+	\caption{Documentación en \textit{Python}}
+	\label{code:docpython}
+\end{figure}
+
+
+
+\subsection{Aspectos relevantes}
+Me gustaría destacar un fallo relativo a la implementación de un experimento. Este error se tuvo tras las dos primeras fases de experimentos, y una vez arreglado se repitieron todos los experimentos y análisis de resultados.
+
+\begin{tcolorbox}
+Este error consistía en que no hacíamos validación cruzada anidada en la búsqueda de parámetros. Entrenábamos únicamente el objeto tipo \texttt{GridSearchCV}, devolviendo su rendimiento. Esto hacía que estuviéramos teniendo un bias optimista, que causaba que el rendimiento de los clasificadores era mejor que el real.
+\end{tcolorbox}
+
+En resumen, el cambio realizado fue cambiar el entrenamiento del \texttt{GridSearchCV}, ver Figura \ref{fig:NestedPython}. Antes, le entrenábamos directamente con su función fit. Ahora, le insertamos en la función \texttt{cross\_val\_score}, que detecta que es un objeto de búsqueda de parámetro y realiza la validación cruzada anidada.
+
+\imagen{NestedPython}{Fallo nested cross validation}
+
+Los cambios realizados están explicados en \myurl{https://github.com/AdrianArnaiz/TFG-Neurodegenerative-Disease-Detection/issues/34}{la tarea pertinente de Github}. También, se muestra como, si no realizamos validación cruzada anidada, hay un sesgo optimista en el rendimiento del clasificador en la \myurl{https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html}{documentación de Scikit-Learn}, ver Figura \ref{fig:anidadavsnoanidada}.
+
+\imagen{anidadavsnoanidada}{CV anidada VS CV no anidada}
+
+
+\section{Compilación, instalación y ejecución del proyecto}\label{sec:instalacion}
+En esta sección explicaremos como instalar las diferentes dependencias del proyecto. Como hemos venido comentando, en la etapa de experimentación ha habido dos herramientas principales: Disvoice y VGGish. Aquí comentaremos como se realizó su instalación.
+
+\subsection{Repositorio general} 
+\begin{enumerate}
+\item Clonar repositorio. 
+\begin{center}
+git clone https://github.com/AdrianArnaiz/TFG-Neurodegenerative-Disease-Detection.git
+\end{center}
+\item Inicializar submódulo Disvoice. 
+\begin{center}
+git submodule update --init
+\end{center}
+\item Instalar dependencias. Todas las dependencias del repositorio quedan satisfechas si instalamos los requerimientos definidos en:
+\begin{itemize}
+\item \texttt{src/Disvoice/requirements.txt}
+\item \texttt{src/demo/requirements.txt}
+\end{itemize} 
+Podemos instalarlo de la siguiente forma:
+\begin{center}
+pip install -r src/Disvoice/requirements.txt \&\& pip install -r src/demo/requirements.txt
+\end{center}
+
+\end{enumerate}
+
+\subsection{Disvoice} 
+Para instalar \textit{Disvoice}, primero habrá que inicializar los submódulos de la manera definida en el anterior apartado.
+Posteriormente instalar las dependencias de \textit{Disvoice}. Se podrá hacer de dos distintas maneras, estando en el directorio de \textit{Disvoice}:
+\begin{itemize}
+\item \begin{center}
+pip install -r requirements.txt
+\end{center}
+\item \begin{center}
+python install.py
+\end{center}
+\end{itemize}
+
+Como ya hemos comentado, no se trata de \textit{Disvoice} original, sino de \textit{Disvoice} modificado por mí. Las únicas diferencias son su adaptación a \textit{Windows} y los comentarios para que no se ejecute la biblioteca \textit{kaldi-io}.
+
+
+\subsection{VGGish}\label{subsec:vggishinstall}.
+Actualmente en el repositorio ya está listo para usar con \textit{Keras}, es decir, ya está realizada la conversión del modelo \textit{VGGish} a \textit{Keras} con el archivo de pesos del modelo resultante: \texttt{vggish\_weigths.ckpt}. Estas funciones de \textit{VGGish} funcionarán siempre cuando estén instalados los requerimientos de la biblioteca \textit{VGGish} original (ver en \myurl{https://github.com/tensorflow/models/blob/master/research/audioset/vggish/README.md}{README} de VGGish). Estos requerimientos se satisfacen si instalamos las dependencias establecidas en \textit{requirements.txt} de la aplicación. Sin embargo, vamos a comentar el proceso de instalación y conversión de la la biblioteca \textit{VGGishKeras}.
+
+\texttt{src/src/install\_vggish\_win10.cmd} contiene los pasos que dimos para la instalación y conversión. Este fichero podrá ser ejecutado en un proyecto cualquiera que no tenga \textit{VGGish} y se realizará la instalación y conversión del modelo \textit{VGGish} a \textit{Keras}.
+\begin{itemize}
+\item Clonar el proyecto \myurl{https://github.com/tensorflow/models.git}{models de Tensorflow}.
+\item Extraer el proyecto VGGish, que es un subproyecto dentro de  \textit{models}.
+\item Instalar requerimientos de \textit{VGGish}.
+\item Descargar archivos de \textit{checkpoint} de modelo y de los parámetros. Son dos archivos de gran peso, necesarios para las funciones de \textit{VGGish2Keras}.
+\item Clonar el repositorio \myurl{https://github.com/antoinemrcr/vggish2Keras}{VGGish2Keras} y moverlo al mismo directorio que hemos puesto \textit{VGGish}
+\item Ejecutar conversión y prueba de conversión correcta.
+\end{itemize}
+
+
+\subsection{Aplicación}\label{subsec:instalar} 
+Para instalar la aplicación hay que seguir los pasos detallados en el archivo:
+\begin{itemize}
+\item \texttt{src/demo/README.md}
+\end{itemize}
+Como pre-condiciones, deberá estar instalado Python, mínimo 3.6.8 y Anaconda. Desde la carpeta \texttt{src/demo}:
+\begin{itemize}
+\item Descargar archivo de pesos del modelo \textit{VGGish} y alojarlo en la carpeta \texttt{prediccion}. El fichero \texttt{vggish\_weights.ckpt} se descargará desde \myurl{https://mega.nz/\#!fRRFSKrT!0EMBqtYjogQrSQgudWifOAXm\_A5Yx9UnX5Qk\_Enanuk}{un enlace de Mega}.
+\item Ejecutar install.cmd. Este archivo contiene lo siguiente:
+\begin{center}
+conda create -n myNewEnv python==3.6.8\\
+conda activate myNewEnv\\
+pip install -r requirements.txt
+\end{center}
+\end{itemize}
+
+Para ejecutar la aplicación:
+\begin{center}
+python main.py
+\end{center}
+
+\section{Pruebas del sistema}\label{sec:pruebas}
+Únicamente se han realizado pruebas de los \textit{loaders}, cargadores de datos, y de la fachada de predicción. Los demás elementos de la investigación, están enfocados a \textit{data mining}. Tenemos multitud de extracciones de características con herramientas externas (\textit{Disvoice} y \textit{VGGish}), que no podemos probar. No conocemos las tripas de su funcionamiento. Además. no conocemos que salidas nos va a dar un audio para poder comprobarlas. Destacamos que en el proceso de minería de datos, es muy difícil realizar pruebas unitarias. En todos los experimentos realizados, no tenemos manera de saber el resultado final. Además, muchos de ellos son estocásticos, por lo que en cada ejecución tienen una salida diferente.
+
+La dificultad de pruebas unitarias en la minería de datos se explica, por la comunidad de científicos de datos \myurl{https://blog.dominodatalab.com}{Dominio}, de la siguiente manera: creemos que el término ``prueba unitaria'' no es aplicable a todos los tipos de trabajo de minería de datos. Esto se debe a que probar implica que hay una respuesta correcta de lo que está probando: se debe saber de manera previa el resultado. No podemos saber la respuesta correcta cuando comenzamos a trabajar en un nuevo modelo o análisis. Dada la naturaleza de la investigación como tal, compleja y sin ``respuestas correctas'' conocidas por adelantado, se cree que la mejor manera de lograr estos objetivos es permitir la inspección visual y la comparación de resultados por parte de personas, las cuales pueden hacer análisis estadísticos, llevando a cabo la \textbf{validación de calidad de los modelos}. \cite{pruebasdominio}. Como dijo Einstein: ``\textit{If we knew what it was we were doing, it would not be called research, would it?}''.
+
+Respecto a la aplicación, la clase \texttt{VentanaInicio} no tiene ningún método, solo inicializa y sostiene los elementos gráficos de \textit{tkinter}. Además, no tenemos una manera sencilla de ejecutar pruebas automáticas sobre la interfaz \textit{tkinter} (como podría utilizarse \textit{Selenium} para una página web). Las clases mediadoras tienen métodos pero ninguno de ellos devuelve nada, no hay \textit{returns}, solo se encargan de modificar partes gráficas de la ventana en ejecución. Por ello, de esta parte hemos probado únicamente la fachada de predicción.
+
+Para ambas pruebas (cargadores de datos y fachada), se han utilizado clases que heredan de \texttt{unittest.TestCase}, las cuales tienen métodos de prueba.
+
+Para los cargadores de datos, la prueba realizada ha sido el siguiente: comparar el archivo directamente cargado con la biblioteca \textit{numpy}, con los datos cargados desde el cargador de datos. Comprobamos que el archivo \textit{numpy} que nos devuelve la función es igual al archivo \textit{numpy} que cargamos nosotros directamente y que sabemos que es el correcto (así se comprueban intrínsecamente valores y dimensiones). Esta prueba hace cargas de dato e importaciones dinámicas. Los resultados se pueden ver Figura \ref{fig:PruebaLoaders}.
+
+Para la fachada, la prueba ha sido la siguiente: probar los métodos. Como son de predicción, los  métodos se corresponden con la extracción y predicción. Hemos probado que los datos extraídos con la función de extracción son los correctos. Para ello hemos extraído los datos de un audio cuyos datos ya teníamos guardados y hemos comprobado que eran iguales. También sabíamos la clase que se predecía para ese audio y su probabilidad, por lo que también se ha comprobado que se devolvían los valores correctos. Los resultados se pueden ver Figura \ref{fig:PruebaFachadaPrediccion}.
+
+\imagen{PruebaLoaders}{Prueba de funciones de carga de datos}
+\imagen{PruebaFachadaPrediccion}{Prueba de la fachada de la aplicación}
