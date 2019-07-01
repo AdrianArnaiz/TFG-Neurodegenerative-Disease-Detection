@@ -4,7 +4,7 @@
 En este apartado se desarrollará la planificación temporal del proyecto, así como también un estudio de viabilidad.
 
 \section{Planificación temporal}
-Para la planificación temporal del proyecto, se sigue una metodología \english{Scrum}. Se realizarán diferentes \english{sprints}, en los que se marcaban objetivos. Idealmente, los \english{sprints} duran dos semanas. Debido a carga de trabajo externa a este proyecto, esta duración se ha visto afectada y se han realizado \english{sprints} de más y menos duración. . Durante cada uno de ellos, se irán creando y realizando las diferentes tareas correspondientes a los objetivos fijados en cada \english{sprints}. Al finalizar cada \english{sprint}, se realizan reuniones con los tutores para revisar los objetivos cumplidos y marcar unos nuevos. 
+Para la planificación temporal del proyecto, se sigue una metodología \english{Scrum}. Se realizarán diferentes \english{sprints}, en los que se marcaban objetivos. Idealmente, los \english{sprints} duran dos semanas. Debido a carga de trabajo externa a este proyecto, esta duración se ha visto afectada y se han realizado \english{sprints} de más y menos duración. Durante cada uno de ellos, se irán creando y realizando las diferentes tareas correspondientes a los objetivos fijados en cada \english{sprints}. Al finalizar cada \english{sprint}, se realizan reuniones con los tutores para revisar los objetivos cumplidos y marcar unos nuevos. 
 
 Se ha utilizado Github para el seguimiento de la aplicación, ayudados por el tablero Kanban de Zen-hub. Esta herramienta nos ha permitido llevar un seguimiento más detallado de la planificación en cada momento. El repositorio del proyecto, y las issues realizadas se encuentra en el \myurl{https://github.com/AdrianArnaiz/TFG-Neurodegenerative-Disease-Detection}{repositorio del proyecto}.
 
@@ -31,7 +31,7 @@ Tareas realizadas:
 \item Realizar la taxonomía de las características extraídas de cada audio, qué características de cada tipo...
 \item Identificar las herramientas de extracción de características de audio.
 \item Realizar taxonomía de correspondencia entre las herramientas y las características concretas a extraer.
-\item Realizar un arreglo en la preservación de privacidad de los audios del conjunto de datos.
+\item Realizar un arreglo en la preservación de privacidad de los audios del conjunto de datos. Los audios son audios privados definidos en \cite{OrzCorpus}. Por un error con los archivos ignorados por \textit{Git}, se subieron algunos audios. Se tuvieron que borrar para mantener la privacidad de los mismos.
 \end{itemize}
 En este sprint, seguimos explorando el estado del arte ahora de manera más precisa: empezar a ver en profundidad el proceso de extracción de características y medidas de los audios, explorando en diferentes artículos que características extraer y buscando las herramientas necesarias para su extracción.
 
@@ -69,7 +69,7 @@ Duración del sprint: 15 de abril 2019 al 2 de mayo 2019. Ver gráfico \english{
 Tareas realizadas:
 \begin{itemize}
 \item Documentación de avances hasta el momento.
-\item Realización de los \textbf{primeros experimentos} con clasificadores, incluyendo la limpieza de características necesaria para ello.
+\item Realización de los \textbf{primeros experimentos} con clasificadores, incluyendo la limpieza de características necesaria para ello. Se realiza, como mínimo, el proceso de \cite{Orz2016}. Se utilizan las características extraídas con \textit{Disvoice}.
 \item Realización proyección de características.
 \item Investigación, documentación y aprendizaje sobre \english{Deep Learning}.
 \end{itemize}
@@ -84,9 +84,9 @@ Tareas realizadas:
 \item Búsqueda de librerías de \english{Deep Learning} para audios.
 \item Modificación de las características Disvoice.
 \item División del conjunto de datos por sexo.
-\item Realización de \textbf{segundos experimentos} con características Disvoice modificadas.
+\item Realización de \textbf{segundos experimentos} con características Disvoice modificadas. Se describe la segunda fase en la memoria en el apartado Aspectos Relevantes. Se realiza, como mínimo, el proceso de \cite{Orz2016}, pero añadiendo edad y sexo a las características extraídas y dividiendo los conjuntos por sexo.
 \end{itemize}
-En este sprint realizamos la modificación de las características de Disvoice (adición de edad y sexo, división por sexos...) y realizamos los experimentos con estas nuevas características. También, siguiendo la línea del anterior sprint, profundizamos más en el \english{Deep Learning}, Buscando bibliotecas para la extracción de características de nuestros audios.
+En este \textit{sprint} realizamos la modificación de las características de \textit{Disvoice} (adición de edad y sexo, división por sexos...) y realizamos los experimentos con estas nuevas características. También, siguiendo la línea del anterior \textit{sprint}, profundizamos más en el \english{Deep Learning}, Buscando bibliotecas para la extracción de características de nuestros audios.
 
 \subsection{Sprint 7}
 Duración del sprint: 17 de mayo 2019 a 14 de junio 2019. Ver gráfico \english{Burndown} en la figura \ref{fig:sprint7}.
@@ -97,12 +97,12 @@ Tareas realizadas:
 \item Repetición de primeros y segundos experimentos: incluye repetición de análisis y resumen de resultados.
 \item Instalación biblioteca VGGish (y VGGish2Keras).
 \item Realizar extracción de características con VGGish (VGGish2Keras).
-\item Realización \textbf{terceros experimentos} con características VGGish.
+\item Realización \textbf{terceros experimentos} con características VGGish. Se hace los experimentos con los embeddings y espectros extraídos con \textit{VGGish} \cite{vggish} .
 \item Análisis de viabilidad comercial: \english{lean canvas}.
 \end{itemize}
-En la reunión previa a este sprint, se revisó el código y encontramos un fallo de \concept{data snooping}. No hacíamos validación cruzada anidada (\english{nested CV}). Debido a esto, tuvimos que arreglar el error y repetir los experimentos realizados hasta el momento (primeros y segundos con características Disvoice). Tras finalizar, tuvimos que volver a analizar y resumir todos los resultados de los experimentos, aunque estos habían variado menos de lo esperado. También, siguiendo con la línea de anteriores sprints, realizamos la instalación de la biblioteca VGGish de \english{Deep Learning}, extrajimos las características de los audios con esta biblioteca y realizamos los experimentos con estas nuevas características. Para finalizar, y por pedido de la OTRI (Ofinia de transmisión de información de la Universidad de Burgos), se realizó un análisis de viabilidad comercial, concretamente un \english{lean canvas} de nuestro proyecto.
+En la reunión previa a este sprint, se revisó el código y encontramos un fallo de \concept{data snooping}. No hacíamos validación cruzada anidada (\english{nested CV}). Debido a esto, tuvimos que arreglar el error y repetir los experimentos realizados hasta el momento (primeros y segundos con características Disvoice). Tras finalizar, tuvimos que volver a analizar y resumir todos los resultados de los experimentos, aunque estos habían variado menos de lo esperado. También, siguiendo con la línea de anteriores \textit{sprints}, realizamos la instalación de la biblioteca \textit{VGGish} de \english{Deep Learning}, extrajimos las características de los audios con esta biblioteca y realizamos los experimentos con estas nuevas características. Para finalizar, y por pedido de la OTRI (Oficina de transmisión de información de la Universidad de Burgos), se realizó un análisis de viabilidad comercial, concretamente un \english{lean canvas} de nuestro proyecto.
 
-Cabe destacar que la duración de este sprint es bastante mayor de lo normal. Se debe a dos aspectos. El primero de ellos es que la carga de trabajo de este sprint era sustancialmente superior a los demás. Se debe a que en fallo encontrado requería de una repetición de gran parte del trabajo y además no podíamos frenarnos en los experimentos con \english{Deep Learning}. Por otra parte, coincidión con las dos últimas semanas del curso, las cuales estaban repletas de trabajos finales y exámenes de convocatoria, que hacían que el tiempo dedicado al proyecto tuviera que ser menor.
+Cabe destacar que la duración de este \textit{sprint} es bastante mayor de lo normal. Se debe a dos aspectos. El primero de ellos es que la carga de trabajo de este \textit{sprint} era sustancialmente superior a los demás. Se debe a que en fallo encontrado requería de una repetición de gran parte del trabajo y además no podíamos frenarnos en los experimentos con \english{Deep Learning}. Por otra parte, coincidió con las dos últimas semanas del curso, las cuales estaban repletas de trabajos finales y exámenes de convocatoria, que hacían que el tiempo dedicado al proyecto tuviera que ser menor.
 
 \subsection{Sprint 8}
 Duración del sprint: 14 de junio 2019 a 24 de junio 2019. Ver gráfico \english{Burndown} en la figura \ref{fig:sprint8}.
@@ -133,15 +133,15 @@ En este apartado se abordará la viabilidad económica, comercial y legal de est
 \subsection{Viabilidad económica}
 En este apartado, simularemos el coste del proyecto que tendría en una empresa, o en una venta al público.
 \subsubsection{Coste personal}
-Este proyecto cuenta con dos \textbf{profesores contratados} durante 6 meses para este proyecto. Por cada profesor se asignan 0,5 créditos, por lo que el coste\footnote{\url{http://www.ubu.es/sites/default/files/portal_page/files/pdi_laboral_2017_2.pdf}} por tutor consideramos que es el siguiente:
+Este proyecto cuenta con dos \textbf{profesores contratados} durante 6 meses para este proyecto. Por cada profesor se asignan 0,5 créditos, por lo que el coste\footnote{\url{https://www.ubu.es/sites/default/files/portal_page/files/pdi_laboral_2019.pdf}} por tutor consideramos que es el siguiente:
 \begin{itemize}
-\item Sueldo base mensual ayudante doctor: 1815,61 euros. 21787,32 euros anuales. En total imparte 24 créditos por lo que el coste anual por crédito es de 907,5 euros. El coste total es el siguiente:
+\item Sueldo ayudante doctor: 26445,24 euros anuales. Más 2 trienios más el complemento de mejora: $26445,24 + 1260,58 + 1110,71 = 28816,52$. En total imparte 24 créditos por lo que el coste anual por crédito es de 1200,68 euros. El coste total es el siguiente:
 \begin{equation}
-907,5 \cdot 0,5 créditos = 453,75 euros
+1200,68 \cdot 0,5 créditos = 600,34 euros
 \end{equation}
-\item Sueldo base mensual doctor permanente: 2325,24 euros. 27902,88 euros anuales. En total imparte 24 créditos por lo que el coste anual por crédito es de 1162.62 euros. El coste total es el siguiente:
+\item Sueldo medio anual de un titular: 42220,34 euros anuales. En total imparte 24 créditos por lo que el coste anual por crédito es de 1759,18 euros. El coste total es el siguiente:
 \begin{equation}
-1162.62 \cdot 0,5 créditos = 581,31 euros
+1759,18 \cdot 0,5 créditos = 879,59 euros
 \end{equation}
 \end{itemize}
 
@@ -182,10 +182,10 @@ El coste total se detalla en la tabla \ref{tabla:costetotal}
  }
  {
   Coste desarrollador  & \multicolumn{1}{r}{12000}\\
-  Costes Tutores(15\%) & \multicolumn{1}{r}{1035.06}\\
+  Costes Tutores(15\%) & \multicolumn{1}{r}{1479.93}\\
   Hardware & \multicolumn{1}{r}{80}\\\hline
   Beca prototipos  & \multicolumn{1}{r}{-800}\\\hline
-  \textbf{Coste total (6 meses)}  & \multicolumn{1}{r}{12315.6}\\\hline
+  \textbf{Coste total (6 meses)}  & \multicolumn{1}{r}{12679.93}\\\hline
   }
 
 

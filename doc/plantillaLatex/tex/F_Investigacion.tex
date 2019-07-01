@@ -1,0 +1,97 @@
+\apendice{Anexo de investigación}
+
+\section{Introducción}
+En esta sección detallaremos las taxonomías realizadas, donde se resume la investigación realizada. Se resumen tanto artículos, como características extraídas de los audios y las herramientas con las que se obtienen. La mayoría de las taxonomías son muy anchas, por lo que  las tablas no caben en esta página, ni siquiera apaisadas. Por tanto, se referenciamos la ruta de la misma en el proyecto y se dará el link de acceso al archivo en la nube. 
+
+También describiremos el árbol de características extraídas, es decir, la estructura de directorios de las características extraídas.
+
+\section{Árbol de características}
+El árbol de directorios de características lo podemos ver en la Figura \ref{fig:dirtreeccas}. En el árbol se utilizan abreviaturas.
+\begin{description}
+\item[art] articulación.
+\item[fon] fonación.
+\item[prs] prosodia.
+\item[ixc] número de instancias por conjunto. Número de audios de cada conjunto de datos.
+\end{description}
+
+\begin{figure}
+	\dirtree{%
+		.1 CaracteristicasExtraidas/.
+		.2 Medidas art, fon y prs Disvoice (sin edad ni sexo) [18 conjuntos] $\rightarrow$  ixc: 100-300.
+		.2 [DivisionSexo].
+		.3 [hombres].
+		.4 Medidas art, art\_on/off, fon y prs de hombres + EDAD [30 conjuntos :(18 + 12 {6on+6off})] $\rightarrow$ ixc: 50-150.
+		.3 [mujeres].
+		.4 Medidas art, art\_on/off, fon y prs de mujeres + EDAD [30 conjuntos :(18 + 12 {6on+6off})] $\rightarrow$ ixc: 50-150.
+		.2 [EdadYSexo].
+		.3 Medidas art, fon y prs Disvoice + EDAD Y SEXO [18 conjuntos]  $\rightarrow$ ixc: 100-300.
+		.2 [Orzco2016].
+		.3 [onset].
+		.4 Medidas art\_offset + EDAD Y SEXO [5 Conjuntos]  $\rightarrow$ ixc: 100-300.
+		.3 [offset].
+		.4 Medidas art\_offset + EDAD Y SEXO [5 Conjuntos]  $\rightarrow$ ixc: 100-300.
+		.2 [vggish].
+		.3 [embeddings].
+		.4 Medidas embeddings [6 Conjuntos]  $\rightarrow$ ixc: 100-300.
+		.3 [espectros].
+		.4 Medidas espectros [6 Conjuntos]  $\rightarrow$ ixc: 100-300.
+	}
+	\caption{Árbol de características}
+	\label{fig:dirtreeccas}
+\end{figure}
+
+\section{Taxonomías}
+Se explicarán las taxonomías realizadas en el proyecto.
+
+\subsection{Artículos relacionados}
+Se detallan los artículos relacionados. Se describe nombre, fuente (link o DOI), año, autor, revista, campo de la revista, número de citas, descripción (no en todos) y enfermedad tratada en el artículo.
+
+Taxonomía:
+\begin{itemize}
+\item \texttt{doc/masRecursos/Articulos\_Relacionados\_Tabla\_Resumen.csv}
+\item \myurl{https://docs.google.com/spreadsheets/d/10f7dg0UIAlxNedFbIpXQ2vrjXtpHhHqNO4hSk7RQBzw/edit?usp=sharing}{Enlace a Drive Spreadsheet}
+\end{itemize}
+
+\subsection{Bases de datos de audios}
+Se detallan las bases de datos o conjunto de audios encontrados. Se describe nombre, descripción, autor, fuente (link o DOI), enfermedad, \textbf{privacidad}, precio, características técnicas de los audios, características extraídas del mismo, resultados de clasificación, año e idioma.
+
+Taxonomía:
+\begin{itemize}
+\item \texttt{datasets/Tabla Resumen Datasets.csv}
+\item \myurl{https://docs.google.com/spreadsheets/d/1yKu5-wWa_uh_VvmoD7Uo6nLbyFrLpeDXlRFeSGhPFak/edit?usp=sharing}{Enlace a Drive Spreadsheet}
+\end{itemize}
+
+\subsection{Características de audios}
+\subsubsection{Características de cada audio}
+Se detallan las características extraídas de cada tipo de audio. Se describe el tipo de audio, la segmentación del audio, las características extraídas, una nota de la característica, la herramienta de extracción de la misma y el artículo donde está descrita la herramienta.
+
+\begin{itemize}
+\item \texttt{doc/masRecursos/Taxonomía ccas completa.csv}
+\item \myurl{https://docs.google.com/spreadsheets/d/1uQ81sL3kpDlMKDWr0w2Sk8U1QC6e1yJUkTx_8f6cU2I/edit?usp=sharing}{Enlace a Drive Spreadsheet}
+\end{itemize}
+
+\subsubsection{Características de cada audio por artículo}
+Se detallan las características extraídas de cada tipo de audio \textbf{divididas por cual se sacan en cada artículo}. Se describe \textbf{el artículo donde se utilizan}, el tipo de audio, la segmentación del audio, las características extraídas, una nota de la característica, la herramienta de extracción de la misma y el artículo donde está descrita la herramienta.
+
+\begin{itemize}
+\item \texttt{doc/masRecursos/Taxonomia\_ccas\_POR\_ARTICULO.csv}
+\item \myurl{https://docs.google.com/spreadsheets/d/1dLJq3So6EIyfl-udspz0htBf2Lx7AFqfdjMuFHX9s_c/edit?usp=sharing}{Enlace a Drive Spreadsheet}
+\end{itemize}
+
+\subsection{Bibliotecas de extracción de características}
+Se detallan las bibliotecas de manejo de audios. Se describe el nombre de la herramienta, la fuente o link de descarga y una pequeña descripción de la misma (que características de las más importantes se pueden obtener con esa herramienta).
+\begin{itemize}
+\item \texttt{doc/masRecursos/Librerías\_Tabla\_Resumen.csv}
+\item \myurl{https://docs.google.com/spreadsheets/d/1WxdAnneBYJOd0tMNeatMloWAJ2XOTcDFqndSbUNOjvc/edit?usp=sharing}{Enlace a Drive Spreadsheet}
+\end{itemize}
+
+
+\subsection{Relación característica $\rightarrow$ herramienta}
+Se describe con que herramienta se saca cada característica del audio. Se detalla el nombre de la característica, una nota de la misma y la o las herramientas con las que se puede extraer.
+
+\begin{itemize}
+\item \texttt{doc/masRecursos/Listado ccas-herramientas\_Tabla\_Resumen.csv}
+\item \myurl{https://docs.google.com/spreadsheets/d/1bUq36piHUQCQoivLOQCX7_Q8QrqQsXXfocesUeyRA_k/edit?usp=sharing}{Enlace a Drive Spreadsheet}
+\end{itemize}
+
+    
