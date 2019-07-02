@@ -6,19 +6,19 @@ Uso de biomarcadores extraídos de la voz para la detección de depresión y enf
 Trabajo de fin de grado de Ingeniería Informática realizado en la **Universidad de Burgos**. Minería de datos aplicada a la diagnosis del Parkinson.
 
 * Autor: *Adrián Arnaiz Rodríguez*
-* Tutores: *José Francisco Diez Pastor* y *Cesar Ignacio García Osorio*
+* Tutores: *José Francisco Diez Pastor* y *César Ignacio García Osorio*
 
 ---
 
 ## Resumen
-La enfermedad del Parkinson causa discapacidades en el habla a más del 90\% de los pacientes. Esta enfermedad causa trastornos del habla como pueden ser monotonía, volumen monótono, imprecisión en la articulación y otros síntomas. Hay numerosos estudios que abordan el problema de desarrollar aplicaciones de ayuda de evaluación del Parkinson.
+La enfermedad del Parkinson causa, entre otras discapacidades, discapacidades en el habla a más del 90\% de los pacientes. Esta enfermedad causa trastornos del habla como pueden ser monotonía, volumen monótono, imprecisión en la articulación y otros síntomas. Hay numerosos estudios que abordan el problema de desarrollar aplicaciones de ayuda de evaluación del Parkinson.
 
 En esta investigación, a partir de una base de datos de audios adquirida, tratamos de realizar todo el proceso de minería de datos que nos permita llegar a construir un clasificador. Este clasificador distingue entre si la persona de un audio tiene Parkinson o no. Para ello, se abordarán diferentes tipos de características extraídas de los audios (características físicas y más novedosas) con las que se realizarán diferentes experimentos.
 
 Por ello, se realizará una aplicación de ayuda al facultativo médico que, usando el clasificador desarrollado en la investigación, sea capaz de agilizar el proceso de diagnosis de la enfermedad del Parkinson, además de reducir el riesgo de fallo en la misma.
 
 ## Abstract
-Parkinson's Disease causes speech impairments in more than 90\% of patients. This disease causes different disorders like monotony, monotonous volume, inaccuracy articulation and other symptoms. There are numerous studies that have addressed the problem of developing applications for helping the diagnosis of Parkinson's.
+Parkinson's Disease causes speech impairments in more than 90\% of patients, among other disabilities. This disease causes different disorders like monotony, monotonous volume, inaccuracy articulation and other symptoms. There are numerous studies that have addressed the problem of developing applications for helping the diagnosis of Parkinson's.
 
 In this research, with a database of acquired audios, we try to realice the whole data mining process, building a good classifier as the main achieve. This classifier distinguishes between if the person of an audio has Parkinson's or not. For this purpose, we address different experiments, which are carried out with different types of characteristics extracted from the audios (physical characteristics and newer ones).
 
