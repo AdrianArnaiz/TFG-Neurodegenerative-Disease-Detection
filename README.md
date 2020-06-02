@@ -26,6 +26,53 @@ Therefore, we will make an aid application addressed to medical professional who
 
 ---
 
+## Página web
+https://adrianarnaiz.github.io/TFG-Neurodegenerative-Disease-Detection/
+
+---
+## Repercusión
+
+###  Prensa escrita
+
+* **El Mundo** (Prensa escrita)
+	* ["Inteligencia Artificial para seguir al párkinson"](https://github.com/AdrianArnaiz/TFG-Neurodegenerative-Disease-Detection/blob/master/doc/masRecursos/ElMundo-Innovadores-28-01-20-Inteligencia%20Artificial%20para%20seguir%20al%20p%C3%A1rkinson.pdf) (EL MUNDO DE CASTILLA Y LEÓN / AÑO VI / 28/01/2020 - Innovadores, página 7).
+	* ["Voces que anticipan los temblores"](https://github.com/AdrianArnaiz/TFG-Neurodegenerative-Disease-Detection/blob/master/doc/masRecursos/ElMundo-Innovadores-17-12-19-Voces%20que%20anticipan%20temblores.pdf) (EL MUNDO DE CASTILLA Y LEÓN / AÑO VI / 17/12/2019 - Innovadores, página 6).
+
+### Digital
+
+* **El Mundo**
+	* ["Voces que anticipan los temblores", (Castilla y León, Innovadores, 17/12/19)](https://diariodevalladolid.elmundo.es/articulo/innovadores/voces-anticipan-temblores/20191217130131365000.html).
+
+
+* **Telecinco**
+	* ["Dos prototipos permiten utilizar la inteligencia artificial para detectar y tratar enfermedades" (28/11/2019)](https://www.telecinco.es/informativos/ciencia/prototipos-utilizar-inteligencia-artificial-detectar-tratar-enfermedades_18_2858370271.html).
+
+
+* **Conferencia de Directores y Decanos de Ingeniería Informática**
+	* ["Dos prototipos de la UBU utilizan la inteligencia artificial para detectar y tratar enfermedades" (02/12/2019)](https://coddii.org/dos-prototipos-de-la-ubu-utilizan-la-inteligencia-artificial-para-detectar-y-tratar-enfermedades).
+
+
+* **Universidad de Burgos**
+	* [Notias de prensa de la UBU (28/10/2020)](https://www.ubu.es/noticias/dos-prototipos-de-la-ubu-utilizan-la-inteligencia-artificial-para-detectar-y-tratar-enfermedades).
+
+
+* **Entre Mayores**: *Periodico especializado en las personas mayores, los profesionales y las empresas del sector*
+	* ["Un prototipo de la Universidad de Burgos utiliza la inteligencia artificial para detectar el Parkinson" (29/11/2019)](http://entremayores.es/spa/ccaa.asp?var2=Castilla%20y%20Le%F3n&var3=Un%20prototipo%20de%20la%20UBU%20utiliza%20la%20inteligencia%20artificial%20para%20detectar%20el%20Parkinson&nar1=3&nar2=23&nar3=41400&nar5=1).
+
+
+* **Burgos Conecta**
+	* ["Dos prototipos de la UBU utilizan la inteligencia artificial para detectar y tratar enfermedades" (28/10/2019)](https://www.burgosconecta.es/burgos/universidad/prototipos-utilizan-inteligencia-20191128121921-nt.html).
+
+
+* **Premio Prototipo 2019-2020 OTRI**
+	* [Premios OTRI 2019-2020: Prototipos Orientados al Mercado (29/10/2020)](https://www.ubu.es/noticias/la-ubu-avanza-en-innovacion).
+	* [Entrega premios OTRI 2019-2020: Prototipos Orientados al Mercado (29/10/2020)](https://www.ubu.es/agenda/entrega-de-premios-y-lanzamiento-de-nuevas-convocatorias-curso-2019-2020-prototipos-orientados-al-mercado-vii-convocatoria-prueba-concepto).
+	* [Vídeo entrega de premios prototipo 2019-2020 (29/10/2020)](https://youtu.be/BCKuHDKv0bw).
+
+
+---
+
+
 ## Instalaciones
 ### Clonar el repositorio
 * `git clone https://github.com/AdrianArnaiz/TFG-Neurodegenerative-Disease-Detection.git`
