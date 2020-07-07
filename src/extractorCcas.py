@@ -94,7 +94,7 @@ class ExtractorCaracteristicas:
         assert pd[:,pd.shape[1]-1].all()==1
 
         #Devolvemos todo el conjunto entero junto
-        set_datos = np.concatenate((hc, pd))
+        set_datos = np.concatenate((pd, hc))
         
         #Añadimos edad o sexo si necesario
         if extra_atribs is not None:

@@ -79,9 +79,9 @@ class Extractor_Caracteristicas_Vggish:
             ruta del directorio de audios a analizar respecto a src/. i.e: 'PC-GITA/read-text/'. Debe subcontener hc y pd.
         extra_atribs: list(string)
             atributos extra a añadir a las caracteriticas. i.e. edad o sexo. lista con los nombres 
-            de los atributos a añadir del self.dic_inf_audiosç
+            de los atributos a añadir del self.dic_inf_audios
         embeddings:boolean
-            Sies true sacamos los embeddings, si false sacamos los espectros
+            Si es true sacamos los embeddings, si false sacamos los espectros
             
         Returns
         -------
@@ -109,7 +109,7 @@ class Extractor_Caracteristicas_Vggish:
         assert ccas_pd[:,ccas_pd.shape[1]-1].all()==1
         
          #Devolvemos todo el conjunto entero junto
-        set_datos = np.concatenate((ccas_hc, ccas_pd))
+        set_datos = np.concatenate((ccas_pd, ccas_hc))
         
         #Añadimos edad o sexo si necesario y si es posible (solo posible para embbedings, no espectros)
         if extra_atribs is not None:
