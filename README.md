@@ -96,3 +96,6 @@ Es necesario resolver las mismas dependencias de VGGish. Como se indica en el or
 Realmente, para VGGish valdría con las dependencias de `src/demo/requirements.txt`. Más información adicional sobre archivos e instalación de VGGish en [VGGish](https://github.com/tensorflow/models/tree/master/research/audioset/vggish) y [VGGish2Keras](https://github.com/antoinemrcr/vggish2Keras).
 
 
+## Demo
+
+![](doc/plantillaLatex/img/ventanas_app.JPG)
