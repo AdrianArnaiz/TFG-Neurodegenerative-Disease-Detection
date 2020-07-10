@@ -1,7 +1,8 @@
 import scipy.stats as stats
 import pandas as pd
 import numpy as np
-
+from scipy.spatial import distance
+import matplotlib.pyplot as plt
 
 def friedman_ranking_chi(d, k, r, iman_davenport = False, verbose=True):
     '''
@@ -143,5 +144,104 @@ def posthoc_Friedman_Davenport_Hochbertest(results, alpha=0.05, obj='max', contr
         print('# Tabla de comparación de Rankings:')
         print(holm_scores)
     
-    return holm_scores
+    return holm_scores, dict_clf_avg_rank
 
+
+
+def nemenyi_CD(n_clfs, n_dtsts, alpha=0.05):
+    if alpha==0.05:
+        q = {2:1.960, 3:2.343, 4:2.569, 5:2.728, 6:2.850, 7:2.949, 8:3.031, 9:3.102, 10:3.164}
+    elif alpha==0.1:
+        q = {2:1.645, 3:2.052, 4:2.291, 5: 2.459, 6:2.589, 7:2.693, 8:2.780, 9:2.855, 10:2.920}
+
+    return q[n_clfs]*np.sqrt( (n_clfs*(n_clfs+1))/(6*n_dtsts))
+
+def groups_Nemenyi(ranks, CD):
+    # Ordenamos los nombres de los rankings de peor a mejor (i>i+1), de izquierda a derecha en el diagrama Nemenyi.
+    ordered_lf_rg_keys = sorted(ranks, key=ranks.get, reverse=True)
+    #Ordenamos los valores
+    coords = [(ranks[k],) for k in ordered_lf_rg_keys]
+    
+    #Calculamos las distancias entre rankings
+    dist = distance.cdist(coords, coords)
+    #Calculamos las menores que la distancia critica de Nemenyi
+    group = distance.cdist(coords, coords)<CD
+    
+    #Nos quedamos los indices donde sean menores (solo de triangulo superior para formar grupos de izq a der)
+    rows,cols =np.where(np.triu(group, k=1))
+    #Calculamos los vecinos, dict donde estan los extremos de los grupos (1:4 representa 1-2-3-4)
+    neighbours = dict(zip(rows,cols))
+    
+    #Nos quedamos con grupos unicos: "2:4" esta incluido en "1:4"
+    sets_same_classifiers = dict()
+    for k in neighbours:
+            if neighbours[k] not in sets_same_classifiers.values():
+                sets_same_classifiers[k]=neighbours[k]
+    #Tenemos los grupos con el nombre del clf            
+    grupos = [(ordered_lf_rg_keys[k:sets_same_classifiers[k]+1]) for k in sets_same_classifiers]
+    
+    return grupos
+
+def plot_nemenyi(ranks, CD, groups, fsize=(13,4)):
+    n_clfs = len(ranks)
+    limits=(n_clfs,1) #Limite a ranking maximo
+    
+    fig, ax = plt.subplots(figsize=fsize)
+    plt.subplots_adjust(left=0.2, right=0.8)
+    
+    # set up plot
+    ax.set_xlim(limits)
+    ax.set_ylim(0,1)
+    ax.spines['top'].set_position(('axes', 0.6))
+
+    #ax.xaxis.tick_top()
+    ax.xaxis.set_ticks_position('top')
+    ax.yaxis.set_visible(False)
+    for pos in ["bottom", "left", "right"]:
+        ax.spines[pos].set_visible(False)
+        
+    # CD bar
+    ax.plot([limits[0],limits[0]-CD], [.9,.9], color="k")
+    ax.plot([limits[0],limits[0]], [.9-0.03,.9+0.03], color="k")
+    ax.plot([limits[0]-CD,limits[0]-CD], [.9-0.03,.9+0.03], color="k") 
+    ax.text(limits[0]-CD/2., 0.92, f"CD {CD:.2f}", ha="center", va="bottom") 
+
+    
+    # annotations
+    bbox_props = dict(boxstyle="square,pad=0.3", fc="w", ec="k", lw=0.72)
+    arrowprops=dict(arrowstyle="-",connectionstyle="angle,angleA=0,angleB=90")
+    kw = dict(xycoords='data',textcoords="axes fraction",
+              arrowprops=arrowprops, bbox=bbox_props, va="center")
+    
+    
+    # Pintamos lineas de los grupos
+    x = 0.55
+    y = 0.55
+    for g in groups:
+        ax.plot([ranks[g[0]],ranks[g[-1]]],[x,y], color="k", lw=3)
+        x=x-0.07
+        y=y-0.07
+    
+    
+    
+    # Escribir cada ranking
+    x = 0
+    #y = 0.4
+    ha_val = 'right'
+    change = True
+    for i,k in enumerate(sorted(ranks, key=ranks.get, reverse=True)):
+        if i >= n_clfs/2 and change:
+            x = 1
+            ha_val = 'left'
+            change = False
+            y = y + 0.15
+        ax.annotate(k, xy=(ranks[k], 0.6), xytext=(x,y),ha="left",  **kw)
+        
+        if i >= n_clfs/2:
+            y = y + 0.15
+        else:
+            y = y - 0.15    
+        
+    
+ 
+    plt.show()
