@@ -16,10 +16,11 @@ def friedman_ranking_chi(d, k, r, iman_davenport = False, verbose=True):
     second = (k*((k+1)**2)) / 4
     res = first*(sumat-second)
     
-    if iman_davenport and verbose:
+    if iman_davenport:
         res = ((d-1)*res)/(d*(k-1)-res)
-        print('Friedman IVAN-Davenport Chi Square - Datasets: {} - Clasificadores {}'.format(d,k))
-        print('-- Chi_sq^2_f = {:.3f}'.format(res))
+        if verbose:
+            print('Friedman IVAN-Davenport Chi Square - Datasets: {} - Clasificadores {}'.format(d,k))
+            print('-- Chi_sq^2_f = {:.3f}'.format(res))
         
     elif verbose:
         print('Friedman Chi Square - Datasets: {} - Clasificadores {}'.format(d,k))
@@ -137,7 +138,7 @@ def posthoc_Friedman_Davenport_Hochbertest(results, alpha=0.05, obj='max', contr
         mx_string = len(max(name_clfs, key=lambda x: len(x)))
         for k in sorted(dict_clf_avg_rank, key=dict_clf_avg_rank.get):
             print('# {:{}} ranking medio:  {}'.format(k,mx_string,dict_clf_avg_rank[k]))
-        print(f'# Test de Friedman sobre Rankings [F({stat_ImanDaven_ranks:.4f}, {df1}, {df2})] \
+        print(f'# Test de Ivan-Davenport sobre Rankings [F({stat_ImanDaven_ranks:.4f}, {df1}, {df2})] \
               \n\t-> p-val: {pval_ImanDaven_ranks:.4f}')
         one = min(dict_clf_avg_rank, key=dict_clf_avg_rank.get) if control is None else control
         print('\n### Test Hochberg Comparacion {} vs all'.format(one))
