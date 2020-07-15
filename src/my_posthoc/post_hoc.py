@@ -92,7 +92,7 @@ def posthoc_Friedman_Davenport_Hochbertest(results, alpha=0.05, obj='max', contr
     
     # Preparamos resultados en numpy, array de nombres y datos del experimento
     name_clfs = results.drop('Dataset', axis=1).columns
-    results_np = results[name_clfs].values
+    results_np = results[name_clfs].values.round(3)
     n_datasets = results_np.shape[0]
     n_clfs = results_np.shape[1]
     
@@ -246,3 +246,128 @@ def plot_nemenyi(ranks, CD, groups, fsize=(13,4)):
     
  
     plt.show()
+    
+    
+def generate_report(results, control=None, output_file='resultados/text.tex'):
+
+    f = open(output_file, 'w')
+    
+    df_hoch, dict_ranks, ranks, iman_dav = posthoc_Friedman_Davenport_Hochbertest(results, control=control, verbose = True)
+    
+    n_datasets, n_clfs = ranks.shape
+    
+    (results.drop('Dataset', axis=1).values)
+    
+    control = sorted(dict_ranks, key=dict_ranks.get)[0] if control is None else control
+    
+    print(r'\documentclass[a4paper,10pt]{article}', file=f)
+    print(r'\usepackage{graphicx}', file=f)
+    print(r'\usepackage{lscape}', file=f)
+    print(r'\usepackage{makecell}', file=f)
+    print(r'\title{Results}', file=f)
+    print(r'\author{}', file=f)
+    print(r'\date{\today}', file=f)
+    print(r'\begin{document}', file=f)
+    print(r'\maketitle', file=f)
+    
+    print('\n', file=f)
+    print('\n', file=f)
+    
+    print(r'\section{Tables of Friedman, Bonferroni-Dunn, Holm, Hochberg and Hommel Tests}', file=f)
+
+    
+    #Tabla de metricas y rankings - Demsar 2006 Table 6
+    print(r'\begin{table}[!htp]', file=f)
+    print(r'\centering', file=f)
+    print(r'\caption{Comparison and Ranking od METRIC across classifiers}', file=f)
+    print(r'\resizebox{\textwidth}{!}{%', file=f)
+    print(r'\begin{tabular}'+'{{r{}}}'.format('l'*(n_clfs)), file=f)
+    print('&'.join(results.columns)+'\\\\', file=f)
+    print(r'\Xhline{2\arrayrulewidth}', file=f)
+    
+    for i in range(n_datasets):
+        line='{}&'.format(results.iloc[i,0].replace('_',r'\_'))
+        for j in range(n_clfs):
+            line+='{:.3f} ({:g})&'.format(results.iloc[i,j+1], ranks[i,j])
+        line=line[:-1]+'\\\\'
+        print(line, file=f)
+            
+    print(r'\Xhline{2\arrayrulewidth}', file=f)
+    print('Avg&'+'&'.join([f'{c:.3f} ({r:.2f})' for c,r in zip(results.drop('Dataset', axis=1).values.mean(axis=0),
+                                                               ranks.mean(axis=0))])+'\\\\', file=f)
+    print(r'\end{tabular}}', file=f)
+    print(r'\end{table}', file=f)
+    
+    print('\n', file=f)
+    print('\n', file=f)
+    
+    
+    
+    # Tabla de rankings medios
+    #Tabla de metricas y rankings - Demsar 2006 Table 6
+    print(r'\begin{table}[!htp]', file=f)
+    print(r'\centering', file=f)
+    print(r'\caption{Average Rankings}', file=f)
+    print(r'\begin{tabular}{r|l}', file=f)
+    print(r'Algorithm&Ranking\\', file=f)
+    print(r'\hline', file=f)
+    
+    for k in sorted(dict_ranks, key=dict_ranks.get):
+            print(' {} & {:.4f} \\\\'.format(k,dict_ranks[k]), file=f)
+
+    print(r'\end{tabular}', file=f)
+    print(r'\end{table}', file=f)
+    
+    print('\n', file=f)
+    print('\n', file=f)
+    
+    
+    
+    #Tabla de HOL-HOCHBERG con p-val de IMAN DAVENPORT
+    print(r'\begin{table}[!htp]', file=f)
+    print(r'\centering', file=f)
+    print(r'\caption{Holm-Hochberg}', file=f)
+    print(r'\begin{tabular}{crcccc}', file=f)
+    print(r'$i$&algorithm&$z=\frac{R_0 - R_i}{SE}$&$p$&$\alpha/i$&Reject\\', file=f)
+    print(r'\Xhline{2\arrayrulewidth}', file=f)
+    
+    linea_escrita=False
+    for i, row in enumerate(df_hoch.iterrows()):
+        #Elegimos el valor de la hipotesis y pintamos la linea si es necesatrio
+        if row[1].sig:
+            reject=fr'\textbf{{Reject for {control}}}'
+        else:
+            reject='Not Rejected'
+            if not linea_escrita:
+                linea_escrita = True
+                print(r'\Xhline{0.5\arrayrulewidth}', file=f)
+                
+        alg = row[0][row[0].rfind(' ')+1:]
+        line='{}&{} ({:.2f})&{:.3e}&{:.3e}&{:.3e}&{} \\\\'.format(n_clfs-1-i,
+                                             alg,dict_ranks[alg],
+                                             row[1].z,
+                                             row[1].p,
+                                             row[1]['alpha/i'],
+                                             reject)
+        print(line, file=f)
+        
+    print(r'\Xhline{2\arrayrulewidth}', file=f)
+    print(r'\multicolumn{6}{l}{'+r'Control method: {} ({:.2f})'.format(control, dict_ranks.get(control))\
+          +'}\\\\', file=f)
+    print(r'\multicolumn{6}{l}{'+r'Iman Davenport: $F$:{:.2f} \rightarrow $p-value$:{:.3e}'.format(iman_dav[0],iman_dav[1])\
+          +'}\\\\', file=f)
+    print(r'\end{tabular}', file=f)
+    print(r'\end{table}', file=f)
+    
+    
+    
+    # Tabla de Nemenyi  
+    
+    
+    
+    
+    
+    
+    print(r'\end{document}', file=f)
+    f.close()
+    return df_hoch

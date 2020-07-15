@@ -103,7 +103,7 @@ def posthoc_Friedman_Davenport_Hochbertest(results, alpha=0.05, obj='max', contr
     #Calculamos rankings y rankings medios en np y dict
     all_ranks = np.array([stats.rankdata(-p) for p in results_np]) if obj=='max' else np.array([stats.rankdata(p) for p in results_np])
     average_ranks = np.mean(all_ranks, axis=0)
-    dict_clf_avg_rank = {c:r for c, r in zip(name_clfs, average_ranks.round(3))}
+    dict_clf_avg_rank = {c:r for c, r in zip(name_clfs, average_ranks)}
     #Calculamos el estadistico de Iman-Davenport
     stat_ImanDaven_ranks = friedman_ranking_chi(n_datasets, #numero datasets
                                                 n_clfs, #numero de clfs
