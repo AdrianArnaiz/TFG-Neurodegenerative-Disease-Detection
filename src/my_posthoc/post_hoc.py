@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 from scipy.spatial import distance
 import matplotlib.pyplot as plt
+import os
 
 def friedman_ranking_chi(d, k, r, iman_davenport = False, verbose=True):
     '''
@@ -120,8 +121,8 @@ def posthoc_Friedman_Davenport_Hochbertest(results, alpha=0.05, obj='max', contr
                                                         control=control,
                                                         alpha=alpha)
 
-    holm_scores = pd.DataFrame({"z":z_values_h.round(3),"p": p_values_h.round(3),
-                                'alpha/i':adj_sigmas_h.round(3) ,"sig": p_values_h < adj_sigmas_h}, 
+    holm_scores = pd.DataFrame({"z":z_values_h.round(5),"p": p_values_h.round(5),
+                                'alpha/i':adj_sigmas_h.round(5) ,"sig": p_values_h < adj_sigmas_h}, 
                                index=comparisons_h)
 
     if verbose:
@@ -145,7 +146,7 @@ def posthoc_Friedman_Davenport_Hochbertest(results, alpha=0.05, obj='max', contr
         print('# Tabla de comparación de Rankings:')
         print(holm_scores)
     
-    return holm_scores, dict_clf_avg_rank
+    return holm_scores, dict_clf_avg_rank, all_ranks, (stat_ImanDaven_ranks, pval_ImanDaven_ranks)
 
 
 
@@ -183,7 +184,7 @@ def groups_Nemenyi(ranks, CD):
     
     return grupos
 
-def plot_nemenyi(ranks, CD, groups, fsize=(13,4)):
+def plot_nemenyi(ranks, CD, groups, fsize=(13,5), plot=True):
     n_clfs = len(ranks)
     limits=(n_clfs,1) #Limite a ranking maximo
     
@@ -202,24 +203,25 @@ def plot_nemenyi(ranks, CD, groups, fsize=(13,4)):
         ax.spines[pos].set_visible(False)
         
     # CD bar
-    ax.plot([limits[0],limits[0]-CD], [.9,.9], color="k")
-    ax.plot([limits[0],limits[0]], [.9-0.03,.9+0.03], color="k")
-    ax.plot([limits[0]-CD,limits[0]-CD], [.9-0.03,.9+0.03], color="k") 
-    ax.text(limits[0]-CD/2., 0.92, f"CD {CD:.2f}", ha="center", va="bottom") 
+    h = .75
+    ax.plot([limits[0],limits[0]-CD], [h,h], color="r")
+    ax.plot([limits[0],limits[0]], [h-0.03,h+0.03], color="r")
+    ax.plot([limits[0]-CD,limits[0]-CD], [h-0.03,h+0.03], color="r") 
+    ax.text(limits[0]-CD/2., h+.02, f"CD {CD:.3f}", ha="center", va="bottom", color="r", fontsize=12) 
 
     
     # annotations
     bbox_props = dict(boxstyle="square,pad=0.3", fc="w", ec="k", lw=0.72)
     arrowprops=dict(arrowstyle="-",connectionstyle="angle,angleA=0,angleB=90")
     kw = dict(xycoords='data',textcoords="axes fraction",
-              arrowprops=arrowprops, bbox=bbox_props, va="center")
+              arrowprops=arrowprops, bbox=bbox_props, va="center", fontsize=14)
     
     
     # Pintamos lineas de los grupos
     x = 0.55
     y = 0.55
     for g in groups:
-        ax.plot([ranks[g[0]],ranks[g[-1]]],[x,y], color="k", lw=3)
+        ax.plot([ranks[g[0]],ranks[g[-1]]],[x,y], color="r", lw=2)
         x=x-0.07
         y=y-0.07
     
@@ -243,16 +245,18 @@ def plot_nemenyi(ranks, CD, groups, fsize=(13,4)):
         else:
             y = y - 0.15    
         
+    if plot:
+        plt.show()
+    else:
+        return fig
     
- 
-    plt.show()
     
     
-def generate_report(results, control=None, output_file='resultados/text.tex'):
+def generate_report(results, control=None, output_file='resultados/text.tex', alpha=0.05, obj='max', verbose=True):
 
     f = open(output_file, 'w')
     
-    df_hoch, dict_ranks, ranks, iman_dav = posthoc_Friedman_Davenport_Hochbertest(results, control=control, verbose = True)
+    df_hoch, dict_ranks, ranks, iman_dav = posthoc_Friedman_Davenport_Hochbertest(results, obj=obj, control=control, verbose = verbose)
     
     n_datasets, n_clfs = ranks.shape
     
@@ -273,7 +277,7 @@ def generate_report(results, control=None, output_file='resultados/text.tex'):
     print('\n', file=f)
     print('\n', file=f)
     
-    print(r'\section{Tables of Friedman, Bonferroni-Dunn, Holm, Hochberg and Hommel Tests}', file=f)
+    print(r'\section{Tables of Friedman, Iman-Davendport, Holm-Hochberg and Nemenyi}', file=f)
 
     
     #Tabla de metricas y rankings - Demsar 2006 Table 6
@@ -359,15 +363,32 @@ def generate_report(results, control=None, output_file='resultados/text.tex'):
     print(r'\end{tabular}', file=f)
     print(r'\end{table}', file=f)
     
-    
-    
-    # Tabla de Nemenyi  
-    
+    print('\n', file=f)
+    print('\n', file=f)
     
     
     
+    #Nemnyi
+    CD = nemenyi_CD(n_clfs, n_datasets,alpha=alpha)
+    g = groups_Nemenyi(dict_ranks, CD)
+    fig = plot_nemenyi(dict_ranks, CD, g, plot=False)
+    
+    #guardar imagen
+    i_slash = output_file.rfind('/')
+    if not 'img' in os.listdir(output_file[:i_slash]): os.mkdir(output_file[:i_slash]+'/img')
+    img_path = output_file[:i_slash+1]+'img/'
+    img_name = 'Nemenyi'+str(len(os.listdir(output_file[:i_slash]+'/img')))+'.png'
+    img_path += img_name
+    fig.savefig(img_path, dpi=fig.dpi, format='png')
+    
+    print(r'\begin{figure}[!h]', file=f)
+    print(r'\includegraphics[width=0.95\linewidth]{{{}}}'.format('img/'+img_name), file=f)
+    print(r'\caption{Nemenyi CD diagram}', file=f)
+    print(r'\label{fig:NemenyiCD}', file=f)
+    print(r'\end{figure}', file=f)
     
     
     print(r'\end{document}', file=f)
     f.close()
-    return df_hoch
+    
+    

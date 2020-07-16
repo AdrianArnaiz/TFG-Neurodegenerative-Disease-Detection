@@ -47,10 +47,10 @@ Avg&0.805 (3.14)&0.820 (2.00)&0.809 (2.93)&0.827 (1.93)\\
 \begin{tabular}{r|l}
 Algorithm&Ranking\\
 \hline
- C4.5+m+cf & 1.9286 \\
+ C4.5+m+cf & 1.9290 \\
  C4.5+m & 2.0000 \\
- C4.5+cf & 2.9286 \\
- C4.5 & 3.1429 \\
+ C4.5+cf & 2.9290 \\
+ C4.5 & 3.1430 \\
 \end{tabular}
 \end{table}
 
@@ -63,13 +63,18 @@ Algorithm&Ranking\\
 \begin{tabular}{crcccc}
 $i$&algorithm&$z=\frac{R_0 - R_i}{SE}$&$p$&$\alpha/i$&Reject\\
 \Xhline{2\arrayrulewidth}
-3&C4.5+m+cf (1.93)&2.489e+00&1.283e-02&1.667e-02&\textbf{Reject for C4.5} \\
-2&C4.5+m (2.00)&2.342e+00&1.917e-02&2.500e-02&\textbf{Reject for C4.5} \\
+3&C4.5+m+cf (1.93)&2.488e+00&1.285e-02&1.667e-02&\textbf{Reject for C4.5} \\
+2&C4.5+m (2.00)&2.342e+00&1.916e-02&2.500e-02&\textbf{Reject for C4.5} \\
 \Xhline{0.5\arrayrulewidth}
-1&C4.5+cf (2.93)&4.392e-01&6.605e-01&5.000e-02&Not Rejected \\
+1&C4.5+cf (2.93)&4.386e-01&6.610e-01&5.000e-02&Not Rejected \\
 \Xhline{2\arrayrulewidth}
 \multicolumn{6}{l}{Control method: C4.5 (3.14)}\\
 \multicolumn{6}{l}{Iman Davenport: $F$:3.99 \rightarrow $p-value$:1.435e-02}\\
 \end{tabular}
 \end{table}
+\begin{figure}[!h]
+\includegraphics[width=0.95\linewidth]{img/Nemenyi1.png}
+\caption{Nemenyi CD diagram}
+\label{fig:NemenyiCD}
+\end{figure}
 \end{document}
