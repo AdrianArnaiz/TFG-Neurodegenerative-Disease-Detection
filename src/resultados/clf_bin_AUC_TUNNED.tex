@@ -53,18 +53,36 @@ Avg&0.647 (4.88)&0.551 (7.19)&0.667 (3.56)&0.656 (4.46)&0.675 (3.17)&0.657 (4.33
 
 \begin{table}[!htp]
 \centering
-\caption{Average Rankings}
-\begin{tabular}{r|l}
-Algorithm&Ranking\\
+\caption{Best Combinations}
+\begin{tabular}{rl|c}
+Algorithm&Dataset&AUC\\
 \hline
- SVM & 3.1670 \\
- GBC & 3.3120 \\
- MLP10 & 3.5620 \\
- Bayes & 4.3330 \\
- RF & 4.4580 \\
- KNN & 4.8750 \\
- Ada & 5.1040 \\
- Tree & 7.1880 \\
+KNN&vggish\_embed\_rt&0.840 \\
+GBC&vggish\_embed\_v\_A&0.832 \\
+MLP10&vggish\_embed\_rt&0.800 \\
+MLP10&fon\_w\_gato&0.796 \\
+GBC&vggish\_embed\_rt&0.792 \\
+RF&art\_rt&0.792 \\
+MLP10&vggish\_embed\_v\_A&0.784 \\
+Bayes&fon\_v\_U&0.773 \\
+MLP10&fon\_v\_E&0.769 \\
+Bayes&art\_rt&0.768 \\
+\end{tabular}
+\end{table}
+\begin{table}[!htp]
+\centering
+\caption{Average Rankings}
+\begin{tabular}{r|l|l}
+Algorithm&Ranking&AUC\\
+\hline
+ SVM & 3.1670 & 0.675 \\
+ GBC & 3.3120 & 0.681 \\
+ MLP10 & 3.5620 & 0.667 \\
+ Bayes & 4.3330 & 0.657 \\
+ RF & 4.4580 & 0.656 \\
+ KNN & 4.8750 & 0.647 \\
+ Ada & 5.1040 & 0.638 \\
+ Tree & 7.1880 & 0.551 \\
 \end{tabular}
 \end{table}
 
@@ -95,7 +113,7 @@ $i$&algorithm&$z=\frac{R_0 - R_i}{SE}$&$p$&$\alpha/i$&Reject\\
 
 
 \begin{figure}[!h]
-\includegraphics[width=0.95\linewidth]{img/Nemenyi4.png}
+\includegraphics[width=0.95\linewidth]{img/Nemenyi2.png}
 \caption{Nemenyi CD diagram}
 \label{fig:NemenyiCD}
 \end{figure}

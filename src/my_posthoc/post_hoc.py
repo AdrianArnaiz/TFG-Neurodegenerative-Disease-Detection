@@ -307,17 +307,34 @@ def generate_report(results, control=None, output_file='resultados/text.tex', al
     
     
     
-    # Tabla de rankings medios
-    #Tabla de metricas y rankings - Demsar 2006 Table 6
+    # Tabla de mejores combinaciones
+    bests = best_combinations(results)
+    print(r'\begin{table}[!htp]', file=f)
+    print(r'\centering', file=f)
+    print(r'\caption{Best Combinations}', file=f)
+    print(r'\begin{tabular}{rl|c}', file=f)
+    print(r'Algorithm&Dataset&AUC\\', file=f)
+    print(r'\hline', file=f)
+    
+    for b in bests:
+        print('{}&{}&{:.3f} \\\\'.format(b[0],b[1].replace('_',r'\_'),b[2]), file=f)
+    
+    print(r'\end{tabular}', file=f)
+    print(r'\end{table}', file=f)
+    
+    
+    # Tabla de rankings medios (y aucs) - Demsar 2006
     print(r'\begin{table}[!htp]', file=f)
     print(r'\centering', file=f)
     print(r'\caption{Average Rankings}', file=f)
-    print(r'\begin{tabular}{r|l}', file=f)
-    print(r'Algorithm&Ranking\\', file=f)
+    print(r'\begin{tabular}{r|l|l}', file=f)
+    print(r'Algorithm&Ranking&AUC\\', file=f)
     print(r'\hline', file=f)
     
+    aucs_medios = results.mean()
+    
     for k in sorted(dict_ranks, key=dict_ranks.get):
-            print(' {} & {:.4f} \\\\'.format(k,dict_ranks[k]), file=f)
+            print(' {} & {:.4f} & {:.3f} \\\\'.format(k,dict_ranks[k], aucs_medios[k]), file=f)
 
     print(r'\end{tabular}', file=f)
     print(r'\end{table}', file=f)
@@ -392,3 +409,17 @@ def generate_report(results, control=None, output_file='resultados/text.tex', al
     f.close()
     
     
+def best_combinations(df_o, n=10, verbose = True):
+    bests = []
+    df = df_o.set_index('Dataset')
+    best_top_index = np.unravel_index(np.array(-df).argsort(axis=None)[:n],df.shape)
+    if verbose: print('\nBest Combinations:')
+    for i,j in zip(best_top_index[0], best_top_index[1]):
+        bests.append( (df.columns[j], df.index[i], df.iloc[i,j]) )
+        
+        if verbose:
+            print('\t', end=' -> ')
+            print(df.index[i],'-',df.columns[j], end=' -> ')
+            print(f'{df.iloc[i,j]:.3f}')
+            
+    return bests
