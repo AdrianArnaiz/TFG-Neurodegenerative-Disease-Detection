@@ -34,5 +34,5 @@ tensorflow==2.4.0
 tensorflow-estimator==1.13.0
 termcolor==1.1.0
 ttkthemes==2.3.0
-Werkzeug==0.15.4
+Werkzeug==0.15.5
 wincertstore==0.2
